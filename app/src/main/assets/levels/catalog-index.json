@@ -1,0 +1,10 @@
+{
+    "schemaVersion": 1,
+    "contentVersion": 4,
+    "files": [
+        "traffic-jam.json",
+        "wave-a.json",
+        "wave-b.json",
+        "wave-c.json"
+    ]
+}

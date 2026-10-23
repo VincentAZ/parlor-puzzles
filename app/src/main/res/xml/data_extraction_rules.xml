@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <!-- Allowlist excludes entitlement, purchase tokens and device consent. -->
+    <cloud-backup>
+        <include domain="database" path="parlor.db" />
+        <include domain="database" path="parlor.db-wal" />
+        <include domain="database" path="parlor.db-shm" />
+        <include domain="database" path="parlor.db-journal" />
+        <include domain="database" path="parlor-recovered.db" />
+        <include domain="database" path="parlor-recovered.db-wal" />
+        <include domain="database" path="parlor-recovered.db-shm" />
+        <include domain="database" path="parlor-recovered.db-journal" />
+        <include domain="file" path="datastore/player.preferences_pb" />
+        <include domain="file" path="recovery/protection.json" />
+        <include domain="file" path="recovery/protection.json.bak" />
+        <include domain="file" path="recovery/active-database.json" />
+        <include domain="file" path="recovery/active-database.json.bak" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="database" path="parlor.db" />
+        <include domain="database" path="parlor.db-wal" />
+        <include domain="database" path="parlor.db-shm" />
+        <include domain="database" path="parlor.db-journal" />
+        <include domain="database" path="parlor-recovered.db" />
+        <include domain="database" path="parlor-recovered.db-wal" />
+        <include domain="database" path="parlor-recovered.db-shm" />
+        <include domain="database" path="parlor-recovered.db-journal" />
+        <include domain="file" path="datastore/player.preferences_pb" />
+        <include domain="file" path="recovery/protection.json" />
+        <include domain="file" path="recovery/protection.json.bak" />
+        <include domain="file" path="recovery/active-database.json" />
+        <include domain="file" path="recovery/active-database.json.bak" />
+    </device-transfer>
+</data-extraction-rules>

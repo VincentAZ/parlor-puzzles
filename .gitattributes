@@ -1,0 +1,5 @@
+* text=auto
+*.bat text eol=crlf
+# Preserve upstream license text exactly, including its original whitespace.
+docs/licenses/*.txt -text whitespace=-blank-at-eol
+feature/library/src/main/assets/licenses/*.txt -text whitespace=-blank-at-eol

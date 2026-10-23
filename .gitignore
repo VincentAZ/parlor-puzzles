@@ -1,0 +1,20 @@
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+*.jks
+*.keystore
+*.hprof
+captures/
+# Local test evidence (logs, reports, captures) stays out of the repository.
+docs/evidence/
+.kotlin/
+.DS_Store
+__pycache__/
+*.pyc
+google-services.json
+signing.properties
+
+# Local APK handoff copies are generated from the build outputs.
+/dist/

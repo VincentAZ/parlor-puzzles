@@ -1,0 +1,1905 @@
+{
+    "schemaVersion": 1,
+    "contentVersion": 4,
+    "levels": [
+        {
+            "id": "pegs-001",
+            "revision": 1,
+            "puzzle": "PEG_SOLITAIRE",
+            "variant": "english",
+            "tier": "EASY",
+            "order": 1,
+            "initial": {
+                "type": "peg_solitaire",
+                "layout": "ENGLISH",
+                "pegs": [
+                    24,
+                    25,
+                    33,
+                    34,
+                    37,
+                    38
+                ],
+                "goal": 24
+            },
+            "reference": [
+                {
+                    "type": "jump_peg",
+                    "from": 34,
+                    "to": 32
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 37,
+                    "to": 39
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 24,
+                    "to": 26
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 39,
+                    "to": 25
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 26,
+                    "to": 24
+                }
+            ],
+            "par": 5,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 75000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "pegs-011",
+            "revision": 1,
+            "puzzle": "PEG_SOLITAIRE",
+            "variant": "triangle",
+            "tier": "MEDIUM",
+            "order": 1,
+            "initial": {
+                "type": "peg_solitaire",
+                "layout": "TRIANGLE",
+                "pegs": [
+                    6,
+                    10,
+                    11,
+                    12,
+                    15,
+                    17,
+                    18,
+                    21,
+                    23,
+                    24
+                ],
+                "goal": 12
+            },
+            "reference": [
+                {
+                    "type": "jump_peg",
+                    "from": 24,
+                    "to": 22
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 15,
+                    "to": 5
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 6,
+                    "to": 16
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 18,
+                    "to": 6
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 22,
+                    "to": 12
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 12,
+                    "to": 0
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 21,
+                    "to": 11
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 0,
+                    "to": 10
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 10,
+                    "to": 12
+                }
+            ],
+            "par": 9,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 120000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "pegs-021",
+            "revision": 1,
+            "puzzle": "PEG_SOLITAIRE",
+            "variant": "european",
+            "tier": "HARD",
+            "order": 1,
+            "initial": {
+                "type": "peg_solitaire",
+                "layout": "EUROPEAN",
+                "pegs": [
+                    9,
+                    10,
+                    15,
+                    17,
+                    18,
+                    19,
+                    22,
+                    23,
+                    24,
+                    29,
+                    31,
+                    32,
+                    33,
+                    38,
+                    40,
+                    45
+                ],
+                "goal": 24
+            },
+            "reference": [
+                {
+                    "type": "jump_peg",
+                    "from": 32,
+                    "to": 30
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 40,
+                    "to": 26
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 30,
+                    "to": 16
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 26,
+                    "to": 12
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 17,
+                    "to": 19
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 45,
+                    "to": 31
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 16,
+                    "to": 14
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 31,
+                    "to": 17
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 29,
+                    "to": 15
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 12,
+                    "to": 26
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 14,
+                    "to": 16
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 16,
+                    "to": 18
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 9,
+                    "to": 11
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 11,
+                    "to": 25
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 26,
+                    "to": 24
+                }
+            ],
+            "par": 15,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 240000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "pegs-031",
+            "revision": 1,
+            "puzzle": "PEG_SOLITAIRE",
+            "variant": "diamond",
+            "tier": "EXPERT",
+            "order": 1,
+            "initial": {
+                "type": "peg_solitaire",
+                "layout": "DIAMOND",
+                "pegs": [
+                    9,
+                    10,
+                    16,
+                    17,
+                    18,
+                    19,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    30,
+                    31,
+                    32,
+                    33,
+                    37,
+                    38,
+                    45
+                ],
+                "goal": 24
+            },
+            "reference": [
+                {
+                    "type": "jump_peg",
+                    "from": 37,
+                    "to": 39
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 24,
+                    "to": 38
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 26,
+                    "to": 24
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 39,
+                    "to": 25
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 45,
+                    "to": 31
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 30,
+                    "to": 32
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 16,
+                    "to": 30
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 18,
+                    "to": 16
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 24,
+                    "to": 26
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 33,
+                    "to": 31
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 30,
+                    "to": 32
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 19,
+                    "to": 33
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 9,
+                    "to": 23
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 22,
+                    "to": 24
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 33,
+                    "to": 31
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 31,
+                    "to": 17
+                },
+                {
+                    "type": "jump_peg",
+                    "from": 10,
+                    "to": 24
+                }
+            ],
+            "par": 17,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 360000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "queens-001",
+            "revision": 1,
+            "puzzle": "QUEENS",
+            "variant": "standard",
+            "tier": "EASY",
+            "order": 1,
+            "initial": {
+                "type": "queens",
+                "side": 4,
+                "queens": [
+                    8
+                ],
+                "fixed": [
+                    8
+                ],
+                "blocked": []
+            },
+            "reference": [
+                {
+                    "type": "place_queen",
+                    "cell": 1
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 7
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 14
+                }
+            ],
+            "par": 3,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 75000,
+            "scoringUnit": "TIME",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "queens-009",
+            "revision": 1,
+            "puzzle": "QUEENS",
+            "variant": "standard",
+            "tier": "MEDIUM",
+            "order": 1,
+            "initial": {
+                "type": "queens",
+                "side": 5,
+                "queens": [
+                    0,
+                    23
+                ],
+                "fixed": [
+                    0,
+                    23
+                ],
+                "blocked": [
+                    8
+                ]
+            },
+            "reference": [
+                {
+                    "type": "place_queen",
+                    "cell": 14
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 7
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 16
+                }
+            ],
+            "par": 3,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 100000,
+            "scoringUnit": "TIME",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "queens-016",
+            "revision": 1,
+            "puzzle": "QUEENS",
+            "variant": "standard",
+            "tier": "HARD",
+            "order": 1,
+            "initial": {
+                "type": "queens",
+                "side": 7,
+                "queens": [
+                    38
+                ],
+                "fixed": [
+                    38
+                ],
+                "blocked": [
+                    5,
+                    26,
+                    37
+                ]
+            },
+            "reference": [
+                {
+                    "type": "place_queen",
+                    "cell": 15
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 25
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 12
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 48
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 2
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 28
+                }
+            ],
+            "par": 6,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 180000,
+            "scoringUnit": "TIME",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "queens-024",
+            "revision": 1,
+            "puzzle": "QUEENS",
+            "variant": "standard",
+            "tier": "EXPERT",
+            "order": 1,
+            "initial": {
+                "type": "queens",
+                "side": 8,
+                "queens": [
+                    46
+                ],
+                "fixed": [
+                    46
+                ],
+                "blocked": [
+                    5,
+                    6,
+                    15,
+                    39,
+                    43
+                ]
+            },
+            "reference": [
+                {
+                    "type": "place_queen",
+                    "cell": 0
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 12
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 23
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 29
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 49
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 34
+                },
+                {
+                    "type": "place_queen",
+                    "cell": 59
+                }
+            ],
+            "par": 7,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 240000,
+            "scoringUnit": "TIME",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "knight-001",
+            "revision": 1,
+            "puzzle": "KNIGHTS_TOUR",
+            "variant": "open",
+            "tier": "EASY",
+            "order": 1,
+            "initial": {
+                "type": "knights_tour",
+                "side": 5,
+                "path": [
+                    0
+                ],
+                "closed": false
+            },
+            "reference": [
+                {
+                    "type": "knight_step",
+                    "cell": 7
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 4
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 13
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 24
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 17
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 20
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 11
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 2
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 5
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 16
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 23
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 14
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 3
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 6
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 15
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 22
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 19
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 8
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 1
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 10
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 21
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 12
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 9
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 18
+                }
+            ],
+            "par": 24,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 180000,
+            "scoringUnit": "TIME_AND_BACKTRACKS",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "knight-009",
+            "revision": 1,
+            "puzzle": "KNIGHTS_TOUR",
+            "variant": "open",
+            "tier": "MEDIUM",
+            "order": 1,
+            "initial": {
+                "type": "knights_tour",
+                "side": 6,
+                "path": [
+                    0
+                ],
+                "closed": false
+            },
+            "reference": [
+                {
+                    "type": "knight_step",
+                    "cell": 8
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 4
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 17
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 28
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 32
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 24
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 13
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 2
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 6
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 19
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 30
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 26
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 34
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 21
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 10
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 23
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 15
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 11
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 3
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 7
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 18
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 31
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 27
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 35
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 22
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 14
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 1
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 9
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 5
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 16
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 29
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 33
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 20
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 12
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 25
+                }
+            ],
+            "par": 35,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 270000,
+            "scoringUnit": "TIME_AND_BACKTRACKS",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "knight-016",
+            "revision": 1,
+            "puzzle": "KNIGHTS_TOUR",
+            "variant": "open",
+            "tier": "HARD",
+            "order": 1,
+            "initial": {
+                "type": "knights_tour",
+                "side": 7,
+                "path": [
+                    0
+                ],
+                "closed": false
+            },
+            "reference": [
+                {
+                    "type": "knight_step",
+                    "cell": 9
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 4
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 13
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 26
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 41
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 46
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 33
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 48
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 39
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 34
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 47
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 38
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 43
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 28
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 15
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 2
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 7
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 22
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 35
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 44
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 29
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 42
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 37
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 24
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 11
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 6
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 19
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 10
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 1
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 14
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 23
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 8
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 3
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 12
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 17
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 32
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 27
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 18
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 5
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 20
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 25
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 16
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 21
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 30
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 45
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 36
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 31
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 40
+                }
+            ],
+            "par": 48,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 420000,
+            "scoringUnit": "TIME_AND_BACKTRACKS",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "knight-024",
+            "revision": 1,
+            "puzzle": "KNIGHTS_TOUR",
+            "variant": "closed",
+            "tier": "EXPERT",
+            "order": 1,
+            "initial": {
+                "type": "knights_tour",
+                "side": 8,
+                "path": [
+                    0
+                ],
+                "closed": true
+            },
+            "reference": [
+                {
+                    "type": "knight_step",
+                    "cell": 10
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 4
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 14
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 31
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 46
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 63
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 53
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 47
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 62
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 52
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 58
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 48
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 33
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 16
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 1
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 11
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 5
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 15
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 21
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 6
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 23
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 38
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 55
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 61
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 51
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 57
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 40
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 25
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 8
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 2
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 12
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 18
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 3
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 9
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 24
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 41
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 56
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 50
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 35
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 20
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 26
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 32
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 42
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 36
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 30
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 13
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 7
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 22
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 28
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 45
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 39
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 29
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 19
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 34
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 49
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 59
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 44
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 54
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 60
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 43
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 37
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 27
+                },
+                {
+                    "type": "knight_step",
+                    "cell": 17
+                }
+            ],
+            "par": 63,
+            "parKind": "REFERENCE",
+            "targetTimeMs": 600000,
+            "scoringUnit": "TIME_AND_BACKTRACKS",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "crossings-001",
+            "revision": 1,
+            "puzzle": "CROSSINGS",
+            "variant": "food_ferry",
+            "tier": "EASY",
+            "order": 1,
+            "initial": {
+                "type": "crossings",
+                "scenario": "FOOD_FERRY",
+                "actors": [
+                    {
+                        "id": "W",
+                        "role": "WOLF",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "G",
+                        "role": "GOAT",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "C",
+                        "role": "CABBAGE",
+                        "pair": null,
+                        "minutes": 1
+                    }
+                ],
+                "capacity": 1,
+                "right": [],
+                "boatRight": false,
+                "elapsedMinutes": 0
+            },
+            "reference": [
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "G"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": []
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "G"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "W"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": []
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "G"
+                    ]
+                }
+            ],
+            "par": 7,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 120000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "crossings-011",
+            "revision": 1,
+            "puzzle": "CROSSINGS",
+            "variant": "missionaries",
+            "tier": "MEDIUM",
+            "order": 1,
+            "initial": {
+                "type": "crossings",
+                "scenario": "MISSIONARIES",
+                "actors": [
+                    {
+                        "id": "M1",
+                        "role": "MISSIONARY",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "C1",
+                        "role": "CANNIBAL",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "M2",
+                        "role": "MISSIONARY",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "C2",
+                        "role": "CANNIBAL",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "M3",
+                        "role": "MISSIONARY",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "C3",
+                        "role": "CANNIBAL",
+                        "pair": null,
+                        "minutes": 1
+                    }
+                ],
+                "capacity": 2,
+                "right": [],
+                "boatRight": false,
+                "elapsedMinutes": 0
+            },
+            "reference": [
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1",
+                        "C2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1",
+                        "C3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "M1",
+                        "M2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C2",
+                        "M1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "M1",
+                        "M3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1",
+                        "C2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "C1",
+                        "C3"
+                    ]
+                }
+            ],
+            "par": 11,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 180000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "crossings-021",
+            "revision": 1,
+            "puzzle": "CROSSINGS",
+            "variant": "couples",
+            "tier": "HARD",
+            "order": 1,
+            "initial": {
+                "type": "crossings",
+                "scenario": "COUPLES",
+                "actors": [
+                    {
+                        "id": "A1",
+                        "role": "PARTNER_A",
+                        "pair": 1,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "B1",
+                        "role": "PARTNER_B",
+                        "pair": 1,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "A2",
+                        "role": "PARTNER_A",
+                        "pair": 2,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "B2",
+                        "role": "PARTNER_B",
+                        "pair": 2,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "A3",
+                        "role": "PARTNER_A",
+                        "pair": 3,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "B3",
+                        "role": "PARTNER_B",
+                        "pair": 3,
+                        "minutes": 1
+                    }
+                ],
+                "capacity": 2,
+                "right": [],
+                "boatRight": false,
+                "elapsedMinutes": 0
+            },
+            "reference": [
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A1",
+                        "B1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "B2",
+                        "B3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "B1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A2",
+                        "A3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A2",
+                        "B2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A1",
+                        "A2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "B3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "B1",
+                        "B2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A3"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "A3",
+                        "B3"
+                    ]
+                }
+            ],
+            "par": 11,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 240000,
+            "scoringUnit": "MOVES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        },
+        {
+            "id": "crossings-031",
+            "revision": 1,
+            "puzzle": "CROSSINGS",
+            "variant": "bridge",
+            "tier": "EXPERT",
+            "order": 1,
+            "initial": {
+                "type": "crossings",
+                "scenario": "BRIDGE",
+                "actors": [
+                    {
+                        "id": "P1",
+                        "role": "WALKER",
+                        "pair": null,
+                        "minutes": 1
+                    },
+                    {
+                        "id": "P2",
+                        "role": "WALKER",
+                        "pair": null,
+                        "minutes": 2
+                    },
+                    {
+                        "id": "P3",
+                        "role": "WALKER",
+                        "pair": null,
+                        "minutes": 5
+                    },
+                    {
+                        "id": "P4",
+                        "role": "WALKER",
+                        "pair": null,
+                        "minutes": 10
+                    },
+                    {
+                        "id": "P5",
+                        "role": "WALKER",
+                        "pair": null,
+                        "minutes": 15
+                    },
+                    {
+                        "id": "P6",
+                        "role": "WALKER",
+                        "pair": null,
+                        "minutes": 20
+                    }
+                ],
+                "capacity": 2,
+                "right": [],
+                "boatRight": false,
+                "elapsedMinutes": 0
+            },
+            "reference": [
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P1",
+                        "P2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P3",
+                        "P4"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P1",
+                        "P2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P1"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P5",
+                        "P6"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P2"
+                    ]
+                },
+                {
+                    "type": "cross_river",
+                    "passengers": [
+                        "P1",
+                        "P2"
+                    ]
+                }
+            ],
+            "par": 42,
+            "parKind": "PROVEN_OPTIMAL",
+            "targetTimeMs": 300000,
+            "scoringUnit": "SCENARIO_MINUTES",
+            "proVariant": false,
+            "provenance": {
+                "author": "Parlor Puzzles",
+                "method": "Original fixed-seed Wave C construction and complete reference verification",
+                "seed": 20260930,
+                "license": "Original project content"
+            }
+        }
+    ]
+}

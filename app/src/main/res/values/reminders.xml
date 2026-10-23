@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reminders_title">Reminders</string>
+    <string name="reminders_body">Choose a quiet reminder, at most once a day. Reminders are optional and never promotional.</string>
+    <string name="reminders_enable">Remind me</string>
+    <string name="reminders_type">What would you like a reminder for?</string>
+    <string name="reminders_daily">Daily puzzle</string>
+    <string name="reminders_streak">Keep a streak going</string>
+    <string name="reminders_daily_detail">A new Daily Challenge is ready each day.</string>
+    <string name="reminders_streak_detail">A reminder only when you solved a puzzle yesterday and have not finished one today.</string>
+    <string name="reminders_time">Reminder time: %1$s</string>
+    <string name="reminders_timing">Around your chosen local time. Android may deliver it later, when your phone is awake.</string>
+    <string name="reminders_skip">We’ll skip it when you have already finished a puzzle that day or you are using Parlor.</string>
+    <string name="reminders_device">Your reminder choices stay on this device and are not included in backups.</string>
+    <string name="reminders_permission">Notifications are off in Android. Reminders stay quiet until you allow them.</string>
+    <string name="reminders_android_settings">Android notification settings</string>
+    <string name="reminders_error">Reminders could not be saved or scheduled. Please try again.</string>
+</resources>

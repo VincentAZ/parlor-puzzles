@@ -1,0 +1,35 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+}
+android {
+    namespace = "com.parlor.feature.library"
+    compileSdk = 36
+    defaultConfig { minSdk = 26; testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" }
+    compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
+    buildFeatures { compose = true }
+}
+kotlin { jvmToolchain(17) }
+dependencies {
+    implementation(project(":core:design"))
+    implementation(project(":core:model"))
+    implementation(libs.coroutines.android)
+    implementation(libs.androidx.core)
+    implementation(project(":core:game"))
+    implementation(project(":core:progress"))
+    implementation(project(":core:data"))
+    implementation(project(":core:platform"))
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.preview)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.coroutines.test)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.junit)
+}

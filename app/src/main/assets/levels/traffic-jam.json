@@ -1,0 +1,2339 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "levels": [
+    {
+      "id": "traffic-001",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "EASY",
+      "order": 1,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 0,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "C",
+            "x": 3,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 5,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "E",
+            "x": 4,
+            "y": 0,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 1,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "G",
+            "x": 4,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 1,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "I",
+            "x": 2,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "J",
+            "x": 1,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 1,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "L",
+            "x": 0,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 8,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 64000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 18; 6914 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-002",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "EASY",
+      "order": 2,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 3,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "C",
+            "x": 4,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "D",
+            "x": 5,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "E",
+            "x": 2,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 1,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 4,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 2,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "I",
+            "x": 1,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 3,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "K",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "L",
+            "x": 0,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 9,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 72000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 95; 891 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-003",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "EASY",
+      "order": 3,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 2,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "C",
+            "x": 3,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 4,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 3,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 1,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "H",
+            "x": 4,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "I",
+            "x": 3,
+            "y": 4,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "J",
+            "x": 2,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 0,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 1,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 8,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 64000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 221; 674 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-021",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "MEDIUM",
+      "order": 1,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 1,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 4,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "C",
+            "x": 4,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "D",
+            "x": 1,
+            "y": 0,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 5,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 1,
+            "y": 5,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "G",
+            "x": 1,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 4,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "I",
+            "x": 3,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 0,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 2,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 4,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 11,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 110000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 9; 6370 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-022",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "MEDIUM",
+      "order": 2,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 4,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "C",
+            "x": 1,
+            "y": 0,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 1,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 0,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 1,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 4,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "I",
+            "x": 4,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "J",
+            "x": 4,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "K",
+            "x": 1,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 3,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 11,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 110000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 57; 9194 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-023",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "MEDIUM",
+      "order": 3,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 2,
+            "y": 0,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "C",
+            "x": 1,
+            "y": 4,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 2,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 4,
+            "y": 2,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 0,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "H",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "I",
+            "x": 2,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "J",
+            "x": 0,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "K",
+            "x": 0,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 3,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 11,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 110000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 65; 7420 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-041",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "HARD",
+      "order": 1,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 2,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "C",
+            "x": 4,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 4,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 5,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 2,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "G",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "H",
+            "x": 2,
+            "y": 1,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "I",
+            "x": 3,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 5,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 0,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "L",
+            "x": 2,
+            "y": 4,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 17,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 204000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 1177; 2705 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-042",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "HARD",
+      "order": 2,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 2,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "C",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "D",
+            "x": 3,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "E",
+            "x": 1,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "F",
+            "x": 0,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 4,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 4,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "I",
+            "x": 1,
+            "y": 5,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "J",
+            "x": 0,
+            "y": 4,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "K",
+            "x": 0,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 4,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 17,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 204000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 1682; 10823 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-043",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "HARD",
+      "order": 3,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 1,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "C",
+            "x": 3,
+            "y": 5,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 3,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 0,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "F",
+            "x": 4,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 4,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "I",
+            "x": 2,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 1,
+            "y": 3,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 2,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 1,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 19,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 228000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 2040; 5520 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-061",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "EXPERT",
+      "order": 1,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 2,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 0,
+            "y": 2,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "C",
+            "x": 2,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 1,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 3,
+            "y": 5,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "F",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 3,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "H",
+            "x": 5,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "I",
+            "x": 3,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 1,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 4,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "L",
+            "x": 0,
+            "y": 0,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 27,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 378000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 4704; 22652 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-062",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "EXPERT",
+      "order": 2,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "C",
+            "x": 1,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "E",
+            "x": 2,
+            "y": 5,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "F",
+            "x": 3,
+            "y": 1,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "G",
+            "x": 0,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "H",
+            "x": 4,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "I",
+            "x": 2,
+            "y": 0,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 4,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "K",
+            "x": 3,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "L",
+            "x": 5,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "D",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "I",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 29,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 406000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 7081; 4031 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    },
+    {
+      "id": "traffic-063",
+      "revision": 1,
+      "puzzle": "TRAFFIC_JAM",
+      "variant": "standard",
+      "tier": "EXPERT",
+      "order": 3,
+      "initial": {
+        "type": "traffic_jam",
+        "width": 6,
+        "height": 6,
+        "exitRow": 2,
+        "targetId": "A",
+        "pieces": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 2,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "B",
+            "x": 3,
+            "y": 3,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "C",
+            "x": 0,
+            "y": 5,
+            "length": 3,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "D",
+            "x": 3,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "E",
+            "x": 0,
+            "y": 0,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "F",
+            "x": 2,
+            "y": 1,
+            "length": 3,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "G",
+            "x": 3,
+            "y": 4,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "H",
+            "x": 5,
+            "y": 2,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "I",
+            "x": 5,
+            "y": 0,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "J",
+            "x": 4,
+            "y": 1,
+            "length": 2,
+            "axis": "VERTICAL"
+          },
+          {
+            "id": "K",
+            "x": 1,
+            "y": 4,
+            "length": 2,
+            "axis": "HORIZONTAL"
+          },
+          {
+            "id": "L",
+            "x": 0,
+            "y": 3,
+            "length": 2,
+            "axis": "VERTICAL"
+          }
+        ]
+      },
+      "reference": [
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "C",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "J",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 4
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "B",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "E",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "L",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 1
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 2
+        },
+        {
+          "type": "translate",
+          "pieceId": "K",
+          "to": 0
+        },
+        {
+          "type": "translate",
+          "pieceId": "F",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "G",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "H",
+          "to": 3
+        },
+        {
+          "type": "translate",
+          "pieceId": "A",
+          "to": 6
+        }
+      ],
+      "par": 26,
+      "parKind": "PROVEN_OPTIMAL",
+      "targetTimeMs": 364000,
+      "scoringUnit": "MOVES",
+      "proVariant": false,
+      "provenance": {
+        "author": "Parlor Puzzles",
+        "method": "Independent random packing + unit-cost BFS; candidate 9831; 5276 visited states",
+        "seed": 20260928,
+        "license": "Original project content; no third-party layout source"
+      }
+    }
+  ]
+}

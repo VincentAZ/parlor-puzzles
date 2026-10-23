@@ -1,0 +1,26 @@
+<resources>
+    <string name="library_themes">Themes and appearance</string>
+    <string name="library_themes_body">Choose a room for your puzzles. Your boards, photos and progress stay with you.</string>
+    <string name="library_appearance">Appearance</string>
+    <string name="library_appearance_light">Light</string>
+    <string name="library_appearance_dark">Dark</string>
+    <string name="library_appearance_system">Use device setting</string>
+    <string name="library_theme_save_error">This choice could not be saved. Please try again.</string>
+    <string name="library_theme_retained">Your Pro theme is saved. Linen is shown until Pro is restored.</string>
+    <string name="library_themes_pro">Explore all six themes with Pro</string>
+    <string name="library_theme_selected">Selected</string>
+    <string name="library_theme_available">Available</string>
+    <string name="library_theme_pro">Included with Pro</string>
+    <string name="library_theme_linen">Linen room</string>
+    <string name="library_theme_sage">Garden room</string>
+    <string name="library_theme_rose">Rose nook</string>
+    <string name="library_theme_amber">Amber study</string>
+    <string name="library_theme_slate">Slate studio</string>
+    <string name="library_theme_walnut">Walnut library</string>
+    <string name="library_theme_linen_detail">Warm linen, soft blue tiles and a fine woven surface.</string>
+    <string name="library_theme_sage_detail">Quiet sage greens with a softly speckled surface.</string>
+    <string name="library_theme_rose_detail">Dusty rose pieces on a warm ceramic surface.</string>
+    <string name="library_theme_amber_detail">Honey and mustard tones with a woven surface.</string>
+    <string name="library_theme_slate_detail">Soft slate blue pieces and fine diagonal marks.</string>
+    <string name="library_theme_walnut_detail">Warm wood tones with subtle grain.</string>
+</resources>

@@ -1,0 +1,572 @@
+{
+    "epochs": [
+        {
+            "version": 1,
+            "effectiveFrom": "2026-09-28",
+            "pool": [
+                {
+                    "id": "traffic-001",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-002",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-003",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-021",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-022",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-023",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-041",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-042",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-043",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-061",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-062",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-063",
+                    "revision": 1
+                }
+            ]
+        },
+        {
+            "version": 2,
+            "effectiveFrom": "2026-10-01",
+            "pool": [
+                {
+                    "id": "traffic-001",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-002",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-003",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-021",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-022",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-023",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-041",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-042",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-043",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-061",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-062",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-063",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-001",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-005",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-011",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-014",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-001",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-016",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-031",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-046",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-001",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-014",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-026",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-039",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-001",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-011",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-021",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-031",
+                    "revision": 1
+                }
+            ]
+        },
+        {
+            "version": 3,
+            "effectiveFrom": "2026-10-04",
+            "pool": [
+                {
+                    "id": "traffic-001",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-002",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-003",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-021",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-022",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-023",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-041",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-042",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-043",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-061",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-062",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-063",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-001",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-005",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-011",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-014",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-001",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-016",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-031",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-046",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-001",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-014",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-026",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-039",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-001",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-011",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-021",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-031",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-001",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-016",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-031",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-046",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-001",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-014",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-026",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-039",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-001",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-016",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-031",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-046",
+                    "revision": 1
+                }
+            ]
+        },
+        {
+            "version": 4,
+            "effectiveFrom": "2026-10-07",
+            "pool": [
+                {
+                    "id": "traffic-001",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-002",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-003",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-021",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-022",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-023",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-041",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-042",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-043",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-061",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-062",
+                    "revision": 1
+                },
+                {
+                    "id": "traffic-063",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-001",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-005",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-011",
+                    "revision": 1
+                },
+                {
+                    "id": "hanoi-014",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-001",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-016",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-031",
+                    "revision": 1
+                },
+                {
+                    "id": "switch-046",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-001",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-014",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-026",
+                    "revision": 1
+                },
+                {
+                    "id": "jugs-039",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-001",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-011",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-021",
+                    "revision": 1
+                },
+                {
+                    "id": "pancake-031",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-001",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-016",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-031",
+                    "revision": 1
+                },
+                {
+                    "id": "tiles-046",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-001",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-014",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-026",
+                    "revision": 1
+                },
+                {
+                    "id": "blocks-039",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-001",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-016",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-031",
+                    "revision": 1
+                },
+                {
+                    "id": "boxes-046",
+                    "revision": 1
+                },
+                {
+                    "id": "pegs-001",
+                    "revision": 1
+                },
+                {
+                    "id": "pegs-011",
+                    "revision": 1
+                },
+                {
+                    "id": "pegs-021",
+                    "revision": 1
+                },
+                {
+                    "id": "pegs-031",
+                    "revision": 1
+                },
+                {
+                    "id": "queens-001",
+                    "revision": 1
+                },
+                {
+                    "id": "queens-009",
+                    "revision": 1
+                },
+                {
+                    "id": "queens-016",
+                    "revision": 1
+                },
+                {
+                    "id": "queens-024",
+                    "revision": 1
+                },
+                {
+                    "id": "knight-001",
+                    "revision": 1
+                },
+                {
+                    "id": "knight-009",
+                    "revision": 1
+                },
+                {
+                    "id": "knight-016",
+                    "revision": 1
+                },
+                {
+                    "id": "knight-024",
+                    "revision": 1
+                },
+                {
+                    "id": "crossings-001",
+                    "revision": 1
+                },
+                {
+                    "id": "crossings-011",
+                    "revision": 1
+                },
+                {
+                    "id": "crossings-021",
+                    "revision": 1
+                },
+                {
+                    "id": "crossings-031",
+                    "revision": 1
+                }
+            ]
+        }
+    ]
+}

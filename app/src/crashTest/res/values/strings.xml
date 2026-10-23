@@ -1,0 +1,11 @@
+<resources>
+    <string name="crash_test_app_name">Parlor crash test</string>
+    <string name="crash_test_title">Crash reporter check</string>
+    <string name="crash_test_started">The crash reporter started. Report delivery still needs verification in the Firebase console.</string>
+    <string name="crash_test_unavailable">The crash reporter could not start. Check this internal build’s Firebase configuration before testing.</string>
+    <string name="crash_test_previous_yes">A crash was detected in the previous execution.</string>
+    <string name="crash_test_previous_no">No crash was detected in the previous execution.</string>
+    <string name="crash_test_instructions">Create one test crash, then reopen this screen so the SDK can upload it. Verify the app ID, version and readable stack trace in the console. This button closes the app and exists only in the separate internal test build.</string>
+    <string name="crash_test_button">Create test crash</string>
+    <string name="crash_test_open_game">Open puzzles</string>
+</resources>

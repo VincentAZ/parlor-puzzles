@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reminder_channel">Puzzle reminders</string>
+    <string name="reminder_channel_description">An optional Daily puzzle or streak reminder, at most once a day.</string>
+    <string name="reminder_daily_title">Today’s puzzle is ready</string>
+    <string name="reminder_daily_body">Take a quiet moment with a new Daily Challenge when it suits you.</string>
+    <string name="reminder_streak_title">A puzzle when you have a moment</string>
+    <string name="reminder_streak_body">One puzzle today keeps your current streak going.</string>
+</resources>
