@@ -6,11 +6,7 @@ import com.parlor.core.data.*
 import com.parlor.core.platform.Feedback
 import com.parlor.core.platform.crashes.AndroidCrashReporting
 import com.parlor.core.platform.crashes.CrashReportingStatus
-import com.parlor.core.platform.billing.AndroidProBilling
-import com.parlor.core.platform.billing.ProBillingOwner
-import com.parlor.core.platform.ads.*
 import com.parlor.core.platform.reminders.*
-import androidx.work.Configuration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,7 +20,7 @@ import kotlinx.coroutines.sync.Mutex
 
 enum class SettingsReset { READY, WORKING, FAILED }
 
-open class ParlorApplication : Application(), ProBillingOwner, Configuration.Provider, RemindersOwner {
+open class ParlorApplication : Application(), RemindersOwner {
     var crashReportingStatus = CrashReportingStatus.DISABLED
         private set
     override fun onCreate() {
@@ -33,22 +29,13 @@ open class ParlorApplication : Application(), ProBillingOwner, Configuration.Pro
         PhotoCodec.clearAbandonedInputs(cacheDir)
     }
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-    override val billing by lazy { AndroidProBilling(this,BuildConfig.PLAY_PUBLIC_KEY,BuildConfig.PRO_PRODUCT_ID) }
-    private val adsDelegate: Lazy<AndroidAds> = lazy { createAds(AdUnits(BuildConfig.ADMOB_APP, BuildConfig.ADMOB_BANNER,
-        BuildConfig.ADMOB_INTERSTITIAL, BuildConfig.ADMOB_REWARDED), adsWork) }
-    protected open fun createAds(units: AdUnits, work: AdsWork): AndroidAds =
-        AndroidAds(this, units, billing.state, work)
-    val ads: AndroidAds by adsDelegate
-    private val adsWork: AdsWork by lazy { AdsWork(this) { adsDelegate.isInitialized() && ads.permitsBackgroundWork } }
-    override fun getWorkManagerConfiguration(): Configuration = adsWork.configuration
     val databaseSlots by lazy { DatabaseSlots(this) }
     val databaseOwner by lazy { ProgressDatabase(databaseSlots::openActive) }
     val database get() = databaseOwner.current
     val storageHealth = StorageHealth()
     val recoveryProtection by lazy { RecoveryProtectionFile(this) }
-    val progress by lazy { ProgressRepository(databaseOwner,isPro = { billing.hasPro }, storageHealth = storageHealth,
+    val progress by lazy { ProgressRepository(databaseOwner,isPro = { true }, storageHealth = storageHealth,
         protection = recoveryProtection) }
-    val rewardDelivery by lazy { RewardDelivery(serviceScope, DeviceRewardStore(this), progress::applyEarnedReward) }
     val settings by lazy { SettingsRepository(this, storageHealth) }
     private val mutableSettingsReset = MutableStateFlow(SettingsReset.READY)
     val settingsReset = mutableSettingsReset.asStateFlow()
@@ -68,10 +55,10 @@ open class ParlorApplication : Application(), ProBillingOwner, Configuration.Pro
     }
     private val backupMutex = Mutex()
     val backups: ManualBackup by lazy { ManualBackup(this, progress, settings, serviceScope, storageHealth, backupMutex,
-        deleteOtherPhotoCopies = { databaseRecovery.deletePhotoCopies() }) { rewardDelivery.state.value.canStart } }
+        deleteOtherPhotoCopies = { databaseRecovery.deletePhotoCopies() }) { true } }
     val databaseRecovery: DamagedDatabaseRecovery by lazy { DamagedDatabaseRecovery(this, databaseOwner, databaseSlots, recoveryProtection,
         serviceScope, backupMutex, loadContent = { content.load() to content.dailySchedule() },
-        isPro = { billing.hasPro },
+        isPro = { true },
         isRecoverable = { storageHealth.state.value.issue == StorageIssue(StorageArea.PROGRESS, StorageProblem.DAMAGED) },
         beforeSwitch = { backups.invalidatePreview() }, onRestored = storageHealth::retry) }
     val content by lazy { ContentRepository(this) }

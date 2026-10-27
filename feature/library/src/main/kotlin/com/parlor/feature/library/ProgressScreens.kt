@@ -40,12 +40,7 @@ internal fun ColumnScope.DailyContent(entries: List<DailyEntry>, today: String, 
     Text(stringResource(R.string.library_daily_intro))
     val current = entries.find { it.record.date == today }
     if (current != null && DailyRules.withinHistory(today, today, ledger.latestResetDate)) {
-        DailyCard(current, ledger, pro, onPlay)
-        if (!pro && onReward != null && ledger.dailyClaims[today]?.firstCompletionClaimed == true) {
-            OutlinedButton(onClick = { onReward(today) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
-                Text(stringResource(R.string.library_daily_earn_retry))
-            }
-        }
+        DailyCard(current, ledger, true, onPlay)
     } else if (error) {
         Text(stringResource(R.string.library_daily_error), color = MaterialTheme.colorScheme.error)
         Button(onClick = onRetry) { Text(stringResource(R.string.library_retry)) }
@@ -54,13 +49,13 @@ internal fun ColumnScope.DailyContent(entries: List<DailyEntry>, today: String, 
     Text(stringResource(R.string.library_daily_history_body))
     val older = entries.filter { it.record.date != today && DailyRules.withinHistory(it.record.date, today, ledger.latestResetDate) }
     if (older.isEmpty()) Text(stringResource(R.string.library_daily_history_empty))
-    older.forEach { DailyCard(it, ledger, pro, onPlay) }
+    older.forEach { DailyCard(it, ledger, true, onPlay) }
 }
 
 @Composable
 private fun DailyCard(entry: DailyEntry, ledger: RewardLedger, pro: Boolean, onPlay: (String) -> Unit) {
     val record = entry.record
-    val eligibility = DailyRules.eligibility(ledger.dailyClaims[record.date] ?: DailyClaim(), pro)
+    val eligibility = DailyRules.eligibility(ledger.dailyClaims[record.date] ?: DailyClaim(), true)
     OutlinedCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(displayDate(record.date), style = MaterialTheme.typography.titleLarge)

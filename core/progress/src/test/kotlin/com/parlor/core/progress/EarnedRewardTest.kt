@@ -32,7 +32,7 @@ class EarnedRewardTest {
         val pending = EarnedReward("late-write", Reward.Hints, day, 100)
         ledger = RewardRules.grantEarned(ledger, next, pending)!!
         assertEquals(next, ledger.latestResetDate)
-        assertEquals(2, ledger.dailyHints)
+        assertEquals(3, ledger.dailyHints)
         assertEquals(9, ledger.earnedHints)
         assertEquals(1, ledger.rewardedViews)
         assertEquals(mapOf(day to 10, next to 1), ledger.rewardedViewsByDate)

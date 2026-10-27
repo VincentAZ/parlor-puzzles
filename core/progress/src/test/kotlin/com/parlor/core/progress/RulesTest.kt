@@ -54,7 +54,7 @@ class RulesTest {
         var ledger = RewardLedger(earnedHints = 7)
         ledger = DailyRules.rollover(ledger, "2026-09-28")
         repeat(3) { ledger = DailyRules.spendHint(ledger, "2026-09-28", false)!! }
-        assertEquals(0, ledger.dailyHints)
+        assertEquals(3, ledger.dailyHints)
         assertEquals(7, ledger.earnedHints)
         assertEquals(ledger, DailyRules.rollover(ledger, "2026-09-27"))
         assertEquals(ledger, DailyRules.rollover(ledger, "2026-09-28"))
@@ -83,15 +83,15 @@ class RulesTest {
         }
     }
 
-    @Test fun progressionUsesCeilingAndExcludesProVariants() {
+    @Test fun allTiersAndFormerPaidVariantsAreFree() {
         val easy = (1..4).map { level.copy(id = "easy-$it", order = it, proVariant = it == 4) }
         val medium = level.copy(id = "medium-1", tier = Tier.MEDIUM)
         val all = easy + medium
         val bests = easy.take(2).map { Scoring.improve(it.id, null, result(5), "2026-09-28") }
-        assertEquals(Access.PREVIOUS_TIER, Progression.access(medium, all, bests, false))
+        assertEquals(Access.AVAILABLE, Progression.access(medium, all, bests, false))
         val third = Scoring.improve(easy[2].id, null, result(5), "2026-09-28")
         assertEquals(Access.AVAILABLE, Progression.access(medium, all, bests + third, false))
-        assertEquals(Access.PRO, Progression.access(medium.copy(tier = Tier.HARD), all, bests, false))
+        assertEquals(Access.AVAILABLE, Progression.access(medium.copy(tier = Tier.HARD), all, bests, false))
         assertEquals(Access.AVAILABLE, Progression.access(medium, all, emptyList(), true))
     }
 }

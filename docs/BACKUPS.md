@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Manual progress backup and restore
 
 Settings → Progress backups opens Pro's file export/import. Android's system

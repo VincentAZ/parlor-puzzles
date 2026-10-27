@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.test.platform.app.InstrumentationRegistry
 import com.parlor.core.data.*
 import com.parlor.core.model.*
-import com.parlor.core.platform.ads.*
 import com.parlor.core.platform.reminders.*
 import com.parlor.feature.library.*
 import com.parlor.feature.play.TrafficBoard
@@ -100,20 +99,6 @@ class LocalePresentationTest {
         compose.runOnIdle { language = "de-DE" }
         compose.onNodeWithTag("destination-A-1").assertTextEquals("2").performClick()
         compose.runOnIdle { assertEquals(Translate("A", 1), move); assertEquals("A", viewport.selectedId) }
-    }
-
-    @Test fun dailyRewardDateUsesLocalDigitsAndRetainsTheCanonicalChallengeDate() {
-        val reward = Reward.DailyRetry("2026-09-28")
-        show { RewardDialog(RewardAdState(reward), RewardDeliveryState(), true, 0,
-            onWatch = {}, onClose = {}, onRetrySave = {}, onContinue = {}) }
-        assertEquals(compose.onAllNodes(isRoot()).onLast().printToString(), 1,
-            compose.onAllNodes(hasText("٢٠٢٦", substring = true) and hasText("٢٨", substring = true)).fetchSemanticsNodes().size)
-        compose.onNode(hasText("٢٠٢٦", substring = true) and hasText("٢٨", substring = true)).performScrollTo().assertIsDisplayed()
-        captureTabletScreen(compose, "locale-daily-retry-arabic-200.png")
-        compose.onNodeWithText("Completed reward ads today: ٠ of ١٠.").performScrollTo().assertIsDisplayed()
-        compose.runOnIdle { language = "de-DE" }
-        compose.onNode(hasText("28.09.2026", substring = true)).performScrollTo().assertIsDisplayed()
-        assertEquals("2026-09-28", reward.date)
     }
 
     @Test fun fractionalProgressUsesTheResourceDecimalSeparator() {

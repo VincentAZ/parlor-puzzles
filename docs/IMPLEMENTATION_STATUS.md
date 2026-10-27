@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Android implementation status
 
 The full objective is the supplied Android v1 requirements, including all 12

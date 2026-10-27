@@ -69,7 +69,7 @@ class LevelSelectScreenTest {
         jump(Tier.EXPERT)
         val last = fixture.levels.last()
         reveal(last.id).assertIsDisplayed().assertHeightIsAtLeast(48.dp).performClick()
-        assertEquals(last, locked); assertEquals(0, plays)
+        assertNull(locked); assertEquals(1, plays)
         val cardBounds = compose.onNodeWithTag("level-${last.id}").fetchSemanticsNode().boundsInRoot
         val bannerBounds = compose.onNodeWithTag("fixture-banner").fetchSemanticsNode().boundsInRoot
         assertTrue(cardBounds.bottom <= bannerBounds.top + 1)
@@ -83,41 +83,27 @@ class LevelSelectScreenTest {
         compose.onNodeWithText("Back").performClick(); assertEquals(1, backs)
     }
 
-    @Test fun progressionProAndExpiredTemporaryAccessRouteFromFreshStateWithoutOpeningLockedBoards() {
+    @Test fun allTiersStayPlayableWithNoProgressOwnershipOrTemporaryGrant() {
         var pro by mutableStateOf(false)
-        var bests by mutableStateOf(emptyList<LevelBest>())
-        var grants by mutableStateOf(emptyMap<String, Long>())
         var now = 1_000L
         val played = mutableListOf<String>()
         val locked = mutableListOf<String>()
-        val clock = { now }
         compose.setContent { ParlorTheme { Surface {
-            LevelSelectScreen(fixture, Puzzle.TRAFFIC_JAM, bests, grants, pro, { played += it.id }, {}, {}, {},
-                onLockedLevel = { locked += it.id }, wallTime = clock)
+            LevelSelectScreen(fixture, Puzzle.TRAFFIC_JAM, emptyList(), emptyMap(), pro,
+                { played += it.id }, {}, {}, {}, onLockedLevel = { locked += it.id }, wallTime = { now })
         } } }
-        reveal("layout-easy-1").performClick(); assertEquals(listOf("layout-easy-1"), played)
-        reveal("layout-easy-2").performClick()
-        compose.onNodeWithText("Complete the earlier levels first.").assertIsDisplayed()
-        compose.onNodeWithText("Close").assertHeightIsAtLeast(48.dp).performClick()
-        jump(Tier.MEDIUM); reveal("layout-medium-1").performClick()
-        compose.onNodeWithText("Complete 70 percent of the previous tier to continue.").assertIsDisplayed()
-        capture("levels-tier-locked-compact-200.png")
-        compose.onNodeWithText("Close").performClick()
-        compose.runOnIdle {
-            bests = fixture.levels.filter { it.tier == Tier.EASY }.take(14).map { LevelBest(it.id, 1, 100, 50_000, 20, "2026-09-28") }
+        for (tier in Tier.entries) {
+            jump(tier)
+            val id = fixture.levels.last { it.tier == tier }.id
+            reveal(id).performClick()
+            assertEquals(id, played.last())
         }
-        reveal("layout-medium-1").performClick(); assertEquals("layout-medium-1", played.last())
-        jump(Tier.HARD); reveal("layout-hard-20").performClick(); assertEquals(listOf("layout-hard-20"), locked)
-        compose.runOnIdle { grants = mapOf("layout-hard-20" to 86_401_000L) }
-        reveal("layout-hard-20").performClick(); assertEquals("layout-hard-20", played.last())
-        val count = played.size
-        compose.runOnIdle { now = 86_401_000L }
-        reveal("layout-hard-20").performClick()
-        assertEquals(count, played.size); assertEquals(2, locked.size)
-        compose.runOnIdle { pro = true }
-        jump(Tier.EXPERT); reveal("layout-expert-20").performClick(); assertEquals("layout-expert-20", played.last())
+        compose.runOnIdle { now = Long.MAX_VALUE; pro = true }
+        reveal("layout-expert-20").performClick()
         compose.runOnIdle { pro = false }
-        reveal("layout-expert-20").performClick(); assertEquals("layout-expert-20", locked.last())
+        reveal("layout-expert-20").performClick()
+        assertEquals("layout-expert-20", played.last())
+        assertTrue(locked.isEmpty())
     }
 
     @Test fun everyBestUnitAndEarnedStarsRemainReadableWithTheLockAfterProRevocationInRtl() {
@@ -134,7 +120,7 @@ class LevelSelectScreenTest {
             jump(Tier.HARD)
             reveal(sample.id).assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Ready when you are"))
             compose.runOnIdle { pro = false }
-            reveal(sample.id).assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Included with Parlor Pro"))
+            reveal(sample.id).assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Ready when you are"))
                 .assertContentDescriptionContains("3 of 3 stars")
             val best = when (sample.scoringUnit) {
                 ScoringUnit.MOVES -> "Best: 17 moves"

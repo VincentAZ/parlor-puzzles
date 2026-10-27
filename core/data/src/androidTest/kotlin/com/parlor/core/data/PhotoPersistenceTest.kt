@@ -63,7 +63,7 @@ class PhotoPersistenceTest {
         val recovery = repo.recoverySnapshot()!!; assertEquals(listOf(blue), recovery.photos)
         db.close(); open(); pro = false
         repo.importProgress(repo.recoverySnapshot()!!, PlayerSettings(), recovery = true); finish()
-        assertEquals(blue.id, repo.startOrResume(level).photoId); assertNotNull(repo.photo(blue.id)); assertFalse(repo.hasPro())
+        assertEquals(blue.id, repo.startOrResume(level).photoId); assertNotNull(repo.photo(blue.id)); assertTrue(repo.hasPro())
         pro = true
         val schemaThree = ParlorJson.parseToJsonElement(BackupFile.bytes(backup.copy(schemaVersion = 3)).decodeToString()).jsonObject
         val legacyPhotoJson = JsonObject(schemaThree + ("settings" to JsonObject(schemaThree.getValue("settings").jsonObject - "appearance")))
@@ -113,7 +113,7 @@ class PhotoPersistenceTest {
     @Test fun proAndDailyGatesKeepBoardsAndAllowFreePrivacyDeletionIncludingRecovery() = runBlocking {
         repo.refreshDay(); val a = repo.startOrResume(level); val image = photo()
         pro = false
-        assertTrue(runCatching { repo.setPhoto(level, a.id, image) }.isFailure)
+        assertTrue(runCatching { repo.setPhoto(level, a.id, image) }.isSuccess)
         pro = true; repo.setPhoto(level, a.id, image)
         val backup = repo.exportProgress(PlayerSettings())
         val daily = repo.startDaily().attempt
@@ -124,7 +124,7 @@ class PhotoPersistenceTest {
         assertEquals(saved.copy(photoId = null), repo.startOrResume(level))
         assertTrue(db.progress().photoIds().isEmpty())
         assertTrue(repo.recoverySnapshot()!!.photos.isEmpty()); assertTrue(repo.recoverySnapshot()!!.attempts.all { it.photoId == null })
-        assertFalse(repo.hasPro()); assertEquals(0, repo.completionCount.first())
+        assertTrue(repo.hasPro()); assertEquals(0, repo.completionCount.first())
     }
 
     @Test fun resetAndReplacingPhotosPruneUnusedCopiesWhileRepeatedImagesAreDeduplicated() = runBlocking {

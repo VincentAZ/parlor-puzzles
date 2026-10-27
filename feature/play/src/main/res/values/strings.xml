@@ -3,8 +3,8 @@
     <string name="play_photo_choose">Choose photo</string>
     <string name="play_photo_change">Change photo</string>
     <string name="play_photo_remove">Use default artwork</string>
-    <string name="play_photo_pro">Use your own photos in Sliding Tiles with Pro.</string>
-    <string name="play_photo_retained">Your saved photo is kept. Pro is needed to show it; you can keep playing with numbers.</string>
+    <string name="play_photo_pro">Use your own photos in Sliding Tiles for free.</string>
+    <string name="play_photo_retained">Your saved photo is available.</string>
     <string name="play_photo_open_pro">View Pro</string>
     <string name="play_photo_local">A private copy stays on this device and in your backups. Delete saved copies in Settings → Saved photos.</string>
     <string name="play_photo_preview">Use this square crop?</string>

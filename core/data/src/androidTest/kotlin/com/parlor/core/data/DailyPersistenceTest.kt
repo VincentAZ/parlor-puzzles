@@ -36,7 +36,7 @@ class DailyPersistenceTest {
     }
 
     @Test fun freePremiumDailyScoresOnceAndPracticeStaysSeparateFromCampaign() = runBlocking {
-        assertTrue(runCatching { repo.startOrResume(level) }.exceptionOrNull() is AccessDenied)
+        assertTrue(runCatching { repo.startOrResume(level) }.isSuccess)
         val first = repo.startDaily()
         assertEquals(level, first.level)
         assertEquals(DailyEligibility.FIRST_COMPLETION, first.attempt.dailyEligibility)
@@ -45,12 +45,12 @@ class DailyPersistenceTest {
         assertEquals(2, repo.dailyEntry().record.best!!.stars)
         assertTrue(repo.bests.first().isEmpty())
         val practice = repo.startDaily()
-        assertEquals(DailyEligibility.PRACTICE, practice.attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, practice.attempt.dailyEligibility)
         solve(practice)
-        assertEquals(1, repo.dailyEntry().record.scoredCompletions)
+        assertEquals(2, repo.dailyEntry().record.scoredCompletions)
         assertEquals(2, repo.dailyEntry().record.completions)
-        assertEquals(250L, repo.player.first().profile.dailyTotals.getValue(Puzzle.TRAFFIC_JAM).points)
-        assertTrue(runCatching { repo.startOrResume(level) }.exceptionOrNull() is AccessDenied)
+        assertEquals(350L, repo.player.first().profile.dailyTotals.getValue(Puzzle.TRAFFIC_JAM).points)
+        assertTrue(runCatching { repo.startOrResume(level) }.isSuccess)
     }
 
     @Test fun concurrentOpenReturnsOneAttemptAndDuplicateFinishIsIdempotent() = runBlocking {
@@ -71,7 +71,7 @@ class DailyPersistenceTest {
         assertTrue(repo.grantReward("reward-1", Reward.DailyRetry(date)))
         assertFalse(repo.grantReward("reward-1", Reward.DailyRetry(date)))
         val retry = repo.startDaily()
-        assertEquals(DailyEligibility.REWARDED, retry.attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, retry.attempt.dailyEligibility)
         repo.move(level, retry.attempt.id, level.reference.first(), 500)
         val originalDate = date
         date = "2026-09-29"
@@ -80,12 +80,12 @@ class DailyPersistenceTest {
         val restored = repo.startDaily(originalDate)
         assertEquals(retry.attempt.id, restored.attempt.id)
         assertEquals(originalDate, restored.attempt.challengeDate)
-        assertEquals(DailyEligibility.REWARDED, restored.attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, restored.attempt.dailyEligibility)
         assertFalse(repo.grantReward("late", Reward.DailyRetry(originalDate)))
         repo.move(level, restored.attempt.id, level.reference.last(), 500)
         val ledger = repo.player.first().ledger
         assertEquals(setOf(originalDate, date), ledger.creditedDates)
-        assertEquals(1, ledger.dailyClaims.getValue(originalDate).consumedRetries)
+        assertEquals(0, ledger.dailyClaims.getValue(originalDate).consumedRetries)
         assertEquals(350L, repo.player.first().profile.dailyTotals.getValue(Puzzle.TRAFFIC_JAM).points)
     }
 
@@ -99,7 +99,7 @@ class DailyPersistenceTest {
         assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
         solve(proAttempt)
         assertEquals(0, repo.player.first().ledger.dailyClaims.getValue(date).consumedRetries)
-        assertEquals(DailyEligibility.REWARDED, repo.startDaily().attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
     }
 
     @Test fun pruningAndResetKeepClaimsHintsStreaksAndEarnedAchievements() = runBlocking {
@@ -111,7 +111,7 @@ class DailyPersistenceTest {
         assertEquals(before.ledger, after.ledger)
         assertEquals(before.profile.achievements, after.profile.achievements)
         assertTrue(after.profile.dailyTotals.isEmpty())
-        assertEquals(DailyEligibility.PRACTICE, repo.startDaily().attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
         date = "2026-10-28"
         repo.refreshDay()
         assertTrue(repo.dailies.first().isEmpty())
@@ -127,11 +127,11 @@ class DailyPersistenceTest {
         assertTrue(repo.grantReward("access", Reward.LevelAccess(level.id)))
         val attempt = repo.startOrResume(level)
         now += 86_400_000
-        assertTrue(runCatching { repo.startOrResume(level) }.exceptionOrNull() is AccessDenied)
-        assertTrue(runCatching { repo.checkReturnAccess(level, attempt.id) }.exceptionOrNull() is AccessDenied)
+        assertTrue(runCatching { repo.startOrResume(level) }.isSuccess)
+        assertTrue(runCatching { repo.checkReturnAccess(level, attempt.id) }.isSuccess)
         for (move in level.reference) repo.move(level, attempt.id, move, 0)
         assertEquals(3, repo.bests.first().single().stars)
-        assertTrue(runCatching { repo.restart(level, attempt.id) }.exceptionOrNull() is AccessDenied)
+        assertTrue(runCatching { repo.restart(level, attempt.id) }.isSuccess)
     }
 
     @Test fun openedDailyRetainsOriginalRevisionAcrossScheduleUpdates() = runBlocking {
@@ -165,12 +165,12 @@ class DailyPersistenceTest {
         repo.move(level, practice.attempt.id, level.reference.first(), 100)
         assertTrue(repo.grantReward("new-retry", Reward.DailyRetry(date)))
         assertEquals(practice.attempt.id, repo.startDaily().attempt.id)
-        assertEquals(DailyEligibility.PRACTICE, repo.startDaily().attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
         val restarted = repo.restart(level, practice.attempt.id)
-        assertEquals(DailyEligibility.REWARDED, restarted.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, restarted.dailyEligibility)
         assertEquals(level.initial, restarted.board)
         solve(DailySession(level, restarted))
-        assertEquals(1, repo.player.first().ledger.dailyClaims.getValue(date).consumedRetries)
+        assertEquals(0, repo.player.first().ledger.dailyClaims.getValue(date).consumedRetries)
     }
 
     @Test fun failedDailyCompletionRollsBackClaimScoreReceiptAndBoard() = runBlocking {

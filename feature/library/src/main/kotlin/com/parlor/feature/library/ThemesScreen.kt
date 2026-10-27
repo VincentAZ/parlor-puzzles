@@ -45,7 +45,7 @@ fun ThemesScreen(settings: PlayerSettings, pro: Boolean, systemDark: Boolean,
     }
     BackHandler(onBack = onBack)
     val dark = settings.appearance.isDark(systemDark)
-    val displayed = RoomTheme.displayed(settings.theme, pro)
+    val displayed = RoomTheme.displayed(settings.theme, true)
     Column(Modifier.fillMaxSize().safeDrawingPadding().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         TextButton(onClick = onBack, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.library_back)) }
@@ -71,16 +71,10 @@ fun ThemesScreen(settings: PlayerSettings, pro: Boolean, systemDark: Boolean,
         if (busy) LinearProgressIndicator(Modifier.fillMaxWidth().testTag("theme-saving"))
         if (error) Text(stringResource(R.string.library_theme_save_error), color = MaterialTheme.colorScheme.error,
             modifier = Modifier.testTag("theme-error").semantics { liveRegion = LiveRegionMode.Polite })
-        if (!pro && settings.theme != RoomTheme.LINEN.id && RoomTheme.fromId(settings.theme) != null) {
-            Text(stringResource(R.string.library_theme_retained), Modifier.testTag("theme-retained"))
-        }
-        if (!pro) OutlinedButton(onClick = onPro, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
-            Text(stringResource(R.string.library_themes_pro))
-        }
         Column(Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             RoomTheme.entries.forEach { theme ->
                 val selected = displayed == theme
-                val available = pro || theme == RoomTheme.LINEN
+                val available = true
                 val state = stringResource(when {
                     selected -> R.string.library_theme_selected
                     !available -> R.string.library_theme_pro
@@ -88,7 +82,7 @@ fun ThemesScreen(settings: PlayerSettings, pro: Boolean, systemDark: Boolean,
                 })
                 OutlinedCard(Modifier.fillMaxWidth().clip(MaterialTheme.shapes.medium).testTag("theme-${theme.id}")
                     .selectable(selected = selected, enabled = !busy, role = Role.RadioButton,
-                        onClick = { if (available) save { onTheme(theme) } else onPro() })
+                        onClick = { save { onTheme(theme) } })
                     .semantics(mergeDescendants = true) { stateDescription = state }) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {

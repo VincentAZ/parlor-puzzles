@@ -21,13 +21,13 @@ class ProgressRepository(
     private val today: () -> String = { LocalDate.now().toString() },
     private val wallTime: () -> Long = System::currentTimeMillis,
     private val newId: () -> String = { UUID.randomUUID().toString() },
-    private val isPro: () -> Boolean = { false },
+    private val isPro: () -> Boolean = { true },
     private val storageHealth: StorageHealth? = null,
     private val protection: RecoveryProtectionStore? = null,
 ) {
     constructor(database: ParlorDatabase, today: () -> String = { LocalDate.now().toString() },
                 wallTime: () -> Long = System::currentTimeMillis, newId: () -> String = { UUID.randomUUID().toString() },
-                isPro: () -> Boolean = { false }, storageHealth: StorageHealth? = null, protection: RecoveryProtectionStore? = null) :
+                isPro: () -> Boolean = { true }, storageHealth: StorageHealth? = null, protection: RecoveryProtectionStore? = null) :
         this(ProgressDatabase { database }, today, wallTime, newId, isPro, storageHealth, protection)
 
     private val dao get() = database.current.progress()
@@ -42,14 +42,13 @@ class ProgressRepository(
     val completionCount = database.observe { it.progress().observeCompletionCount() }.observeStorage(storageHealth, StorageArea.PROGRESS)
     val dailies = database.observe { it.progress().observeDailies() }.map { rows -> rows.map { it.entry() } }.observeStorage(storageHealth, StorageArea.PROGRESS)
     val history = database.observe { it.progress().observeHistory() }.map { rows -> rows.map { it.attempt() } }.observeStorage(storageHealth, StorageArea.PROGRESS)
-    /** Collected only while Pro history is visible; at most one page of saved boards is decoded. */
+    /** Collected only while history is visible; at most one page of saved boards is decoded. */
     fun historyPage(query: HistoryQuery): Flow<HistoryPage> = flow {
-        if (!isPro()) { emit(HistoryPage(proRequired = true)); return@flow }
         val generation = storageHealth?.state?.value?.generation
         emitAll(database.observe { it.progress().observeHistoryPage(query.puzzle?.name,
             query.kind.takeUnless { kind -> kind == HistoryKind.ALL }?.name,
             query.before?.updatedAt ?: 0, query.before?.id, HistoryPage.SIZE + 1) }.map { rows ->
-            if (!isPro()) HistoryPage(proRequired = true) else {
+            run {
                 val page = rows.take(HistoryPage.SIZE)
                 HistoryPage(page.map { it.detail(requireNotNull(catalog)) },
                     if (rows.size > HistoryPage.SIZE) page.last().attempt.let { HistoryCursor(it.updatedAt, it.id) } else null)
@@ -61,7 +60,7 @@ class ProgressRepository(
     }
     fun observeAttempt(id: String) = database.observe { it.progress().observeAttempt(id) }.map { it?.attempt() }.observeStorage(storageHealth, StorageArea.PROGRESS)
     fun localDate(): String = today()
-    fun hasPro(): Boolean = isPro()
+    fun hasPro(): Boolean = true
 
     suspend fun photo(id: String): ByteArray? = database.transaction { dao.photo(id)?.jpeg }
 
@@ -72,14 +71,14 @@ class ProgressRepository(
         require(previous.levelId == level.id && previous.levelRevision == level.revision && previous.board is TilesBoard)
         require(previous.mode == AttemptMode.CAMPAIGN && !previous.completed)
         if (photo != null) {
-            check(isPro()) { "Pro is required" }
+
             dao.savePhoto(PhotoRow(photo.id, PhotoCodec.validate(photo)))
         }
         val next = previous.copy(photoId = photo?.id)
         dao.saveAttempt(next.row(level.puzzle))
         prunePhotos()
         check(dao.photoBytes() <= PhotoLimits.TOTAL_BYTES) { "Saved photo storage is full" }
-        check(photo == null || isPro()) { "Pro changed before photo committed" }
+
         next
     }
 
@@ -100,7 +99,7 @@ class ProgressRepository(
     private suspend fun prunePhotos() = dao.prunePhotos(dao.allAttempts().mapNotNull { it.attempt().photoId }.distinct())
 
     suspend fun exportProgress(settings: PlayerSettings): ProgressEnvelope = database.transaction {
-        check(isPro()) { "Pro is required" }
+
         check(dao.pendingSettings() == null) { "Finish the earlier import first" }
         snapshot(settings).also(::validateBackup)
     }
@@ -120,7 +119,7 @@ class ProgressRepository(
 
     /** Progress and its recoverable previous snapshot commit together. Settings finish before play resumes. */
     suspend fun importProgress(file: ProgressEnvelope, currentSettings: PlayerSettings, recovery: Boolean = false) = database.transaction {
-        check(recovery || isPro()) { "Pro is required" }
+
         check(dao.pendingSettings() == null) { "Finish the earlier import first" }
         if (recovery) check(recoverySnapshot() == file) { "Recovery snapshot changed" }
         validateBackup(file)
@@ -140,12 +139,7 @@ class ProgressRepository(
         val attempts = file.attempts.filterNot { !it.completed && it.id in protected.completionDates }.map { a ->
             val eligibility = if (a.mode == AttemptMode.DAILY && !a.completed) {
                 val claim = ledger.dailyClaims[requireNotNull(a.challengeDate)] ?: DailyClaim()
-                when (a.dailyEligibility) {
-                    DailyEligibility.FIRST_COMPLETION -> if (!claim.firstCompletionClaimed) a.dailyEligibility else DailyEligibility.PRACTICE
-                    DailyEligibility.REWARDED -> if (claim.earnedRetries > claim.consumedRetries) a.dailyEligibility else DailyEligibility.PRACTICE
-                    DailyEligibility.PRO -> if (isPro()) a.dailyEligibility else DailyRules.eligibility(claim, false)
-                    DailyEligibility.PRACTICE -> a.dailyEligibility
-                }
+                DailyRules.eligibility(claim, true)
             } else a.dailyEligibility
             a.copy(hintsUsed = a.hintsUsed || a.id in ledger.hintedAttemptIds, dailyEligibility = eligibility)
         }
@@ -168,12 +162,12 @@ class ProgressRepository(
         if (recovery) check(dao.restoreBackupSettings(ParlorJson.encodeToString(settings), file.snapshotId) == 1)
         else dao.saveBackupState(BackupStateRow(recoveryJson = recoveryBytes.toString(Charsets.UTF_8),
             pendingSettingsJson = ParlorJson.encodeToString(settings), lastImportId = file.snapshotId))
-        check(recovery || isPro()) { "Pro changed before import committed" }
+
     }
 
     /** Build only an empty, inactive file. No data from an unreadable database is interpreted as empty. */
     internal suspend fun restoreIntoEmptyDatabase(file: ProgressEnvelope, retained: RecoveryProtection) = database.transaction {
-        check(isPro()) { "Pro is required" }
+
         validateBackup(file)
         BackupRules.validateProtection(retained)
         check(dao.player() == null && dao.allAttempts().isEmpty() && dao.allBests().isEmpty() &&
@@ -282,11 +276,13 @@ class ProgressRepository(
         val previous = entry.record.activeAttemptId?.let { dao.attempt(it)?.attempt() }
         if (previous != null && !previous.completed) {
             require(engineFor(entry.level.puzzle).validate(previous.board))
-            dao.saveAttempt(previous.row(entry.level.puzzle))
-            return@transaction DailySession(entry.level, previous)
+            val claim = playerRow().ledger().dailyClaims[date] ?: DailyClaim()
+            val resumed = previous.copy(dailyEligibility = DailyRules.eligibility(claim, true))
+            dao.saveAttempt(resumed.row(entry.level.puzzle))
+            return@transaction DailySession(entry.level, resumed)
         }
         val claim = playerRow().ledger().dailyClaims[date] ?: DailyClaim()
-        val attempt = Attempt.start(newId(), entry.level, AttemptMode.DAILY, date, DailyRules.eligibility(claim, isPro()))
+        val attempt = Attempt.start(newId(), entry.level, AttemptMode.DAILY, date, DailyRules.eligibility(claim, true))
         dao.saveAttempt(attempt.row(entry.level.puzzle))
         dao.saveDaily(entry.copy(record = entry.record.copy(activeAttemptId = attempt.id)).row())
         DailySession(entry.level, attempt)
@@ -297,7 +293,7 @@ class ProgressRepository(
         val session = startDaily(date)
         if (session.attempt.dailyEligibility != DailyEligibility.PRACTICE) return@transaction session
         val claim = playerRow().ledger().dailyClaims[date] ?: DailyClaim()
-        check(DailyRules.eligibility(claim, isPro()) != DailyEligibility.PRACTICE) { "No scored retry available" }
+        check(DailyRules.eligibility(claim, true) != DailyEligibility.PRACTICE) { "No scored retry available" }
         DailySession(session.level, restart(session.level, session.attempt.id))
     }
 
@@ -310,7 +306,7 @@ class ProgressRepository(
             if (previous.completed) return@transaction startDaily(date).attempt
             // An explicitly restarted practice board may use a newly earned retry or Pro access.
             val eligibility = if (previous.dailyEligibility == DailyEligibility.PRACTICE)
-                DailyRules.eligibility(playerRow().ledger().dailyClaims[date] ?: DailyClaim(), isPro()) else previous.dailyEligibility
+                DailyRules.eligibility(playerRow().ledger().dailyClaims[date] ?: DailyClaim(), true) else previous.dailyEligibility
             val restarted = Attempt.start(newId(), level, AttemptMode.DAILY, date, eligibility)
             dao.deleteAttempt(previous.id)
             dao.saveAttempt(restarted.row(level.puzzle))
@@ -337,12 +333,12 @@ class ProgressRepository(
         val original = requireNotNull(dao.attempt(id)).attempt()
         if (original.completed) return@transaction null
         val row = playerRow()
-        val spent = DailyRules.spendHint(row.ledger(), today(), isPro()) ?: return@transaction null
+        val spent = DailyRules.spendHint(row.ledger(), today(), true) ?: return@transaction null
         savePlayer(row.copy(ledgerJson = ParlorJson.encodeToString(spent.copy(hintedAttemptIds = spent.hintedAttemptIds + id))))
         mutate(level, id, elapsedMs) { it.copy(hintsUsed = true) }
     }
 
-    /** SDK adapters call this once a completed rewarded view has been confirmed. */
+    /** Legacy reward-ledger compatibility. The free app has no SDK callers or reward offers. */
     suspend fun grantReward(rewardId: String, reward: Reward): Boolean = database.transaction {
         val row = playerRow()
         val level = (reward as? Reward.LevelAccess)?.let { r -> requireNotNull(catalog).levels.find { it.id == r.levelId } }
@@ -354,18 +350,8 @@ class ProgressRepository(
     suspend fun canOfferReward(reward: Reward): Boolean = rewardAvailability(reward) == RewardAvailability.AVAILABLE
 
     suspend fun rewardAvailability(reward: Reward): RewardAvailability = database.transaction {
-        val row = playerRow()
-        val date = today()
-        val ledger = DailyRules.rollover(row.ledger(), date)
-        savePlayer(row.copy(ledgerJson = ParlorJson.encodeToString(ledger)))
-        val level = (reward as? Reward.LevelAccess)?.let { r -> requireNotNull(catalog).levels.find { it.id == r.levelId } }
-        when {
-            isPro() -> RewardAvailability.PRO
-            ledger.latestResetDate != date -> RewardAvailability.INVALID_DATE
-            ledger.rewardedViews >= 10 -> RewardAvailability.DAILY_LIMIT
-            RewardRules.canOffer(ledger, date, reward, level) -> RewardAvailability.AVAILABLE
-            else -> RewardAvailability.INELIGIBLE
-        }
+        // Legacy API: every benefit is included, so no rewarded offer is eligible.
+        RewardAvailability.PRO
     }
 
     /** The receipt remains in private recovery storage until this transaction commits. */
@@ -378,38 +364,13 @@ class ProgressRepository(
         RewardApplication.APPLIED
     }
 
-    /** Claim a results departure before presenting a ready ad; failures never create a deferred interruption. */
-    suspend fun claimInterstitial(attemptId: String, ready: Boolean, elapsedMs: Long, launchedMs: Long, boot: String?): Boolean = database.transaction {
-        if (!dao.wasCompleted(attemptId)) return@transaction false
-        val row = playerRow(); val ledger = row.ledger(); val key = "ad-results:$attemptId"
-        if (key in ledger.claims) return@transaction false
-        val count = dao.completionCount()
-        val allowed = ready && !isPro() && AdRules.interstitialAllowed(ledger.ads, count, elapsedMs, launchedMs, boot)
-        val history = if (allowed) ledger.ads.copy(lastInterstitialCompletion = count,
-            lastInterstitialElapsedMs = elapsedMs, lastInterstitialBoot = boot, interstitialUnsettled = true) else ledger.ads
-        savePlayer(row.copy(ledgerJson = ParlorJson.encodeToString(ledger.copy(ads = history, claims = ledger.claims + key))))
-        allowed
-    }
+    // Source-compatible no-ops for callers upgrading from the ad-supported preview.
+    // Do not mutate old ad ledgers, schedule prompts, or reserve any placement.
+    suspend fun claimInterstitial(attemptId: String, ready: Boolean, elapsedMs: Long, launchedMs: Long, boot: String?): Boolean = false
+    suspend fun interstitialDismissed(attemptId: String, elapsedMs: Long, boot: String?): Boolean = false
+    suspend fun claimTenCompletionPrompt(): Boolean = false
 
-    /** Called only for a shown interstitial's actual close callback; callback duplicates are harmless. */
-    suspend fun interstitialDismissed(attemptId: String, elapsedMs: Long, boot: String?): Boolean = database.transaction {
-        val row = playerRow(); val ledger = row.ledger(); val key = "ad-dismissed:$attemptId"
-        if ("ad-results:$attemptId" !in ledger.claims || key in ledger.claims) return@transaction false
-        val count = ledger.ads.dismissedInterstitials + 1
-        savePlayer(row.copy(ledgerJson = ParlorJson.encodeToString(ledger.copy(
-            ads = ledger.ads.copy(dismissedInterstitials = count, lastInterstitialElapsedMs = elapsedMs,
-                lastInterstitialBoot = boot, interstitialUnsettled = false), claims = ledger.claims + key))))
-        count % 5 == 0 && !isPro()
-    }
-
-    suspend fun claimTenCompletionPrompt(): Boolean = database.transaction {
-        val row = playerRow(); val ledger = row.ledger()
-        if (ledger.ads.tenCompletionPromptSeen || dao.completionCount() < 10 || isPro()) return@transaction false
-        savePlayer(row.copy(ledgerJson = ParlorJson.encodeToString(ledger.copy(ads = ledger.ads.copy(tenCompletionPromptSeen = true)))))
-        true
-    }
-
-    /** Clear play progress, retaining claims, hints, streaks and achievements. Purchase data is elsewhere. */
+    /** Clear play progress, retaining claims, hints, streaks and achievements. All features remain free. */
     suspend fun resetProgress(puzzle: Puzzle? = null) = database.transaction {
         val row = playerRow()
         val profile = row.profile()
@@ -485,7 +446,7 @@ class ProgressRepository(
         val levels = requireNotNull(catalog) { "Content not configured" }.levels
         require(levels.any { it == level }) { "Unknown level revision" }
         val ledger = playerRow().ledger()
-        val access = Progression.access(level, levels, dao.allBests().map { it.best() }, isPro(), ledger.temporaryUnlocks[level.id], wallTime())
+        val access = Progression.access(level, levels, dao.allBests().map { it.best() }, true, ledger.temporaryUnlocks[level.id], wallTime())
         if (access != Access.AVAILABLE) throw AccessDenied(access)
     }
     private suspend fun savePlayer(row: PlayerRow) {

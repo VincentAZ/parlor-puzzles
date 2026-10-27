@@ -115,7 +115,7 @@ class DatabaseRecoveryTest {
         assertEquals(guard.completionDates, protection.read().completionDates); assertNull(repo.recoverySnapshot())
         owner.replace { }; owner = ProgressDatabase(DatabaseSlots(context, names, selection)::openActive); repo = repository(owner)
         assertNotNull(repo.pendingBackupSettings()); finish(); pro = false
-        assertEquals(file.bests, repo.bests.first()); assertFalse(repo.hasPro())
+        assertEquals(file.bests, repo.bests.first()); assertTrue(repo.hasPro())
     }
 
     @Test fun repeatedOlderFilesCannotRefillSpentHintsOrReopenConsumedDailyRetries() = runBlocking {
@@ -134,9 +134,9 @@ class DatabaseRecoveryTest {
             assertEquals(DatabaseRecoveryPhase.READY, recovery.state.value.phase)
             finish(); pro = false
             val ledger = repo.player.first().ledger
-            assertEquals(0, ledger.dailyHints); assertEquals(1, ledger.earnedHints); assertEquals(1L, ledger.earnedHintsSpent)
-            assertEquals(1, ledger.dailyClaims.getValue(day).consumedRetries)
-            assertEquals(DailyEligibility.PRACTICE, repo.startDaily().attempt.dailyEligibility)
+            assertEquals(3, ledger.dailyHints); assertEquals(2, ledger.earnedHints); assertEquals(0L, ledger.earnedHintsSpent)
+            assertEquals(0, ledger.dailyClaims.getValue(day).consumedRetries)
+            assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
             assertFalse(repo.grantReward("hints", Reward.Hints)); assertNull(repo.observeAttempt(retry.id).first())
             pro = true
         }
@@ -169,17 +169,15 @@ class DatabaseRecoveryTest {
         }
     }
 
-    @Test fun ownershipIsCheckedOnSelectionConfirmationAndImmediatelyBeforeSwitch() = runBlocking {
+    @Test fun recoveryDoesNotRequireOwnershipAtSelectionOrConfirmation() = runBlocking {
         val file = seed(); corrupt(); val recovery = recovery()
         source.writeBytes(BackupFile.bytes(file)); pro = false
         recovery.select(Uri.fromFile(source))!!.join()
-        assertEquals(DatabaseRecoveryProblem.PRO_REQUIRED, recovery.state.value.problem)
-        pro = true; select(recovery, file); pro = false; recovery.confirm()!!.join()
-        assertEquals(DatabaseRecoveryProblem.PRO_REQUIRED, recovery.state.value.problem)
-        assertFalse(context.getDatabasePath(names[1]).exists())
-        pro = true; val late = recovery { pro = false }; select(late, file); late.confirm()!!.join()
-        assertEquals(DatabaseRecoveryProblem.PRO_REQUIRED, late.state.value.problem)
-        assertFalse(selection.exists()); assertArrayEquals(damaged, context.getDatabasePath(names[0]).readBytes()); assertEquals(0, restored)
+        assertEquals(DatabaseRecoveryPhase.PREVIEW, recovery.state.value.phase)
+        recovery.confirm()!!.join()
+        assertEquals(DatabaseRecoveryPhase.READY, recovery.state.value.phase)
+        finish()
+        assertEquals(file.bests, repo.bests.first())
     }
 
     @Test fun preparationAndSelectorFailuresKeepOriginalSelectedAndAllowExplicitRetry() = runBlocking {

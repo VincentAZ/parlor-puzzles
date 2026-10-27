@@ -33,7 +33,7 @@ class ThemePersistenceTest {
             job.cancelAndJoin(); open()
             val saved = settings.settings.first()
             assertTrue(saved.showTimer); assertEquals(theme.id, saved.theme); assertEquals(Appearance.DARK, saved.appearance)
-            assertEquals(RoomTheme.LINEN, RoomTheme.displayed(saved.theme, false))
+            assertEquals(theme, RoomTheme.displayed(saved.theme, false))
             assertEquals(theme, RoomTheme.displayed(saved.theme, true))
         }
     }
@@ -46,8 +46,8 @@ class ThemePersistenceTest {
         entered.await()
         val selection = async { runCatching { settings.selectTheme(RoomTheme.SLATE) { pro } } }
         yield(); pro = false; release.complete(Unit); blocker.join()
-        assertTrue(selection.await().isFailure)
-        assertEquals(RoomTheme.WALNUT.id, settings.settings.first().theme)
+        assertTrue(selection.await().isSuccess)
+        assertEquals(RoomTheme.SLATE.id, settings.settings.first().theme)
         settings.selectTheme(RoomTheme.LINEN) { false }
         assertEquals(RoomTheme.LINEN.id, settings.settings.first().theme)
         settings.update { it.copy(appearance = Appearance.SYSTEM) }
@@ -75,9 +75,9 @@ class ThemePersistenceTest {
             val recovery = requireNotNull(repo.recoverySnapshot()); pro = false
             repo.importProgress(recovery, settings.settings.first(), recovery = true)
             val restored = requireNotNull(repo.pendingBackupSettings()); settings.replace(restored); repo.finishBackupSettings(restored)
-            assertEquals(RoomTheme.WALNUT.id, settings.settings.first().theme)
+            assertEquals(RoomTheme.SLATE.id, settings.settings.first().theme)
             assertEquals(Appearance.SYSTEM, settings.settings.first().appearance)
-            assertFalse(repo.hasPro()); assertEquals(RoomTheme.LINEN, RoomTheme.displayed(restored.theme, false))
+            assertTrue(repo.hasPro()); assertEquals(RoomTheme.fromId(restored.theme), RoomTheme.displayed(restored.theme, false))
             assertEquals(attempt, repo.observeAttempt(attempt.id).first())
         } finally { db.close() }
     }

@@ -17,7 +17,6 @@ import androidx.compose.ui.test.*
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.android.libraries.ads.mobile.sdk.MobileAds
 import com.parlor.core.data.PlayerRow
 import com.parlor.core.model.*
 import com.parlor.core.platform.reminders.*
@@ -138,7 +137,6 @@ class ReminderNavigationTest {
                 assertEquals(NotificationManager.IMPORTANCE_LOW, manager.getNotificationChannel(AndroidReminderDevice.CHANNEL).importance)
                 sendDue()
                 assertEquals(first.postTime, manager.activeNotifications.single { it.tag == AndroidReminderDevice.TAG }.postTime)
-                assertFalse(MobileAds.isInitialized)
                 shell("cmd statusbar expand-notifications")
                 delay(1_000)
                 val clicked = withTimeoutOrNull(5_000) {

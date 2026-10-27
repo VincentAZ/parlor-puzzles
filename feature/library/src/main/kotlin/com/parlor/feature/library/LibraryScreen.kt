@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.DpSize
 import com.parlor.core.data.*
 import com.parlor.core.model.*
 import com.parlor.core.progress.*
-import com.parlor.core.platform.ads.AdPlacement
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.Flow
@@ -33,9 +32,6 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
                   pro: Boolean, dailyError: Boolean, onDaily: (String) -> Unit, onDailyRetry: () -> Unit,
                   resetProgress: suspend (Puzzle?) -> Unit, updateSettings: ((PlayerSettings) -> PlayerSettings) -> Unit,
                   onPlay: (LevelDefinition) -> Unit, onTutorial: (Puzzle) -> Unit, onPro: () -> Unit,
-                  onPlacement: (AdPlacement) -> Unit = {}, banner: @Composable (AdPlacement) -> Unit = {},
-                  onPrivacyOptions: (() -> Unit)? = null, privacyRequired: Boolean = false,
-                  privacyBusy: Boolean = false, privacyError: Boolean = false,
                   onLockedLevel: ((LevelDefinition) -> Unit)? = null, onRewardDaily: ((String) -> Unit)? = null,
                   rewardRecovery: @Composable () -> Unit = {}, onBackup: (() -> Unit)? = null,
                   onReminders: (() -> Unit)? = null, onPhotos: (() -> Unit)? = null,
@@ -43,11 +39,6 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
                   onDestinationOpened: () -> Unit = {}) {
     var backStack by rememberSaveable { mutableStateOf(listOf("home")) }
     val screen = backStack.last()
-    val placement = if (!settings.onboarded) AdPlacement.ONBOARDING else when (screen) {
-        "levels" -> AdPlacement.LEVEL_SELECT; "daily" -> AdPlacement.DAILY_ENTRY
-        "stats" -> AdPlacement.STATS; "settings" -> AdPlacement.SETTINGS; else -> AdPlacement.HOME
-    }
-    SideEffect { onPlacement(placement) }
     var collection by rememberSaveable { mutableStateOf(Puzzle.TRAFFIC_JAM) }
     LaunchedEffect(requestedDestination) {
         if (requestedDestination == "daily") backStack = listOf("home", "daily")
@@ -69,22 +60,20 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
     LaunchedEffect(screen) { if (screen != "home") otherScroll.scrollTo(0) }
     LaunchedEffect(screen, today) { if (screen == "daily") onDailyRetry() }
     var notice by rememberSaveable { mutableStateOf<String?>(null) }
-    LaunchedEffect(notice) { if(notice == Access.PRO.name) { notice = null;onPro() } }
     BackHandler(enabled = screen != "home") { back() }
     if (!settings.onboarded) {
         Onboarding { updateSettings { it.copy(onboarded = true) } }
         return
     }
     if (screen == "stats") {
-        ProgressScreen(catalog, bests, player, pro, history, onPro = { notice = Access.PRO.name },
-            onBack = ::back, banner = { banner(AdPlacement.STATS) })
+        ProgressScreen(catalog, bests, player, true, history, onPro = { notice = Access.PRO.name },
+            onBack = ::back)
         return
     }
     if (screen == "levels") {
         key(collection) {
-            LevelSelectScreen(catalog, collection, bests, player.ledger.temporaryUnlocks, pro,
-                onPlay, onTutorial, onPro, ::back, onLockedLevel,
-                banner = { banner(AdPlacement.LEVEL_SELECT) })
+            LevelSelectScreen(catalog, collection, bests, player.ledger.temporaryUnlocks, true,
+                onPlay, onTutorial, onPro, ::back, onLockedLevel)
         }
         return
     }
@@ -126,7 +115,7 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
                     onPuzzle = { collection = it; navigate("levels") },
                     onDaily = { navigate("daily") }, onProgress = { navigate("stats") })
             }
-            "daily" -> DailyContent(dailies, today, player.ledger, pro, dailyError, onDaily, onDailyRetry, onRewardDaily)
+            "daily" -> DailyContent(dailies, today, player.ledger, true, dailyError, onDaily, onDailyRetry, onRewardDaily)
             "settings" -> {
                 rewardRecovery()
                 Text(stringResource(R.string.library_settings_title), style = MaterialTheme.typography.headlineLarge)
@@ -146,7 +135,6 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
                 onThemes?.let { open -> OutlinedButton(onClick = open, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                     Text(stringResource(R.string.library_themes))
                 } }
-                OutlinedButton(onClick = { notice = Access.PRO.name }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.library_pro_title)) }
                 onBackup?.let { open -> OutlinedButton(onClick = open, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                     Text(stringResource(R.string.library_backup))
                 } }
@@ -156,17 +144,6 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
                 onPhotos?.let { open -> OutlinedButton(onClick = open, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                     Text(stringResource(R.string.library_photos))
                 } }
-                if (onPrivacyOptions != null) {
-                    OutlinedButton(onClick = onPrivacyOptions, enabled = !privacyBusy, modifier = Modifier.fillMaxWidth()) {
-                        Text(stringResource(R.string.library_privacy_options))
-                    }
-                    Text(stringResource(when {
-                        privacyBusy -> R.string.library_privacy_loading
-                        privacyError -> R.string.library_privacy_error
-                        privacyRequired -> R.string.library_privacy_detail
-                        else -> R.string.library_privacy_not_required
-                    }), style = MaterialTheme.typography.bodySmall)
-                }
                 HorizontalDivider()
                 Text(stringResource(R.string.library_reset_heading), style = MaterialTheme.typography.titleLarge)
                 catalog.levels.map { it.puzzle }.distinct().forEach { puzzle ->
@@ -177,7 +154,6 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
         }
         Spacer(Modifier.height(12.dp))
     }
-    if (placement.banner) banner(placement)
     }
     if (reset != null) {
     val resetScroll = rememberScrollState()

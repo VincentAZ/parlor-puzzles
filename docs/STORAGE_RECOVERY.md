@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Unreadable local storage
 
 Storage read failures now open a recovery screen instead of escaping a UI

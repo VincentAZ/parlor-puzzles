@@ -17,7 +17,7 @@ class BackupRulesTest {
             BackupRules.validate(file, catalog)
             val restored = ParlorJson.decodeFromString<ProgressEnvelope>(ParlorJson.encodeToString(file))
             assertEquals(file, restored)
-            assertEquals(RoomTheme.LINEN, RoomTheme.displayed(restored.settings.theme, false))
+            assertEquals(theme, RoomTheme.displayed(restored.settings.theme, false))
         }
         assertFails { BackupRules.validate(ProgressEnvelope(snapshotId = "unknown", settings = PlayerSettings(theme = "future-room")), catalog) }
         assertFails { ParlorJson.decodeFromString<PlayerSettings>("""{"appearance":"FUTURE"}""") }
@@ -35,7 +35,8 @@ class BackupRulesTest {
         val backup = RewardLedger(latestResetDate = day, dailyHints = 3, earnedHints = 4, rewardedViews = 2,
             claims = setOf("earned-one", "earned-two"), dailyClaims = mapOf(day to DailyClaim(true, 1, 0)))
         var local = backup.copy(rewardedViews = 10, claims = backup.claims + "local-view", dailyClaims = mapOf(day to DailyClaim(true, 1, 1)), hintedAttemptIds = setOf("hinted"))
-        repeat(7) { local = DailyRules.spendHint(local, day, false)!! }
+        // A legacy save may already have consumed its old allowances.
+        local = local.copy(dailyHints = 0, earnedHints = 0, earnedHintsSpent = 4)
         assertEquals(4L, local.earnedHintsSpent)
         repeat(3) { local = BackupRules.protect(local, backup, day) }
         assertEquals(0, local.dailyHints); assertEquals(0, local.earnedHints); assertEquals(10, local.rewardedViews)
@@ -50,7 +51,7 @@ class BackupRulesTest {
         assertEquals(7, restored.earnedHints); assertEquals(2, restored.dailyHints)
         val next = DailyRules.spendHint(DailyRules.rollover(restored, "2026-09-29"), "2026-09-29", false)!!
         val oldFile = BackupRules.protect(next, imported, day)
-        assertEquals("2026-09-29", oldFile.latestResetDate); assertEquals(2, oldFile.dailyHints)
+        assertEquals("2026-09-29", oldFile.latestResetDate); assertEquals(3, oldFile.dailyHints)
         assertEquals(8, oldFile.rewardedViewsByDate[day]); assertEquals(0, oldFile.rewardedViews)
         assertEquals(7, oldFile.earnedHints)
     }

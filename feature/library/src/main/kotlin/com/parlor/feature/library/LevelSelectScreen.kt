@@ -62,7 +62,7 @@ fun LevelSelectScreen(catalog: Catalog, puzzle: Puzzle, bests: List<LevelBest>,
         }
     }
     fun access(level: LevelDefinition, time: Long) =
-        Progression.access(level, catalog.levels, bests, pro, temporaryUnlocks[level.id], time)
+        Progression.access(level, catalog.levels, bests, true, temporaryUnlocks[level.id], time)
     fun open(level: LevelDefinition) {
         // A card can remain visible across a 24-hour expiry; never trust its earlier label.
         accessTime = wallTime()

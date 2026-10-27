@@ -104,7 +104,7 @@
     <string name="library_daily_continue">Continue saved daily</string>
     <string name="library_daily_start">Play for stars</string>
     <string name="library_daily_practice">Play for practice</string>
-    <string name="library_daily_practice_body">Your first completion is saved. Practice adds no stars or points. Pro includes unlimited scored retries.</string>
+    <string name="library_daily_practice_body">Retry a Daily Challenge as often as you like. Your best score counts.</string>
     <string name="library_daily_history">Your recent days</string>
     <string name="library_daily_history_body">Your recent challenges stay here for 30 days. Pick up where you left off, with the same date and scoring.</string>
     <string name="library_daily_history_empty">Today is a good place to begin. Earlier opened challenges will appear here.</string>
@@ -120,8 +120,8 @@
     <string name="library_reset_title">Reset %1$s?</string>
     <string name="library_all_progress">all progress</string>
     <string name="library_reset_body">Clear saved boards, campaign bests, daily scores and play time for this selection.</string>
-    <string name="library_reset_preserved">Your hints, rewarded access, earned retries, streaks and achievements stay. Purchase and privacy settings stay too.</string>
-    <string name="library_reset_allowances">Daily scoring allowances are not renewed.</string>
+    <string name="library_reset_preserved">Your streaks, achievements, settings and saved photos stay.</string>
+    <string name="library_reset_allowances">All puzzles and unlimited hints remain available for free.</string>
     <string name="library_reset_busy">Resetting progress…</string>
     <string name="library_reset_error">Progress could not be reset. Nothing was changed. Please try again.</string>
     <string name="library_reset_confirm">Reset progress</string>
@@ -159,7 +159,7 @@
     <string name="library_achievement_count">%1$d of %2$d achievements earned</string>
     <string name="library_earned">Earned</string>
     <string name="library_to_discover">Still to discover</string>
-    <string name="library_history_pro">Your attempt history and detailed results are included with Parlor Pro. Summary progress and achievements are always available.</string>
+    <string name="library_history_pro">Your complete attempt history is included for free.</string>
     <string name="library_history_empty">Your completed attempts will appear here.</string>
     <string name="library_saved_puzzle">Saved puzzle</string>
     <string name="library_history_level">%1$s · %2$s · Level %3$d</string>

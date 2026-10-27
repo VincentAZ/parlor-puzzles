@@ -12,7 +12,7 @@ class AppearanceTest {
             val settings = PlayerSettings(theme = theme.id, appearance = Appearance.DARK)
             assertEquals(settings, ParlorJson.decodeFromString<PlayerSettings>(ParlorJson.encodeToString(settings)))
             assertEquals(theme, RoomTheme.displayed(settings.theme, true))
-            assertEquals(RoomTheme.LINEN, RoomTheme.displayed(settings.theme, false))
+            assertEquals(theme, RoomTheme.displayed(settings.theme, false))
             assertEquals(theme.id, settings.theme)
         }
         assertEquals(RoomTheme.LINEN, RoomTheme.displayed("unknown", true))

@@ -26,11 +26,8 @@ class LevelSelectionNavigationTest {
                 compose.onNodeWithTag("level-difficulty").performClick()
                 compose.onNodeWithTag("level-jump-EXPERT").performScrollTo().performClick()
                 compose.onNodeWithTag("level-list").performScrollToNode(hasTestTag("level-${last.id}"))
-                compose.onNodeWithTag("level-${last.id}").assertIsDisplayed().performClick()
-                compose.onNodeWithText("Explore Pro").performClick()
-                compose.waitUntil { compose.onAllNodesWithText("Restore purchases").fetchSemanticsNodes().isNotEmpty() }
-                compose.onNodeWithText("Back").performScrollTo().performClick()
                 compose.onNodeWithTag("level-${last.id}").assertIsDisplayed()
+                compose.onAllNodesWithText("Explore Pro").assertCountEquals(0)
                 scenario.recreate()
                 compose.waitUntil { compose.onAllNodesWithTag("level-${last.id}").fetchSemanticsNodes().isNotEmpty() }
                 compose.onNodeWithTag("level-${last.id}").assertIsDisplayed()

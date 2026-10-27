@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Level selection
 
 All four difficulty groups remain in one lazy list. Cards have stable level IDs;

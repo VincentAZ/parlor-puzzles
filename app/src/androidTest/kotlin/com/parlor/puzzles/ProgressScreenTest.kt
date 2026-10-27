@@ -76,8 +76,8 @@ class ProgressScreenTest {
         } }
         assertEquals(0, subscriptions)
         tab("history")
-        reveal(hasText("More room to explore.")).performClick(); assertEquals(1, proOpens)
-        assertEquals(0, subscriptions)
+        compose.onAllNodesWithText("More room to explore.").assertCountEquals(0)
+        assertEquals(0, proOpens)
         compose.runOnIdle { pro = true }
         compose.waitUntil { active == 1 }
         compose.onNodeWithTag("history-newer").assertDoesNotExist()
@@ -101,9 +101,10 @@ class ProgressScreenTest {
         compose.waitUntil { active == 1 }
         reveal(hasTestTag("history-page-new"))
         compose.runOnIdle { pro = false }
-        compose.waitUntil { active == 0 }
-        reveal(hasText("More room to explore.")).assertIsDisplayed()
-        compose.onAllNodes(hasTestTag("history-page-new")).assertCountEquals(0)
+        compose.waitForIdle()
+        assertEquals(1, active)
+        compose.onAllNodesWithText("More room to explore.").assertCountEquals(0)
+        reveal(hasTestTag("history-page-new")).assertIsDisplayed()
         capture("history-free-compact-200.png")
     }
 
@@ -160,8 +161,8 @@ class ProgressScreenTest {
             Surface { ProgressScreen(catalog, listOf(best), PlayerSummary(), pro, provider, {}, {}) }
         } } }
         tab("bests")
-        reveal(hasText("More room to explore.")).assertIsDisplayed()
-        compose.onNodeWithTag("best-${traffic.id}").assertDoesNotExist()
+        compose.onAllNodesWithText("More room to explore.").assertCountEquals(0)
+        reveal(hasTestTag("best-${traffic.id}")).assertIsDisplayed()
         compose.runOnIdle { pro = true }
         reveal(hasText("Saved best: 3 stars · 325 points")).assertIsDisplayed()
         reveal(hasText("Best time: 12 seconds")).assertIsDisplayed()

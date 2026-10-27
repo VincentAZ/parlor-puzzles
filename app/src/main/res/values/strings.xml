@@ -22,7 +22,7 @@
     <string name="database_restore_detail">This backup will become your active progress and settings. The damaged save will be kept privately on this device. Only one previous damaged save is kept; an earlier recovery copy may be replaced.</string>
     <string name="database_restore_claims">Saved reward limits, used hints and completion claims are retained. Some unfinished attempts may be omitted and hint balances may be lower than the backup shows. This file never unlocks Pro or changes your privacy and reminder choices.</string>
     <string name="database_restore_confirm">Restore backup</string>
-    <string name="database_restore_pro">Restoring a backup file requires confirmed Pro access. Parlor checks your purchase with Google Play when connected. You can retry or close this screen while that check finishes.</string>
+    <string name="database_restore_pro">Backup restoration is free and needs no store connection.</string>
     <string name="database_restore_safeguards">The separate reward safeguards could not be read. A backup cannot be restored safely without them. The saved files have been kept. Try again after checking storage, or update Parlor if this save came from a newer version.</string>
     <string name="database_restore_failed">Recovery could not finish. Check the available storage, then retry or choose the backup again. The damaged save has been kept.</string>
     <string name="database_restoring">Preparing your restored progress. This continues if you close this screen.</string>
@@ -31,10 +31,10 @@
     <string name="photos_error">The photos could not be deleted. Please try again.</string>
     <string name="backup_title">Progress backups</string>
     <string name="backup_body">Save your progress, settings and puzzle photos in one file, or bring them back from a Parlor backup.</string>
-    <string name="backup_private">Pro purchases and privacy choices stay with this device and Google Play. A progress file never unlocks Pro. Notification permission is kept on this device.</string>
+    <string name="backup_private">Backups contain your progress, settings and puzzle photos. Notification permission stays on this device.</string>
     <string name="backup_export">Save a backup file</string>
     <string name="backup_import">Choose a backup file</string>
-    <string name="backup_pro_required">Pro includes saving and importing progress files. Automatic Android backup remains available.</string>
+    <string name="backup_pro_required">Saving and importing progress files is free.</string>
     <string name="backup_reading">Checking the backup. Your current progress stays saved.</string>
     <string name="backup_exporting">Saving your backup file.</string>
     <string name="backup_importing">Restoring progress and settings. Please wait for this step to finish.</string>
@@ -46,7 +46,7 @@
     <string name="backup_created">Saved %s</string>
     <string name="backup_summary">Completed levels: %1$s\nUnfinished puzzles: %2$s\nCampaign stars: %3$s</string>
     <string name="backup_photos">Saved photos: %s</string>
-    <string name="backup_replace_detail">This replaces your current boards, results and settings. Earned achievements, streak dates and reward safeguards are kept. Spent hints and used scored retries are not issued again. Your current progress is saved for recovery before anything is replaced.</string>
+    <string name="backup_replace_detail">This replaces your current boards, results and settings. Earned achievements and streak dates are kept. Your current progress is saved for recovery before anything is replaced.</string>
     <string name="backup_import_confirm">Replace progress with this backup</string>
     <string name="backup_cancel">Keep current progress</string>
     <string name="backup_recovery_title">Progress before the last import</string>

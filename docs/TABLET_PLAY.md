@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Adaptive play, tutorials and demonstrations
 
 Play now uses the available window dimensions to arrange the board and controls.

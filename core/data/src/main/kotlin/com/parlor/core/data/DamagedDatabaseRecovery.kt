@@ -121,7 +121,6 @@ class DamagedDatabaseRecovery(
     }
 
     private fun requireAllowed() {
-        if (!isPro()) throw RecoveryFailure(DatabaseRecoveryProblem.PRO_REQUIRED)
         check(isRecoverable()) { "Storage is no longer eligible for replacement" }
     }
 
@@ -140,8 +139,7 @@ class DamagedDatabaseRecovery(
                 catch (cancelled: CancellationException) { throw cancelled }
                 catch (failure: Exception) {
                     mutable.value = mutable.value.copy(phase = DatabaseRecoveryPhase.ERROR,
-                        problem = (failure as? RecoveryFailure)?.problem ?: if (!isPro())
-                            DatabaseRecoveryProblem.PRO_REQUIRED else DatabaseRecoveryProblem.STORAGE)
+                        problem = (failure as? RecoveryFailure)?.problem ?: DatabaseRecoveryProblem.STORAGE)
                 }
             } }
         }

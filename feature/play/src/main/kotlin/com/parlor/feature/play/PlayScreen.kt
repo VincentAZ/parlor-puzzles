@@ -21,15 +21,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.parlor.core.game.*
 import com.parlor.core.model.*
 import com.parlor.core.platform.*
-import com.parlor.core.platform.ads.AdPlacement
 import com.parlor.core.progress.Scoring
 import kotlinx.coroutines.delay
 import com.parlor.core.design.rememberDisplayFormats
 
 @Composable
 fun PlayScreen(viewModel: PlayViewModel, settings: PlayerSettings, hints: Int, previouslyCompleted: Boolean,
-               feedback: Feedback, onLeave: () -> Unit, onNext: (() -> Unit)?, pro: Boolean = false,
-               onDemonstrate: (() -> Unit)? = null, onPlacement: (AdPlacement) -> Unit = {},
+               feedback: Feedback, onLeave: () -> Unit, onNext: (() -> Unit)?, pro: Boolean = true,
+               onDemonstrate: (() -> Unit)? = null,
                banner: @Composable () -> Unit = {}, externalPause: Boolean = false,
                onLevelStarted: (String) -> Unit = {}, onCompleted: () -> Unit = {},
                onResultsLeave: (Attempt, () -> Unit) -> Unit = { _, navigate -> navigate() },
@@ -38,7 +37,7 @@ fun PlayScreen(viewModel: PlayViewModel, settings: PlayerSettings, hints: Int, p
     val state by viewModel.state.collectAsStateWithLifecycle()
     val photoEdit by viewModel.photoEdit.collectAsStateWithLifecycle()
     val attempt = state.attempt
-    val photo = savedPhoto(viewModel, attempt?.photoId, pro)
+    val photo = savedPhoto(viewModel, attempt?.photoId, true)
     val puzzle = viewModel.level.puzzle
     var illegalCount by remember { mutableIntStateOf(0) }
     var illegalVisible by remember { mutableStateOf(false) }
@@ -53,7 +52,6 @@ fun PlayScreen(viewModel: PlayViewModel, settings: PlayerSettings, hints: Int, p
     var completionAnnounced by rememberSaveable(attempt?.id) { mutableStateOf(false) }
     var celebration by remember(attempt?.id) { mutableStateOf(false) }
     LaunchedEffect(reducedMotion) { if (reducedMotion) celebration = false }
-    SideEffect { onPlacement(if (showResults) AdPlacement.RESULTS else AdPlacement.PLAY) }
     val currentDialog by rememberUpdatedState(dialog)
     val currentExternalPause by rememberUpdatedState(externalPause || photoEdit.pausesPlay)
     LaunchedEffect(attempt?.id, attempt?.completed, showResults) {
@@ -114,7 +112,7 @@ fun PlayScreen(viewModel: PlayViewModel, settings: PlayerSettings, hints: Int, p
                     if(puzzle==Puzzle.KNIGHTS_TOUR) Text(stringResource(R.string.play_backtracks,attempt.backtracks))
                     if (puzzle == Puzzle.BOX_PUSHER) Text(pluralStringResource(R.plurals.play_walking_count, attempt.walkingSteps, attempt.walkingSteps))
                     if (previouslyCompleted) Text(parCount(viewModel.level))
-                    Text(if (pro) stringResource(R.string.play_unlimited_hints) else pluralStringResource(R.plurals.play_hints_count, hints, hints))
+                    Text(stringResource(R.string.play_unlimited_hints))
                     if (settings.showTimer) Text(stringResource(R.string.play_time_count, attempt.activeTimeMs / 60_000, attempt.activeTimeMs / 1000 % 60))
                 }
             }
@@ -193,11 +191,6 @@ fun PlayScreen(viewModel: PlayViewModel, settings: PlayerSettings, hints: Int, p
                     }
                     Text(message, Modifier.semantics { liveRegion = LiveRegionMode.Polite }, color = MaterialTheme.colorScheme.primary)
                 }
-                if (state.noHints && hints == 0 && !pro) Text(stringResource(R.string.play_no_hints), Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-                if (!pro && onRewardHints != null) OutlinedButton(onClick = { viewModel.prepareReward(onRewardHints) },
-                    enabled = !state.busy && !state.paused && !state.checkingAccess, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
-                    Text(stringResource(R.string.play_earn_hints))
-                }
                 if (state.error) {
                     Text(stringResource(R.string.play_save_error), color = MaterialTheme.colorScheme.error)
                     TextButton(onClick = viewModel::checkpoint) { Text(stringResource(R.string.play_retry)) }
@@ -206,10 +199,10 @@ fun PlayScreen(viewModel: PlayViewModel, settings: PlayerSettings, hints: Int, p
                     Text(stringResource(R.string.play_saved), style = MaterialTheme.typography.bodySmall)
                     TextButton(onClick = { dialog = "restart" }) { Text(stringResource(R.string.play_restart)) }
                 }
-                if (pro && onDemonstrate != null) OutlinedButton(onClick = { viewModel.leave(onDemonstrate) }, enabled = !state.busy,
+                if (onDemonstrate != null) OutlinedButton(onClick = { viewModel.leave(onDemonstrate) }, enabled = !state.busy,
                     modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.play_solve_for_me)) }
                 if (attempt.board is TilesBoard && attempt.mode == AttemptMode.CAMPAIGN) PhotoControls(attempt, photoEdit, viewModel,
-                    pro, !state.busy && !state.checkingAccess && !externalPause && !state.unavailable && !photoEdit.pausesPlay,
+                    true, !state.busy && !state.checkingAccess && !externalPause && !state.unavailable && !photoEdit.pausesPlay,
                     photo.failed, onPhotoPro)
             }
         }

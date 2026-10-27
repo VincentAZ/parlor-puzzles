@@ -19,14 +19,11 @@ class ProgressNavigationTest {
         try {
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
                 compose.waitUntil(15_000) { compose.onAllNodesWithText("Progress").fetchSemanticsNodes().isNotEmpty() }
-                assertFalse(app.billing.hasPro)
                 val before = runBlocking { Triple(app.progress.bests.first(), app.progress.player.first(), app.progress.history.first()) }
                 compose.onNodeWithText("Progress").performScrollTo().performClick()
                 reveal(hasTestTag("progress-tab-history")); compose.onNodeWithTag("progress-tab-history").performClick()
-                reveal(hasText("More room to explore.")); compose.onNodeWithText("More room to explore.").performClick()
-                compose.waitUntil(10_000) { compose.onAllNodesWithText("Restore purchases").fetchSemanticsNodes().isNotEmpty() }
-                compose.onNodeWithText("Back").performScrollTo().performClick()
-                reveal(hasTestTag("progress-tab-history")); compose.onNodeWithTag("progress-tab-history").assertIsSelected()
+                compose.onAllNodesWithText("Restore purchases").assertCountEquals(0)
+                compose.onNodeWithTag("progress-tab-history").assertIsSelected()
                 scenario.recreate()
                 compose.waitUntil(10_000) { compose.onAllNodesWithTag("progress-list").fetchSemanticsNodes().isNotEmpty() }
                 reveal(hasTestTag("progress-tab-history")); compose.onNodeWithTag("progress-tab-history").assertIsSelected()

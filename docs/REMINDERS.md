@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Local reminders
 
 Settings → Reminders offers **Daily puzzle** or **Keep a streak going**, with a

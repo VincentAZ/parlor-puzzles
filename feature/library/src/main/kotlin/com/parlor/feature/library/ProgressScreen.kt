@@ -51,13 +51,12 @@ fun ProgressScreen(catalog: Catalog, bests: List<LevelBest>, player: PlayerSumma
     val puzzle = puzzleId?.let(Puzzle::valueOf)
     val kind = HistoryKind.valueOf(kindId)
     val query = HistoryQuery(puzzle, kind, cursorIds.lastOrNull()?.let { HistoryCursor(cursorTimes.last(), it) })
-    val loaded = remember(query, pro, tab, retry, history) { mutableStateOf<HistoryLoad>(HistoryLoad.Loading) }
+    val loaded = remember(query, true, tab, retry, history) { mutableStateOf<HistoryLoad>(HistoryLoad.Loading) }
     val list = rememberLazyListState()
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     LaunchedEffect(tab, puzzleId, kindId, cursorIds) { list.scrollToItem(0) }
-    LaunchedEffect(pro) { if (!pro) { cursorIds = emptyList(); cursorTimes = emptyList() } }
     LaunchedEffect(loaded, lifecycle) {
-        if (tab == "history" && pro) {
+        if (tab == "history") {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
                     history(query).collect { loaded.value = HistoryLoad.Ready(it) }
@@ -97,8 +96,7 @@ fun ProgressScreen(catalog: Catalog, bests: List<LevelBest>, player: PlayerSumma
                     }
                 }
                 "history", "bests" -> {
-                    if (!pro) item { ProDetails(onPro) }
-                    else {
+                    run {
                         item("filters") {
                             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                 Text(stringResource(if (tab == "history") R.string.library_history_explainer else R.string.library_bests_explainer))
@@ -138,7 +136,7 @@ fun ProgressScreen(catalog: Catalog, bests: List<LevelBest>, player: PlayerSumma
                                     OutlinedButton(onClick = { retry++ }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.library_retry)) }
                                 }
                             }
-                            is HistoryLoad.Ready -> if (state.page.proRequired) item { ProDetails(onPro) } else {
+                            is HistoryLoad.Ready -> {
                                 if (state.page.entries.isEmpty()) item { Text(stringResource(R.string.library_history_empty)) }
                                 items(state.page.entries, key = { "attempt-${it.attempt.id}" }) { HistoryCard(it) }
                                 item("history-pages") {
@@ -193,7 +191,7 @@ fun ProgressScreen(catalog: Catalog, bests: List<LevelBest>, player: PlayerSumma
         }
         banner()
     }
-    if (filter != null && pro) {
+    if (filter != null) {
         val selectingPuzzle = filter == "puzzle"
         val choices = if (selectingPuzzle) listOf(null) + puzzles.map { it.name } else HistoryKind.entries.map { it.name }
         FoldAwareAlertDialog(onDismissRequest = { filter = null }, title = { Text(stringResource(if (selectingPuzzle) R.string.library_choose_puzzle else R.string.library_choose_kind)) },
@@ -258,14 +256,6 @@ private fun TargetText(level: LevelDefinition) = Text(stringResource(when (level
     ScoringUnit.PUSHES -> R.string.library_par_pushes
     else -> R.string.library_par_moves
 }, if (level.scoringUnit in listOf(ScoringUnit.TIME, ScoringUnit.TIME_AND_BACKTRACKS)) level.targetTimeMs / 1000 else level.par.toLong()))
-
-@Composable
-private fun ProDetails(onPro: () -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(stringResource(R.string.library_history_pro))
-        OutlinedButton(onClick = onPro, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.library_pro_title)) }
-    }
-}
 
 @Composable
 private fun DetailCard(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {

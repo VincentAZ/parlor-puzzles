@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Implementation decisions
 
 2026-09-28 · foundation and Traffic Jam prototype

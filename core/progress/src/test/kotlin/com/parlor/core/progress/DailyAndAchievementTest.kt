@@ -27,12 +27,12 @@ class DailyAndAchievementTest {
         }
     }
 
-    @Test fun eligibilityKeepsProRetriesSeparateFromEarnedCredits() {
+    @Test fun unlimitedRetriesDoNotDependOnPurchasesOrEarnedCredits() {
         assertEquals(DailyEligibility.FIRST_COMPLETION, DailyRules.eligibility(DailyClaim(), false))
         val claim = DailyClaim(true, earnedRetries = 2, consumedRetries = 1)
-        assertEquals(DailyEligibility.REWARDED, DailyRules.eligibility(claim, false))
+        assertEquals(DailyEligibility.PRO, DailyRules.eligibility(claim, false))
         assertEquals(DailyEligibility.PRO, DailyRules.eligibility(claim, true))
-        assertEquals(DailyEligibility.PRACTICE, DailyRules.eligibility(claim.copy(consumedRetries = 2), false))
+        assertEquals(DailyEligibility.PRO, DailyRules.eligibility(claim.copy(consumedRetries = 2), false))
         val attempt = Attempt.start("a", level, AttemptMode.DAILY, "2026-09-28").copy(completed = true)
         assertNull(Scoring.result(level, attempt))
         assertEquals(350, Scoring.result(level, attempt.copy(dailyEligibility = DailyEligibility.FIRST_COMPLETION))!!.points)

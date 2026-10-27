@@ -1,6 +1,3 @@
-import java.security.KeyFactory
-import java.security.spec.X509EncodedKeySpec
-import java.util.Base64
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import com.google.gms.googleservices.GoogleServicesTask
 import groovy.json.JsonSlurper
@@ -12,20 +9,6 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
 }
-val proProductId = providers.gradleProperty("parlor.proProductId").orElse("parlor_pro").get()
-val playPublicKey = providers.gradleProperty("parlor.playPublicKey").orElse("").get().filterNot(Char::isWhitespace)
-require(proProductId.matches(Regex("[a-z0-9][a-z0-9._]{0,99}"))) { "Invalid Pro product ID" }
-require(playPublicKey.matches(Regex("[A-Za-z0-9+/=]*"))) { "Play licensing public key must be Base64" }
-val productionAds = listOf("app", "banner", "interstitial", "rewarded").associateWith {
-    providers.gradleProperty("parlor.admob.$it").orElse("").get()
-}
-productionAds.forEach { (kind, value) ->
-    require(value.isEmpty() || value.matches(Regex("ca-app-pub-[0-9]{16}${if (kind == "app") "~" else "/"}[0-9]{10}"))) {
-        "Invalid AdMob $kind ID"
-    }
-}
-val testAds = mapOf("app" to "ca-app-pub-3940256099942544~3347511713", "banner" to "ca-app-pub-3940256099942544/9214589741",
-    "interstitial" to "ca-app-pub-3940256099942544/1033173712", "rewarded" to "ca-app-pub-3940256099942544/5224354917")
 android {
     namespace = "com.parlor.puzzles"
     compileSdk = 36
@@ -33,50 +16,26 @@ android {
         applicationId = "com.parlor.puzzles"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 2
+        versionName = "0.2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Network-dependent SDK qualification runs explicitly in a fresh process; ordinary tests stay deterministic.
-        testInstrumentationRunnerArguments["notAnnotation"] = "com.parlor.puzzles.AdNetworkQualification"
-        buildConfigField("String", "PRO_PRODUCT_ID", "\"$proProductId\"")
-        buildConfigField("String", "PLAY_PUBLIC_KEY", "\"$playPublicKey\"")
         buildConfigField("boolean", "CRASH_REPORTING_ENABLED", "false")
         manifestPlaceholders["crashReportingEnabled"] = "false"
     }
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"; versionNameSuffix = "-dev"
-            testAds.forEach { (kind, value) -> buildConfigField("String", "ADMOB_${kind.uppercase()}", "\"$value\"") }
-            manifestPlaceholders["admobAppId"] = testAds.getValue("app")
-        }
-        create("adTest") {
-            initWith(getByName("debug"))
-            applicationIdSuffix = ".adtest"
-            versionNameSuffix = "-ad-test"
-            matchingFallbacks += listOf("debug")
-            // This isolated preview cannot make purchases, even with owner properties configured.
-            buildConfigField("String", "PLAY_PUBLIC_KEY", "\"\"")
-        }
-        create("storeTest") {
-            initWith(getByName("debug"))
-            // License testers need the package configured in Play Console.
-            applicationIdSuffix = null
-            versionNameSuffix = "-store-test"
-            matchingFallbacks += listOf("debug")
         }
         release {
             buildConfigField("boolean", "CRASH_REPORTING_ENABLED", "true")
             manifestPlaceholders["crashReportingEnabled"] = "true"
-            productionAds.forEach { (kind, value) -> buildConfigField("String", "ADMOB_${kind.uppercase()}", "\"$value\"") }
-            manifestPlaceholders["admobAppId"] = productionAds.getValue("app")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         create("benchmark") {
             initWith(getByName("release"))
-            testAds.forEach { (kind, value) -> buildConfigField("String", "ADMOB_${kind.uppercase()}", "\"$value\"") }
-            manifestPlaceholders["admobAppId"] = testAds.getValue("app")
             applicationIdSuffix = ".benchmark"
             versionNameSuffix = "-benchmark"
             signingConfig = signingConfigs.getByName("debug")
@@ -103,11 +62,15 @@ android {
 }
 kotlin { jvmToolchain(17) }
 dependencies {
+    constraints {
+        // Removing the ad SDK changes transitive version selection. Keep the
+        // annotation-only dependency on a version already covered by our checksums.
+        implementation("com.google.errorprone:error_prone_annotations:2.26.1")
+    }
     implementation(project(":core:design"))
     implementation(project(":core:model"))
     implementation(project(":core:data"))
     implementation(project(":core:platform"))
-    implementation(libs.work.runtime)
     implementation(project(":feature:play"))
     implementation(project(":feature:library"))
     implementation(libs.androidx.navigation.compose)
@@ -127,7 +90,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.room.runtime)
     androidTestImplementation(libs.serialization.json)
-    androidTestImplementation(libs.mobile.ads)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.test)
     androidTestImplementation(libs.coroutines.test)
@@ -136,22 +98,7 @@ dependencies {
     debugImplementation(libs.compose.test.manifest)
 }
 tasks.matching { it.name == "preReleaseBuild" }.configureEach { dependsOn(":tools:levels:verifyCatalog") }
-val verifyReleaseBilling by tasks.registering {
-    doLast {
-        require(playPublicKey.isNotBlank()) { "Configure parlor.playPublicKey before building release or storeTest." }
-        KeyFactory.getInstance("RSA").generatePublic(X509EncodedKeySpec(Base64.getDecoder().decode(playPublicKey)))
-    }
-}
-tasks.matching { it.name == "preReleaseBuild" || it.name == "preStoreTestBuild" }.configureEach { dependsOn(verifyReleaseBilling) }
-val verifyReleaseAds by tasks.registering {
-    doLast {
-        require(productionAds.values.all { it.isNotBlank() && !it.startsWith("ca-app-pub-3940256099942544") }) {
-            "Configure production parlor.admob.app, banner, interstitial and rewarded IDs before building release."
-        }
-    }
-}
-tasks.matching { it.name == "preReleaseBuild" }.configureEach { dependsOn(verifyReleaseAds) }
-tasks.matching { it.name in setOf("preDebugBuild", "preAdTestBuild", "preBenchmarkBuild", "preStoreTestBuild", "preCrashTestBuild") }.configureEach {
+tasks.matching { it.name in setOf("preDebugBuild", "preBenchmarkBuild", "preCrashTestBuild") }.configureEach {
     dependsOn(":tools:levels:verifyPrototype")
 }
 
@@ -194,7 +141,7 @@ for ((variant, packageName) in mapOf("Release" to "com.parlor.puzzles", "CrashTe
 }
 val verifyNoAnalytics by tasks.registering {
     group = "verification"
-    description = "Reject Analytics and measurement SDKs in every application variant."
+    description = "Reject advertising, billing, consent, Analytics and measurement SDKs in every application variant."
     doLast {
         android.buildTypes.forEach { variant ->
             val resolved = configurations.getByName("${variant.name}RuntimeClasspath").incoming.resolutionResult
@@ -202,9 +149,11 @@ val verifyNoAnalytics by tasks.registering {
             require(unresolved.isEmpty()) { "Cannot audit unresolved dependencies in ${variant.name}: ${unresolved.joinToString { it.attempted.displayName }}" }
             val forbidden = resolved.allComponents
                 .mapNotNull { it.moduleVersion }
-                .filter { (it.group == "com.google.firebase" && it.name.startsWith("firebase-analytics")) ||
+                .filter { it.group in setOf("com.android.billingclient", "com.google.android.libraries.ads.mobile.sdk", "com.google.android.ump") ||
+                    (it.group == "com.google.android.gms" && it.name.startsWith("play-services-ads")) ||
+                    (it.group == "com.google.firebase" && it.name.startsWith("firebase-analytics")) ||
                     (it.group == "com.google.android.gms" && it.name.startsWith("play-services-measurement")) }
-            require(forbidden.isEmpty()) { "Analytics SDKs are outside v1 scope: ${forbidden.joinToString()}" }
+            require(forbidden.isEmpty()) { "Advertising, billing, consent and analytics SDKs must not ship: ${forbidden.joinToString()}" }
         }
     }
 }

@@ -33,7 +33,7 @@ class SettingsRepository private constructor(private val store: DataStore<Prefer
     }
     suspend fun selectTheme(theme: RoomTheme, hasPro: () -> Boolean) {
         update { current ->
-            check(theme == RoomTheme.LINEN || hasPro()) { "Pro is required" }
+            // All room palettes are free; the callback is retained for source compatibility.
             current.copy(theme = theme.id)
         }
     }

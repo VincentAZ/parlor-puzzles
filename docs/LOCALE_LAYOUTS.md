@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Locale formatting and right-to-left layouts
 
 The launch copy remains English. The interface follows Android's layout direction,

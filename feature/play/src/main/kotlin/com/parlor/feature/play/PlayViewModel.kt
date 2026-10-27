@@ -194,7 +194,6 @@ class PlayViewModel(val level: LevelDefinition, private val repository: Progress
     }
 
     suspend fun loadPhoto(id: String): Bitmap? = withContext(Dispatchers.IO) {
-        if (!repository.hasPro()) return@withContext null
         repository.photo(id)?.let { bytes ->
             PhotoCodec.validate(PhotoCodec.payload(bytes).also { require(it.id == id) })
             BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -210,12 +209,11 @@ class PlayViewModel(val level: LevelDefinition, private val repository: Progress
             try {
                 val opened = withTimeout(10_000) { state.map { it.attempt }.filterNotNull().first() }
                 check(opened.id == attemptId && !opened.completed)
-                check(repository.hasPro())
                 val (photo, bitmap) = withContext(Dispatchers.IO) {
                     val p = read(); val bytes = PhotoCodec.validate(p)
                     p to requireNotNull(BitmapFactory.decodeByteArray(bytes, 0, bytes.size))
                 }
-                check(repository.hasPro() && mutable.value.attempt?.id == attemptId && mutable.value.attempt?.completed == false)
+                check(mutable.value.attempt?.id == attemptId && mutable.value.attempt?.completed == false)
                 publishPhoto(PhotoEditState(preview = photo, bitmap = bitmap, attemptId = attemptId))
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (_: Exception) { publishPhoto(PhotoEditState(error = true)) }

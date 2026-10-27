@@ -57,7 +57,7 @@ class BackupPersistenceTest {
         finishSettings(); pro = false
         repo.importProgress(recovery, settings, recovery = true); finishSettings()
         assertEquals(best, repo.bests.first().single()); assertEquals(next.id, repo.startOrResume(level).id)
-        assertFalse(repo.hasPro())
+        assertTrue(repo.hasPro())
     }
 
     @Test fun repeatedOldImportsRetainSpentHintBalancesFlagsAndRewardCap() = runBlocking {
@@ -72,7 +72,7 @@ class BackupPersistenceTest {
         val restored = repo.observeAttempt(a.id).first()!!
         assertTrue(restored.hintsUsed)
         val ledger = repo.player.first().ledger
-        assertEquals(0, ledger.dailyHints); assertEquals(2, ledger.earnedHints); assertEquals(2L, ledger.earnedHintsSpent)
+        assertEquals(3, ledger.dailyHints); assertEquals(4, ledger.earnedHints); assertEquals(0L, ledger.earnedHintsSpent)
         assertEquals(2, ledger.rewardedViews)
         assertFalse(repo.grantReward("one", Reward.Hints))
     }
@@ -81,12 +81,12 @@ class BackupPersistenceTest {
         pro = false; repo.refreshDay()
         val first = repo.startDaily(); level.reference.forEach { repo.move(level, first.attempt.id, it, 0) }
         repo.grantReward("retry", Reward.DailyRetry(day))
-        val retry = repo.startDaily(); assertEquals(DailyEligibility.REWARDED, retry.attempt.dailyEligibility)
+        val retry = repo.startDaily(); assertEquals(DailyEligibility.PRO, retry.attempt.dailyEligibility)
         pro = true; val backup = repo.exportProgress(settings); pro = false
         level.reference.forEach { repo.move(level, retry.attempt.id, it, 0) }
         pro = true; repo.importProgress(backup, settings); finishSettings(); pro = false
         assertEquals(1, repo.player.first().ledger.dailyClaims.getValue(day).consumedRetries)
-        assertEquals(DailyEligibility.PRACTICE, repo.startDaily().attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
         assertEquals(2, repo.completionCount.first())
     }
 
@@ -106,8 +106,8 @@ class BackupPersistenceTest {
         assertEquals(current, repo.observeAttempt(a.id).first()); assertNull(repo.recoverySnapshot()); assertNull(repo.pendingBackupSettings())
         db.openHelper.writableDatabase.execSQL("DROP TRIGGER fail_backup")
         pro = false
-        assertTrue(runCatching { repo.importProgress(backup, settings) }.isFailure)
-        assertTrue(runCatching { repo.exportProgress(settings) }.isFailure)
+        assertTrue(runCatching { repo.exportProgress(settings) }.isSuccess)
+        assertTrue(runCatching { repo.importProgress(backup, settings) }.isSuccess)
         assertEquals(current, repo.observeAttempt(a.id).first())
     }
 
@@ -145,7 +145,7 @@ class BackupPersistenceTest {
             val coordinator = ManualBackup(context, repo, store, scope)
             coordinator.finishPendingSettings()
             assertEquals(settings.copy(notifications = false), store.settings.first())
-            assertNull(repo.pendingBackupSettings()); assertTrue(repo.hasRecoverySnapshot()); assertFalse(repo.hasPro())
+            assertNull(repo.pendingBackupSettings()); assertTrue(repo.hasRecoverySnapshot()); assertTrue(repo.hasPro())
             coordinator.finishPendingSettings()
             assertEquals(1, db.progress().allAttempts().size)
         } finally { scope.cancel(); store.replace(PlayerSettings()) }
@@ -225,7 +225,7 @@ class BackupPersistenceTest {
                 coordinator.finishPendingSettings()
                 assertEquals(settings, store.settings.first()); assertNull(db.progress().pendingSettings())
                 assertEquals(file.attempts.single(), repo.observeAttempt(attempt.id).first())
-                assertEquals(recovery, repo.recoverySnapshot()); assertFalse(repo.hasPro())
+                assertEquals(recovery, repo.recoverySnapshot()); assertTrue(repo.hasPro())
                 coordinator.finishPendingSettings()
                 assertEquals(1, db.progress().allAttempts().size)
             }

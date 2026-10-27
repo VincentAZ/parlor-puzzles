@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Shared navigation contract
 
 The Android back stack holds Library, campaign Play, dated Daily Play, tutorials

@@ -59,7 +59,7 @@ class RewardPersistenceTest {
         val ledger = repo.player.first().ledger
         assertEquals(10, ledger.rewardedViews); assertEquals(16, ledger.earnedHints)
         assertEquals(1, ledger.dailyClaims.getValue(date).earnedRetries)
-        assertEquals(DailyEligibility.REWARDED, repo.startDaily().attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, repo.startDaily().attempt.dailyEligibility)
         date = "2026-09-29"
         assertTrue(repo.canOfferReward(Reward.Hints))
         assertFalse(repo.canOfferReward(Reward.DailyRetry("2026-09-28")))
@@ -75,7 +75,7 @@ class RewardPersistenceTest {
         assertEquals(RewardApplication.APPLIED, repo.applyEarnedReward(receipt))
         val retry = repo.startDaily(oldDate)
         assertEquals(oldDate, retry.attempt.challengeDate)
-        assertEquals(DailyEligibility.REWARDED, retry.attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, retry.attempt.dailyEligibility)
         assertEquals(0, repo.player.first().ledger.rewardedViews)
         assertEquals(1, repo.player.first().ledger.rewardedViewsByDate[oldDate])
     }
@@ -102,7 +102,7 @@ class RewardPersistenceTest {
         assertEquals(1, repo.startDaily().attempt.scoredMoves)
         val retry = repo.startScoredDailyRetry(date)
         assertNotEquals(practice.attempt.id, retry.attempt.id)
-        assertEquals(DailyEligibility.REWARDED, retry.attempt.dailyEligibility)
+        assertEquals(DailyEligibility.PRO, retry.attempt.dailyEligibility)
         assertEquals(0, retry.attempt.scoredMoves)
         assertEquals(level.initial, retry.attempt.board)
         repo.move(level, retry.attempt.id, Translate("A", 1), 100)

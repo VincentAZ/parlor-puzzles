@@ -28,9 +28,9 @@ internal data class PhotoRender(val id: String? = null, val bitmap: ImageBitmap?
 
 @Composable
 internal fun savedPhoto(viewModel: PlayViewModel, id: String?, pro: Boolean): PhotoRender {
-    val loaded by produceState(PhotoRender(), id, pro) {
+    val loaded by produceState(PhotoRender(), id, true) {
         value = PhotoRender()
-        if (id != null && pro) {
+        if (id != null) {
             value = try {
                 val bitmap = viewModel.loadPhoto(id)?.asImageBitmap()
                 PhotoRender(id, bitmap, bitmap == null)
@@ -38,7 +38,7 @@ internal fun savedPhoto(viewModel: PlayViewModel, id: String?, pro: Boolean): Ph
             catch (_: Exception) { PhotoRender(id, failed = true) }
         }
     }
-    return if (pro && loaded.id == id) loaded else PhotoRender()
+    return if (loaded.id == id) loaded else PhotoRender()
 }
 
 @Composable
@@ -55,7 +55,6 @@ internal fun PhotoControls(attempt: Attempt, state: PhotoEditState, viewModel: P
     }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(R.string.play_photo_heading), style = MaterialTheme.typography.titleMedium)
-        if (!pro) Text(stringResource(if (attempt.photoId == null) R.string.play_photo_pro else R.string.play_photo_retained))
         if (failed) Text(stringResource(R.string.play_photo_missing), color = MaterialTheme.colorScheme.error)
         if (state.error) Text(stringResource(R.string.play_photo_error), color = MaterialTheme.colorScheme.error,
             modifier = Modifier.testTag("photo-error").semantics { liveRegion = LiveRegionMode.Polite })
@@ -64,14 +63,13 @@ internal fun PhotoControls(attempt: Attempt, state: PhotoEditState, viewModel: P
             Text(stringResource(R.string.play_photo_working))
         }
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            if (pro) OutlinedButton(onClick = {
+            OutlinedButton(onClick = {
                 offeredAttempt = attempt.id
                 try { picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }
                 catch (_: Exception) { offeredAttempt = null; viewModel.preparePhoto(attempt.id) { error("Picker unavailable") } }
             }, enabled = enabled && !state.busy, modifier = Modifier.heightIn(min = 48.dp).testTag("photo-choose")) {
                 Text(stringResource(if (attempt.photoId == null) R.string.play_photo_choose else R.string.play_photo_change))
-            } else if (onPro != null) OutlinedButton(onClick = { viewModel.leave(onPro) }, enabled = enabled,
-                modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.play_photo_open_pro)) }
+            }
             if (attempt.photoId != null) TextButton(onClick = viewModel::removePhoto, enabled = enabled && !state.busy,
                 modifier = Modifier.heightIn(min = 48.dp).testTag("photo-remove")) { Text(stringResource(R.string.play_photo_remove)) }
         }
@@ -87,7 +85,7 @@ internal fun PhotoControls(attempt: Attempt, state: PhotoEditState, viewModel: P
                 Text(stringResource(R.string.play_photo_crop_detail))
             }
         },
-        confirmButton = { TextButton(onClick = viewModel::confirmPhoto, enabled = pro && !state.busy,
+        confirmButton = { TextButton(onClick = viewModel::confirmPhoto, enabled = !state.busy,
             modifier = Modifier.heightIn(min = 48.dp).testTag("photo-confirm")) { Text(stringResource(R.string.play_photo_use)) } },
         dismissButton = { TextButton(onClick = viewModel::discardPhoto, enabled = !state.busy,
             modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.play_photo_cancel)) } })

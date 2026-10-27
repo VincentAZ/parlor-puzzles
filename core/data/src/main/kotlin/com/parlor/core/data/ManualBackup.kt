@@ -142,7 +142,7 @@ class ManualBackup(
         }
     }
 
-    private fun requireReady() { check(progress.hasPro()) { "Pro is required" }; check(rewardsReady()) { "Reward pending" } }
+    private fun requireReady() { check(rewardsReady()) { "Reward pending" } }
     private fun preview(file: ProgressEnvelope, recovery: Boolean) = BackupPreview(file.snapshotId, file.createdAtMs,
         file.bests.size, file.attempts.count { !it.completed }, file.bests.sumOf { it.stars }, recovery, file.photos.size)
     private fun operation(phase: BackupPhase, action: suspend () -> Unit): Job? {
@@ -154,8 +154,7 @@ class ManualBackup(
                 catch (cancelled: CancellationException) { throw cancelled }
                 catch (_: Exception) {
                     if (mutable.value.phase != BackupPhase.FINISH_REQUIRED) mutable.value = mutable.value.copy(phase = BackupPhase.ERROR,
-                        problem = if (!rewardsReady()) BackupProblem.REWARD_PENDING else if (!progress.hasPro() && mutable.value.preview?.recovery != true)
-                            BackupProblem.PRO_REQUIRED else BackupProblem.FILE)
+                        problem = if (!rewardsReady()) BackupProblem.REWARD_PENDING else BackupProblem.FILE)
                 }
             }
         }

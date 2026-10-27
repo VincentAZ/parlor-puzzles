@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Settings accessibility and progress reset
 
 Sound effects has a labelled, adjustable slider. Music has a separately labelled,

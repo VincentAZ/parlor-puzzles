@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Prototype qualification procedure
 
 The app is still a development prototype. No physical performance, audio latency,

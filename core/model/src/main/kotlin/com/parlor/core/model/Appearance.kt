@@ -9,7 +9,7 @@ enum class RoomTheme(val id: String) {
     companion object {
         fun fromId(id: String): RoomTheme? = entries.firstOrNull { it.id == id }
         fun displayed(id: String, pro: Boolean): RoomTheme =
-            if (pro) fromId(id) ?: LINEN else LINEN
+            fromId(id) ?: LINEN
     }
 }
 

@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Progress and attempt history
 
 The Progress screen keeps Summary and Achievements available to every player.

@@ -74,7 +74,8 @@ class ThemesScreenTest {
             }
         }
         compose.onNodeWithTag("theme-sage").performScrollTo().assertHeightIsAtLeast(48.dp).performClick()
-        assertEquals(1, proOpens); assertEquals("linen", settings.theme)
+        compose.waitUntil { settings.theme == "sage" }
+        assertEquals(0, proOpens)
         compose.onNodeWithTag("appearance-DARK").performScrollTo().assertHeightIsAtLeast(48.dp).performClick()
         assertEquals(Appearance.DARK, settings.appearance)
         compose.runOnIdle { pro = true }
@@ -85,9 +86,9 @@ class ThemesScreenTest {
             capture("theme-${theme.id}-dark-compact-200.png")
         }
         compose.runOnIdle { pro = false }
-        compose.onNodeWithTag("theme-retained").performScrollTo().assertIsDisplayed()
+        compose.onAllNodesWithTag("theme-retained").assertCountEquals(0)
         assertEquals("walnut", settings.theme)
-        compose.onNodeWithTag("theme-linen").performScrollTo().assertIsSelected()
+        compose.onNodeWithTag("theme-walnut").performScrollTo().assertIsSelected()
         compose.runOnIdle { pro = true }
         compose.onNodeWithTag("theme-walnut").performScrollTo().assertIsSelected()
         compose.runOnIdle { fail = true }

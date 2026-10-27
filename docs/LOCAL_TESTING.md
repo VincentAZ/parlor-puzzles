@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Local testing checkpoint
 
 This is version `0.1.0-dev`, package `com.parlor.puzzles.debug`, for development

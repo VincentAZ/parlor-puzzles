@@ -5,7 +5,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.test.platform.app.InstrumentationRegistry
 import com.parlor.core.model.*
-import com.parlor.core.platform.ads.AdPlacement
 import com.parlor.feature.library.ParlorTheme
 import com.parlor.feature.play.PlayScreen
 import com.parlor.feature.play.PlayViewModel
@@ -17,7 +16,7 @@ import org.junit.Test
 class CompletionCallbackTest {
     @get:Rule val compose = createComposeRule()
 
-    @Test fun resultsCallbackWaitsForTheFinalSlideAndUsesResultsPlacement() {
+    @Test fun resultsCallbackWaitsForTheFinalSlideAndFiresOnce() {
         val app = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as ParlorApplication
         val catalog = runBlocking { app.content.load() }
         val level = catalog.levels.first { it.puzzle == Puzzle.TRAFFIC_JAM && it.tier == Tier.EASY }
@@ -27,14 +26,13 @@ class CompletionCallbackTest {
             level.reference.dropLast(1).forEach { app.progress.move(level, fresh.id, it, 10) }
             fresh
         }
-        var placement = AdPlacement.PLAY
-        val callbackPlacements = mutableListOf<AdPlacement>()
+        var callbacks = 0
         compose.setContent {
             ParlorTheme {
                 val vm: PlayViewModel = viewModel(factory = PlayViewModel.factory(level, app.progress))
                 PlayScreen(vm, PlayerSettings(sfxVolume = 0f, haptics = false, reduceMotion = false), 3, false,
                     app.feedback, onLeave = {}, onNext = null,
-                    onPlacement = { placement = it }, onCompleted = { callbackPlacements += placement })
+                    onCompleted = { callbacks++ })
             }
         }
         compose.waitUntil(10_000) { compose.onAllNodesWithTag("piece-A").fetchSemanticsNodes().isNotEmpty() }
@@ -44,13 +42,12 @@ class CompletionCallbackTest {
         assertTrue(requireNotNull(saved).completed)
         compose.mainClock.advanceTimeBy(80)
         compose.onNodeWithTag("piece-A").assertExists()
-        assertEquals(AdPlacement.PLAY, placement)
-        assertTrue(callbackPlacements.isEmpty())
+        assertEquals(0, callbacks)
         compose.mainClock.advanceTimeBy(400)
         compose.onNodeWithText("A clear way through.").assertExists()
-        assertEquals(listOf(AdPlacement.RESULTS), callbackPlacements)
+        assertEquals(1, callbacks)
         compose.mainClock.advanceTimeBy(400)
-        assertEquals(listOf(AdPlacement.RESULTS), callbackPlacements)
+        assertEquals(1, callbacks)
         compose.mainClock.autoAdvance = true
     }
 }

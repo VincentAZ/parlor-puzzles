@@ -33,7 +33,7 @@ class ThemeNavigationTest {
     private fun assertBackground(dark: Boolean) {
         compose.waitForIdle()
         val pixels = compose.onNodeWithTag("app-surface").captureToImage().toPixelMap()
-        assertEquals(roomColors(RoomTheme.LINEN, dark).scheme.background.toArgb(), pixels[2, 2].toArgb())
+        assertEquals(roomColors(RoomTheme.fromId(runBlocking { app.settings.settings.first().theme }) ?: RoomTheme.LINEN, dark).scheme.background.toArgb(), pixels[2, 2].toArgb())
     }
     private fun assertHomeCard(dark: Boolean) {
         compose.waitUntil(15_000) {
@@ -78,17 +78,17 @@ class ThemeNavigationTest {
         }
     }
 
-    @Test fun actualSettingsApplyDarkPersistThroughRecreationAndRetainPremiumChoiceForFree() {
+    @Test fun actualSettingsApplyDarkAndEveryPalettePersistsWithoutPurchase() {
         val previous = runBlocking { app.settings.settings.first() }
         runBlocking { app.settings.replace(PlayerSettings(onboarded = true, theme = "walnut")) }
         try {
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
                 compose.waitUntil(15_000) { visible("Settings") }
-                assertFalse(app.billing.hasPro); assertBackground(false)
+                assertBackground(false)
                 compose.onNodeWithText("Settings").performClick()
                 compose.onNodeWithText("Themes and appearance").performScrollTo().performClick()
-                compose.onNodeWithTag("theme-retained").performScrollTo().assertIsDisplayed()
-                compose.onNodeWithTag("theme-linen").performScrollTo().assertIsSelected()
+                compose.onAllNodesWithTag("theme-retained").assertCountEquals(0)
+                compose.onNodeWithTag("theme-walnut").performScrollTo().assertIsSelected()
                 compose.onNodeWithTag("appearance-DARK").performScrollTo().performClick()
                 compose.waitUntil(5_000) { runBlocking { app.settings.settings.first().appearance } == Appearance.DARK }
                 assertBackground(true)
@@ -98,10 +98,8 @@ class ThemeNavigationTest {
                 compose.onNodeWithTag("appearance-DARK").assertIsSelected(); assertBackground(true)
                 capture("themes-native-dark.png")
                 compose.onNodeWithTag("theme-sage").performScrollTo().performClick()
-                compose.waitUntil { visible("Restore purchases") }
-                compose.onNodeWithText("Back").performClick()
-                compose.onNodeWithTag("theme-retained").performScrollTo().assertIsDisplayed()
-                assertEquals("walnut", runBlocking { app.settings.settings.first().theme })
+                compose.waitUntil { runBlocking { app.settings.settings.first().theme } == "sage" }
+                compose.onAllNodesWithText("Restore purchases").assertCountEquals(0)
                 compose.onNodeWithTag("theme-linen").performScrollTo().performClick()
                 compose.waitUntil { runBlocking { app.settings.settings.first().theme } == "linen" }
                 compose.onNodeWithTag("appearance-LIGHT").performScrollTo().performClick()

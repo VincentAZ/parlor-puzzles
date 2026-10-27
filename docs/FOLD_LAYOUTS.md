@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Fold, hinge and cutout layouts
 
 The app observes WindowManager's layout flow while its Activity is started. A

@@ -108,7 +108,7 @@ class AttemptHistoryTest {
         assertEquals(2, repo.historyPage(HistoryQuery(before = page.next)).first().entries.size)
     }
 
-    @Test fun livePagesReflectResetAndProLossAndFreeDoesNotOpenTheDatabase() = runBlocking {
+    @Test fun livePagesReflectResetAndRemainAvailableWithoutOwnership() = runBlocking {
         solve()
         val channel = Channel<HistoryPage>(Channel.UNLIMITED)
         val observer = launch { repo.historyPage(HistoryQuery()).collect { channel.send(it) } }
@@ -119,11 +119,11 @@ class AttemptHistoryTest {
             pro = false
             solve()
             var next: HistoryPage
-            do { next = withTimeout(5_000) { channel.receive() } } while (!next.proRequired)
-            assertTrue(next.entries.isEmpty())
+            do { next = withTimeout(5_000) { channel.receive() } } while (next.entries.isEmpty())
+            assertFalse(next.proRequired)
         } finally { observer.cancelAndJoin(); channel.close() }
         db.close()
-        assertTrue(repo.historyPage(HistoryQuery()).first().proRequired)
+        assertTrue(runCatching { repo.historyPage(HistoryQuery()).first() }.isFailure)
     }
 
     @Test fun importedHistoryKeepsDatesCountersAndNeverMutatesBestTotals() = runBlocking {

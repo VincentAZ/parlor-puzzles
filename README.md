@@ -1,198 +1,121 @@
 <div align="center">
-  <img src="docs/screenshots/parlor-icon.svg" alt="Parlor Puzzles icon" width="112" height="112">
+  <img src="docs/screenshots/parlor-icon.svg" alt="Parlor Puzzles" width="112" height="112">
   <h1>Parlor Puzzles</h1>
-  <p><strong>A little room to think.</strong> Twelve classic logic puzzles in one calm Android app: settle into a board, stay for a moment, keep your progress on your own device.</p>
-  <p>Kotlin · Jetpack Compose · Room · Android 8.0+ · Phones, tablets and foldables</p>
-
-  ![Kotlin 2.2](https://img.shields.io/badge/kotlin-2.2-7F52FF?logo=kotlin&logoColor=white)
-  ![Jetpack Compose](https://img.shields.io/badge/ui-Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)
-  ![Min SDK 26](https://img.shields.io/badge/minSdk-26-3DDC84?logo=android&logoColor=white)
-  ![Target SDK 36](https://img.shields.io/badge/targetSdk-36-3DDC84?logo=android&logoColor=white)
-  ![No backend](https://img.shields.io/badge/backend-none-brightgreen)
-  ![Status: development prototype](https://img.shields.io/badge/status-development%20prototype-f59e0b)
-  ![MIT license](https://img.shields.io/badge/license-MIT-blue)
+  <p><strong>A little room to think. Every room is yours.</strong></p>
+  <p>Twelve classic logic puzzles. One calm Android app.<br>Free to download. Free to play. Every feature included.</p>
+  <p>
+    <img src="https://img.shields.io/badge/price-free-2e7d61" alt="Free">
+    <img src="https://img.shields.io/badge/ads-none-2e7d61" alt="No ads">
+    <img src="https://img.shields.io/badge/in--app_purchases-none-2e7d61" alt="No in-app purchases">
+    <img src="https://img.shields.io/badge/Android-8%2B-3ddc84?logo=android&logoColor=white" alt="Android 8 and newer">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license">
+  </p>
+  <p><a href="#the-puzzles">Meet the puzzles</a> · <a href="#make-yourself-at-home">Features</a> · <a href="#build-and-play">Build and play</a> · <a href="docs/FREE_EDITION.md">Free edition notes</a></p>
 </div>
 
-Parlor Puzzles gathers Traffic Jam, Tower of Hanoi, Switch Grid, Water Jugs, Pancake Flip, Sliding Tiles, Block Escape, Box Pusher, Peg Solitaire, Queens, Knight's Tour and Crossings into one warm, unhurried interface. Every level ships with a verified solution, every move is saved the moment you make it, and nothing about your play leaves the phone.
-
-**This is a development prototype, not a release.** Development builds contain 56 verified sample levels across all twelve families; the full launch catalog is 556 levels. Google Play purchasing, production ads, crash reporting and physical-device qualification are documented but not yet certified. See [Implementation status](docs/IMPLEMENTATION_STATUS.md) and [Qualification](docs/QUALIFICATION.md) for exactly where things stand.
-
-**Explore:** [Screenshots](#screenshots) · [The puzzles](#the-puzzles) · [Features](#what-it-does) · [Build](#build-and-run) · [Architecture](#architecture) · [Content and verification](#content-and-verification) · [Privacy](#privacy-and-local-data) · [Documentation](#documentation) · [Contributing](#development-and-contributions)
-
-## Screenshots
-
-Captured from the development build on Android emulators with fresh, empty saves.
-
-**Home** — a tabletop for Traffic Jam, illustrated shelves for the other eleven collections, and today's Daily Challenge. Six room palettes, each with light and dark appearance.
-
 <table>
 <tr>
-<td><img src="docs/screenshots/home-room.png" alt="Parlor home screen: 'A little room to think', a Traffic Jam side table and the Daily Challenge button" width="300"></td>
-<td><img src="docs/screenshots/home-shelves-light.png" alt="Home shelves in the light Linen palette showing puzzle collections with illustrated boards" width="300"></td>
-<td><img src="docs/screenshots/home-shelves-dark.png" alt="Home shelves in a dark palette showing Box Pusher, Peg Solitaire, Queens and Knight's Tour" width="300"></td>
+<td><img src="docs/screenshots/home-room.png" alt="A warm illustrated room with a Traffic Jam tabletop and Daily Challenge" width="300"></td>
+<td><img src="docs/screenshots/home-shelves-light.png" alt="Illustrated puzzle collections on light shelves" width="300"></td>
+<td><img src="docs/screenshots/home-shelves-dark.png" alt="Puzzle shelves in a dark room palette" width="300"></td>
 </tr>
 </table>
 
-**Boards** — code-drawn skins, large touch targets, a magnifier for small pieces, and the same physical layout under right-to-left locales.
+A good puzzle needs space, a clear set of rules, and a satisfying moment when it clicks. Parlor Puzzles brings twelve families together with large touch targets, thoughtful tutorials, solver-backed hints, and a place for every move you make.
 
-<table>
-<tr>
-<td><img src="docs/screenshots/board-traffic-jam-linen.png" alt="Traffic Jam board in the Linen palette with lettered sliding pieces and the red A piece" width="300"></td>
-<td><img src="docs/screenshots/board-queens-walnut.png" alt="Queens board in the dark Walnut palette with one fixed underlined queen" width="300"></td>
-<td><img src="docs/screenshots/board-pegs-walnut.png" alt="Peg Solitaire board in the dark Walnut palette" width="300"></td>
-</tr>
-</table>
+**No ads. No purchases. No subscriptions. No account.** All puzzle difficulties and variants, all six room palettes, photo tiles, backups, demonstrations, detailed history, unlimited hints, and unlimited scored Daily retries are included. Nothing needs a store connection to unlock.
 
-**Tablets and foldables** — in wide windows the board sits beside its instructions and controls; on hinged devices the two panes avoid the fold.
-
-<img src="docs/screenshots/tablet-play-landscape.png" alt="Traffic Jam on a landscape tablet with the board on the left and instructions, move count, hints, undo, redo and restart on the right" width="760">
+> **Project status:** this is a development prototype with **56 verified sample levels across all twelve families**. The planned 556-level launch catalog and physical-device release qualification are unfinished. Making every existing feature free does not turn the prototype into a certified store release. See [release readiness](docs/FREE_EDITION.md#release-readiness).
 
 ## The puzzles
 
-| Family | Goal | Scored by |
-| --- | --- | --- |
-| **Traffic Jam** | Slide the red piece through the exit | Moves |
-| **Tower of Hanoi** | Move the whole stack, never a larger disc on a smaller one (three- and four-peg boards) | Moves |
-| **Switch Grid** | Turn every light on when each switch flips its neighbours | Moves |
-| **Water Jugs** | Measure an exact amount with jugs of fixed sizes | Moves |
-| **Pancake Flip** | Sort the stack using only flips from the top | Moves |
-| **Sliding Tiles** | Settle the picture into place (3×3 to 5×5, with your own photos in Pro) | Moves |
-| **Block Escape** | Clear a path until the large square can leave the board | Moves |
-| **Box Pusher** | Walk every box onto a target without trapping one | Pushes |
-| **Peg Solitaire** | Jump pegs until one remains | Moves |
-| **Queens** | Place every queen with none attacking another, around fixed queens | Time |
-| **Knight's Tour** | Visit every square with L-shaped steps | Time and backtracks |
-| **Crossings** | Ferry everyone across under the river rules (couples, missionaries, bridges) | Moves, or minutes for the bridge |
+| Puzzle | Your moment of clarity |
+| --- | --- |
+| **Traffic Jam** | Make a path and slide the red piece to the exit. |
+| **Tower of Hanoi** | Move the tower without resting a larger disc on a smaller one. |
+| **Switch Grid** | Flip the right switches until every light is on. |
+| **Water Jugs** | Measure an exact amount with an unlikely set of containers. |
+| **Pancake Flip** | Put the stack in order using only flips from the top. |
+| **Sliding Tiles** | Settle the picture into place—or turn your own photo into a puzzle. |
+| **Block Escape** | Untangle the blocks and guide the large square out. |
+| **Box Pusher** | Push every box onto a target without trapping yourself. |
+| **Peg Solitaire** | Jump your way down to one remaining peg. |
+| **Queens** | Give every queen a square with no one in the line of attack. |
+| **Knight’s Tour** | Visit every square with the knight’s distinctive L-shaped steps. |
+| **Crossings** | Get everyone across the river while respecting each scenario’s rules. |
 
-Each family has its own interactive tutorial and a worked demonstration. Undo and redo are always available and count against your score; hints come from the real solver, so they are never wrong.
+Every bundled level includes a verified solution. Every family has an interactive tutorial and a worked demonstration. Hints use the game’s actual solver; undo and redo let you explore another approach.
 
-## What it does
+<table>
+<tr>
+<td><img src="docs/screenshots/board-traffic-jam-linen.png" alt="Traffic Jam board in Linen" width="300"></td>
+<td><img src="docs/screenshots/board-queens-walnut.png" alt="Queens board in dark Walnut" width="300"></td>
+<td><img src="docs/screenshots/board-pegs-walnut.png" alt="Peg Solitaire in dark Walnut" width="300"></td>
+</tr>
+</table>
 
-- **Play without an account.** No sign-in, no server. Progress, personal bests, attempt history and settings live in a local Room database and survive force-stop, rotation and reinstall over the same package.
-- **Save every move.** Each accepted move, score counter and completion reward commits through one database transaction before the animation finishes. Leaving mid-level and coming back resumes exactly where you were.
-- **Daily Challenge.** One scheduled level a day drawn from the bundled schedule, with its own history, streaks and a scored retry.
-- **Stars, points and 40 achievements.** Deterministic scoring with per-level bests, difficulty tiers that unlock as you go, and a full attempt history with puzzle and play filters.
-- **Six room palettes.** Linen is free; Amber, Rose, Sage, Slate and Walnut come with Pro. Light, dark or follow-the-device, applied across all twelve boards.
-- **Adaptive layout.** Compact phones, 200% system text, landscape tablets, hinge-aware foldables with book and tabletop postures, display cutouts and right-to-left locales (English, Arabic and German are exercised in tests).
-- **Gentle motion.** 250 ms board transitions, verified walking paths for Box Pusher, immediate rendering under reduced motion, and a single soft celebration when you set a new result.
-- **Original sound.** Short synthesized effects and haptics, with separate sound and haptic switches. No third-party audio samples.
-- **Optional reminders.** Opt-in Daily or streak reminders at a chosen local time, suppressed once the day's puzzle is done.
-- **Pro, once.** A one-time purchase through Google Play Billing unlocks themes, photo tiles, manual backup files and the full attempt detail. Pending or unverified purchases never grant Pro; confirmed ownership survives offline queries.
-- **Ads only when eligible.** Banners, a Results interstitial and explicit rewarded offers (two hints, a 24-hour Hard or Expert level, or a scored Daily retry) run behind confirmed Free status and consent. A separate `adTest` build previews Google's demo units with no account setup.
-- **Recovery screens.** Unreadable saves, future database versions and damaged settings open a recovery flow that preserves the original files and reward records instead of silently resetting.
+## Make yourself at home
 
-## Build and run
+- **Pick any puzzle.** All bundled levels, difficulty tiers, and former paid variants are available from the start.
+- **Take all the help you need.** Unlimited hints, unlimited scored Daily retries, and solution demonstrations. Hints still affect scoring; being free does not change the puzzle rules.
+- **Keep your place.** Moves, bests, attempts, and settings save locally. Leave halfway through a board and resume it later.
+- **Find your room.** Linen, Amber, Rose, Sage, Slate, and Walnut, each with light, dark, or device-controlled appearance.
+- **Make a picture personal.** Choose a photo for Sliding Tiles with Android’s photo picker; the app keeps a bounded local copy.
+- **Bring your progress along.** Manual backup and restore, complete attempt history, filters, stars, points, streaks, and 40 achievements.
+- **Play comfortably.** Reduced motion, optional haptics and sound, large text, accessible home navigation, and layouts for phones, tablets, and foldables.
+- **Return when you want.** Optional Daily and streak reminders at a time you choose.
 
-### Requirements
+<img src="docs/screenshots/tablet-play-landscape.png" alt="Landscape tablet with a puzzle board beside instructions, hints, undo, redo, and restart" width="900">
 
-- JDK **17**
-- Android SDK **platform 36**, build tools **35.0.0** and platform tools
-- Android 8.0 (API 26) or newer on the device or emulator
-- Python 3 for the content generators and device smoke scripts (optional)
+Screenshots show existing development builds. Some older captures and historical documents predate the free edition.
 
-Gradle 8.13, AGP 8.13.2, Kotlin 2.2.21 and all dependencies are pinned in `gradle/libs.versions.toml`. The wrapper distribution carries a SHA-256 check and Maven artifacts are verified against `gradle/verification-metadata.xml`, so update that file deliberately when adding a dependency.
+## Build and play
 
-### Build the development APK
-
-Clone, point Gradle at your SDK (set `ANDROID_HOME`, or write `sdk.dir=/path/to/sdk` to an untracked `local.properties`), and build:
+You need **JDK 17**, Android SDK **platform 36**, build tools **35.0.0**, and an Android 8.0+ device or emulator. Android Studio is the easiest starting point.
 
 ```sh
 git clone https://github.com/VincentAZ/parlor-puzzles.git
 cd parlor-puzzles
+# Set ANDROID_HOME, or put sdk.dir=/your/android/sdk in local.properties.
 ./gradlew :app:assembleDebug
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Or open the folder in Android Studio with JDK 17, pick the `app` module's `debug` variant and run it. The debug package is `com.parlor.puzzles.debug`, so it coexists with other variants. No account credentials, API keys or service files are needed for an ordinary debug build.
+The debug package is `com.parlor.puzzles.debug`. It coexists with the production package and needs **no billing key, ad account, or purchase-verification service**. Debug and release use the same free feature policy.
 
-Other variants: `adTest` (demo ads, no purchases), `storeTest` (real Play Billing against a configured Play Console listing), `crashTest` (an isolated minified build with a manual crash screen) and `benchmark`. Each is described in [Local testing](docs/LOCAL_TESTING.md), [Ad setup](docs/ADS_SETUP.md), [Billing setup](docs/BILLING_SETUP.md) and [Crash reporting](docs/CRASH_REPORTING.md).
+A release build still requires the complete launch catalog, signing, and the existing Firebase crash-reporting configuration. These are release-readiness requirements, never feature unlocks. There is no download charge in this source project; Google Play pricing and a published update must be managed separately in Play Console.
 
-### Run the tests
+## Built for moves that matter
 
-```sh
-# Portable JVM tests plus the platform-import boundary check.
-./gradlew :core:model:test :core:game:test :core:progress:test :core:data:testDebugUnitTest :core:platform:testDebugUnitTest :core:design:testDebugUnitTest verifyPortableBoundaries
-
-# Replay every bundled level and check each optimality claim.
-./gradlew :tools:levels:verifyPrototype
-
-# Lint and build.
-./gradlew :app:lintDebug :app:assembleDebug
-
-# Instrumented storage and UI tests on a connected device or emulator.
-./gradlew :core:data:connectedDebugAndroidTest :app:connectedDebugAndroidTest --no-parallel
-```
-
-Instrumented suites are run on API 26 and API 36 emulators. The latest full matrix passes 593 executions across 365 distinct cases with no failures or skips.
-
-## Architecture
-
-Eleven Gradle modules, split so that the puzzle rules never touch Android:
-
-| Module | Responsibility |
+| Layer | Responsibility |
 | --- | --- |
-| `core:model` | Portable serialized levels, attempts, settings and progress contracts |
-| `core:game` | Pure rules for all twelve families, reversible sessions, bounded search and verified hints |
-| `core:progress` | Deterministic stars and points, personal bests, tier gates, achievements, local-date and reward rules |
-| `core:data` | Room database with v1 to v4 migrations, durable daily and campaign transactions, private photos, backups and recovery |
-| `core:design` | Six room palettes, light and dark colors, code-drawn board skins and fold-aware layout helpers |
-| `core:platform` | Sound and haptics, Play Billing, UMP consent, gated AdMob, rewards, reminders and gated Crashlytics |
-| `feature:play` | Shared board and results screens, twelve renderers, tutorials and demonstrations |
-| `feature:library` | Onboarding, Home, level lists, Daily history, stats, achievements, settings, backups and Pro |
-| `app` | Android composition root, navigation and build variants |
-| `tools:levels` | Offline catalog generation and the independent optimality verifier |
-| `benchmark` | Minified startup and frame-measurement scenarios |
+| `core/model` | Serializable boards, moves, settings, attempts, and stable save formats |
+| `core/game` | Twelve puzzle engines, move validation, solvers, and reference-solution verification |
+| `core/progress` | Scoring, Daily scheduling, streaks, achievements, and unrestricted access rules |
+| `core/data` | Room persistence, transactions, backups, photos, and damaged-save recovery |
+| `core/design` | Room palettes, responsive layouts, typography, and fold-safe UI primitives |
+| `core/platform` | Sound, haptics, local reminders, and configured crash reporting; no ad or billing SDK |
+| `feature/library` · `feature/play` | Home, collections, history, settings, boards, tutorials, and demonstrations |
+| `tools/levels` | Original level generation and catalog verification |
 
-A Gradle check rejects Android and Java platform imports in the portable modules. UI state is always derived from durable storage rather than held in memory, which is what makes force-stop, recreation and fold changes uneventful. Design notes behind these choices are in [Decisions](docs/DECISIONS.md).
+An accepted move is committed before its animation finishes. The save schema stays compatible with earlier builds: old paid flags and reward records cannot restrict play, and old progress does not need to be reset.
 
-## Content and verification
-
-Every committed board is original, has a complete solution and carries a provenance record ([Asset provenance](docs/ASSET_PROVENANCE.md)). To regenerate the catalog and sound effects from their fixed seeds:
+### Check your changes
 
 ```sh
-python3 tools/levels/generate_traffic.py
-./gradlew :tools:levels:generateWaveA :tools:levels:generateWaveB :tools:levels:generateWaveC
-python3 tools/generate_sfx.py
+./gradlew :core:model:test :core:game:test :core:progress:test
 ./gradlew :tools:levels:verifyPrototype
+./gradlew :app:testDebugUnitTest :app:assembleDebug
+# With a connected device or emulator:
+./gradlew :app:connectedDebugAndroidTest
 ```
 
-Generation is offline authoring tooling and can take a few minutes. The Kotlin verifier checks legality, goal, cost and each optimality claim; the solver-backed families are cross-checked with independent exhaustive or breadth-first searches in engine tests. For a deterministic regeneration check, run `./gradlew :tools:levels:installDist` followed by `python3 tools/check_content_regeneration.py`.
+Gradle, Kotlin, AGP, and dependencies are pinned; Maven artifacts use checksum verification. Keep solver and migration tests passing when changing gameplay or saves.
 
-The `tools/` scripts also drive emulator smoke runs (`device_smoke.py`, `wave_a_device_smoke.py`, `wave_b_device_smoke.py`, `wave_c_device_smoke.py`) and record test reports with hashes (`record_verification.py`). They write to `docs/evidence/`, which is ignored by Git so logs, captures and reports stay on the machine that produced them.
+## Privacy and contributions
 
-## Privacy and local data
+Gameplay and progress work locally without an account. Photos use the system picker; reminders are opt-in. Ads, ad consent, payment processing, and purchase verification are absent. The existing configured release crash reporter is separate from gameplay; see [crash reporting](docs/CRASH_REPORTING.md).
 
-Parlor has no backend, no analytics SDK and no account. What it keeps, it keeps on the device:
+Found a bug or have a puzzle idea? [Open an issue](https://github.com/VincentAZ/parlor-puzzles/issues). Include the puzzle, level, device, and steps to reproduce; keep personal photos and backup files out of public reports. For contributions, start with a focused change and its relevant tests.
 
-- **Progress and settings** in the app's private Room database and preferences. Android auto-backup is allowlisted to progress and preferences only.
-- **Purchase state** in device-only, no-backup storage. Purchase tokens, entitlement and consent choices never enter the database, exports or backups.
-- **Photos** chosen for Sliding Tiles are copied privately, cropped square and deleted from the app on request. Themes never recolor them.
-- **Manual backups** (Pro) are written through the system file picker to a location you choose, validated on import and never uploaded.
-- **Crash reporting** is compiled only into the `crashTest` and `release` variants and needs the owner's own Firebase configuration; debug, benchmark and purchase-test builds never initialize Firebase.
-- **Ads and consent** go through Google's UMP and AdMob SDKs only after Free status and consent are confirmed. The debug build keeps ads suppressed.
-
-Signing keys, purchase tokens and service credentials stay outside Git. `local.properties`, `google-services.json`, `signing.properties` and keystores are ignored.
-
-## Documentation
-
-- [Local testing](docs/LOCAL_TESTING.md), [Qualification](docs/QUALIFICATION.md), [Implementation status](docs/IMPLEMENTATION_STATUS.md)
-- [Screen map](docs/SCREEN_MAP.md), [Home](docs/HOME.md), [Level selection](docs/LEVEL_SELECTION.md), [Progress](docs/PROGRESS.md), [Settings](docs/SETTINGS.md)
-- [Themes](docs/THEMES.md), [Motion](docs/MOTION.md), [Fold layouts](docs/FOLD_LAYOUTS.md), [Tablet play](docs/TABLET_PLAY.md), [Locale layouts](docs/LOCALE_LAYOUTS.md)
-- [Photos](docs/PHOTOS.md), [Backups](docs/BACKUPS.md), [Storage recovery](docs/STORAGE_RECOVERY.md), [Reminders](docs/REMINDERS.md)
-- [Ad setup](docs/ADS_SETUP.md), [Billing setup](docs/BILLING_SETUP.md), [Crash reporting](docs/CRASH_REPORTING.md)
-- [Decisions](docs/DECISIONS.md), [Asset provenance](docs/ASSET_PROVENANCE.md), the original [requirements](requirements/) and [third-party licenses](docs/licenses/)
-
-## Development and contributions
-
-Bug reports and focused pull requests are welcome. For a useful report, include the device and Android version, the puzzle and level, the steps, what you expected and what happened; keep the original save if you can. Redact anything personal from logs and screenshots before posting them in [GitHub issues](https://github.com/VincentAZ/parlor-puzzles/issues).
-
-Before opening a pull request, run the JVM tests and the level verifier above. Changes to the portable modules must pass `verifyPortableBoundaries`; changes to dependencies must update `gradle/verification-metadata.xml` in the same commit. Content changes must regenerate deterministically and keep every optimality claim verifiable.
-
-## Acknowledgements
-
-- [Nunito](https://fonts.google.com/specimen/Nunito), under the SIL Open Font License (`docs/licenses/Nunito-OFL.txt`).
-- Jetpack Compose, Room, Play Billing, Google Mobile Ads, User Messaging Platform and Firebase Crashlytics, pinned in the version catalog.
-
-## License
-
-Parlor Puzzles is licensed under the [MIT License](LICENSE). Nunito is distributed under its own SIL Open Font License (`docs/licenses/Nunito-OFL.txt`).
+Code is available under the [MIT license](LICENSE). See [asset provenance](docs/ASSET_PROVENANCE.md) and bundled font licenses for asset-specific terms.

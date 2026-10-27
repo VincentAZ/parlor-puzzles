@@ -25,7 +25,7 @@ internal fun BackupRoute(backups: ManualBackup, pro: Boolean, onBack: () -> Unit
         uri?.let(backups::export)
     }
     val open = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(backups::select) }
-    BackupScreen(state, pro, pickerError, onBack, onPro,
+    BackupScreen(state, true, pickerError, onBack, onPro,
         onExport = { pickerError = false; try { create.launch(exportName) } catch (_: Exception) { pickerError = true } },
         onImport = { pickerError = false; try { open.launch(arrayOf("application/json", "application/octet-stream", "text/plain")) } catch (_: Exception) { pickerError = true } },
         onRecovery = backups::previewRecovery, onConfirm = backups::confirm, onDiscard = backups::discard)
@@ -67,17 +67,14 @@ internal fun BackupScreen(state: BackupUiState, pro: Boolean, pickerError: Boole
             Text(stringResource(R.string.backup_summary, numbers.integer(preview.levels), numbers.integer(preview.unfinished), numbers.integer(preview.stars)))
             Text(stringResource(R.string.backup_photos, numbers.integer(preview.photos)))
             Text(stringResource(R.string.backup_replace_detail))
-            Button(onClick = onConfirm, enabled = pro || preview.recovery, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
+            Button(onClick = onConfirm, enabled = !state.busy, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                 Text(stringResource(if (preview.recovery) R.string.backup_recover_confirm else R.string.backup_import_confirm))
             }
             OutlinedButton(onClick = onDiscard, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(stringResource(R.string.backup_cancel)) }
         } else if (!state.busy) {
-            if (pro) {
+            run {
                 Button(onClick = onExport, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(stringResource(R.string.backup_export)) }
                 OutlinedButton(onClick = onImport, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(stringResource(R.string.backup_import)) }
-            } else {
-                Text(stringResource(R.string.backup_pro_required))
-                Button(onClick = onPro, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(stringResource(R.string.pro_prompt_explore)) }
             }
             if (state.canRecover) {
                 HorizontalDivider()

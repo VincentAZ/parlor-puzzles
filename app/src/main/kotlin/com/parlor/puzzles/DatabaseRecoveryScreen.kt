@@ -24,7 +24,7 @@ internal fun DatabaseRecoveryRoute(recovery: DamagedDatabaseRecovery, pro: Boole
     val state by recovery.state.collectAsStateWithLifecycle()
     var pickerError by remember { mutableStateOf(false) }
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { it?.let(recovery::select) }
-    DatabaseRecoveryScreen(state, pro, pickerError, onRetry, onClose,
+    DatabaseRecoveryScreen(state, true, pickerError, onRetry, onClose,
         onChoose = {
             pickerError = false
             try { picker.launch(arrayOf("application/json", "application/octet-stream", "text/plain")) }
@@ -48,7 +48,6 @@ internal fun DatabaseRecoveryScreen(state: DatabaseRecoveryState, pro: Boolean, 
             Text(stringResource(if (state.phase == DatabaseRecoveryPhase.RESTORING) R.string.database_restoring else R.string.backup_reading),
                 Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         }
-        if (!pro) Text(stringResource(R.string.database_restore_pro))
         if (pickerError || state.phase == DatabaseRecoveryPhase.ERROR) {
             Text(stringResource(when (state.problem) {
                 DatabaseRecoveryProblem.PRO_REQUIRED -> R.string.database_restore_pro
@@ -64,7 +63,7 @@ internal fun DatabaseRecoveryScreen(state: DatabaseRecoveryState, pro: Boolean, 
             Text(stringResource(R.string.backup_summary, numbers.integer(preview.levels), numbers.integer(preview.unfinished), numbers.integer(preview.stars)))
             Text(stringResource(R.string.backup_photos, numbers.integer(preview.photos)))
             Text(stringResource(R.string.database_restore_claims))
-            Button(onClick = onConfirm, enabled = pro,
+            Button(onClick = onConfirm, enabled = true,
                 modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("database-restore-confirm")) {
                 Text(stringResource(R.string.database_restore_confirm))
             }
@@ -76,7 +75,7 @@ internal fun DatabaseRecoveryScreen(state: DatabaseRecoveryState, pro: Boolean, 
                 modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("storage-retry")) {
                 Text(stringResource(R.string.retry))
             }
-            OutlinedButton(onClick = onChoose, enabled = pro && !state.busy,
+            OutlinedButton(onClick = onChoose, enabled = !state.busy,
                 modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("database-restore-choose")) {
                 Text(stringResource(R.string.backup_import))
             }

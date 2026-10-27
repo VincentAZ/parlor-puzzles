@@ -5,7 +5,6 @@ import androidx.compose.ui.test.*
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import com.parlor.core.model.*
-import com.parlor.core.platform.ads.AdPlacement
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
 import org.junit.Assert.*
@@ -33,7 +32,6 @@ class CompletionMotionTest {
         val middle = compose.onNodeWithTag("piece-A").fetchSemanticsNode().boundsInRoot
         assertTrue("The saved final move is still visibly travelling", middle.left > start.left)
         compose.onNodeWithTag("piece-A").assertIsNotEnabled()
-        assertEquals(AdPlacement.PLAY, app.ads.currentPlacement.value)
         capture("completion-last-slide")
         compose.mainClock.advanceTimeBy(240)
         compose.onNodeWithText("A clear way through.").assertExists()
@@ -41,7 +39,6 @@ class CompletionMotionTest {
         compose.mainClock.advanceTimeBy(32)
         capture("completion-confetti")
         compose.onNodeWithTag("completion-confetti", useUnmergedTree = true).assertExists()
-        assertEquals(AdPlacement.RESULTS, app.ads.currentPlacement.value)
         scenario.recreate()
         advanceUntil { compose.onAllNodesWithText("A clear way through.").fetchSemanticsNodes().isNotEmpty() }
         compose.mainClock.advanceTimeBy(32)
@@ -64,7 +61,6 @@ class CompletionMotionTest {
         compose.onNodeWithTag("completion-confetti", useUnmergedTree = true).assertDoesNotExist()
         compose.onNodeWithTag("piece-A").assertDoesNotExist()
         assertEquals(8, saved.scoredMoves)
-        assertEquals(AdPlacement.RESULTS, app.ads.currentPlacement.value)
         capture("completion-reduced")
         compose.mainClock.advanceTimeBy(400)
         compose.onNodeWithTag("completion-confetti", useUnmergedTree = true).assertDoesNotExist()

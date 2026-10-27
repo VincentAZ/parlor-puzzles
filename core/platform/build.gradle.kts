@@ -13,10 +13,6 @@ kotlin { jvmToolchain(17) }
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
-    implementation(libs.billing)
-    implementation(libs.mobile.ads)
-    implementation(libs.ump)
-    implementation(libs.work.runtime)
     implementation(libs.serialization.json)
     implementation(project(":core:model"))
     implementation(libs.coroutines.android)

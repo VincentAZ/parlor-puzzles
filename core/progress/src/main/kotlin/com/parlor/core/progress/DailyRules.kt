@@ -17,13 +17,7 @@ object DailyRules {
     }
 
     fun spendHint(ledger: RewardLedger, date: String, pro: Boolean): RewardLedger? {
-        val current = rollover(ledger, date)
-        return when {
-            pro -> current
-            current.dailyHints > 0 -> current.copy(dailyHints = current.dailyHints - 1)
-            current.earnedHints > 0 -> current.copy(earnedHints = current.earnedHints - 1, earnedHintsSpent = current.earnedHintsSpent + 1)
-            else -> null
-        }
+        return rollover(ledger, date) // Unlimited hints; never consume a saved allowance.
     }
 
     fun earnHints(ledger: RewardLedger, date: String, rewardId: String): RewardLedger? {
@@ -84,12 +78,9 @@ object DailyRules {
         return epoch.version to epoch.pool[indexFor(day.toEpochDays().toLong(), epoch.pool.size, epoch.version)]
     }
 
-    fun eligibility(claim: DailyClaim, pro: Boolean): DailyEligibility = when {
-        !claim.firstCompletionClaimed -> DailyEligibility.FIRST_COMPLETION
-        pro -> DailyEligibility.PRO
-        claim.earnedRetries > claim.consumedRetries -> DailyEligibility.REWARDED
-        else -> DailyEligibility.PRACTICE
-    }
+    // PRO is the existing serialized value for an unlimited scored retry, including migrated saves.
+    fun eligibility(claim: DailyClaim, pro: Boolean): DailyEligibility =
+        if (!claim.firstCompletionClaimed) DailyEligibility.FIRST_COMPLETION else DailyEligibility.PRO
 
     fun withinHistory(date: String, today: String, latest: String?): Boolean {
         val anchor = maxOf(LocalDate.parse(today), latest?.let(LocalDate::parse) ?: LocalDate.parse(today)).toEpochDays()

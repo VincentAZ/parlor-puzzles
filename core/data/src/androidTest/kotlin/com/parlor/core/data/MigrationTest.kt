@@ -34,7 +34,7 @@ class MigrationTest {
             repo.configure(Catalog(levels = listOf(level)), DailySchedule(listOf(ScheduleEpoch(1, "2026-09-28", listOf(LevelRef(level.id, 1))))))
             assertEquals(old, repo.recoverySnapshot())
             repo.importProgress(requireNotNull(repo.recoverySnapshot()), PlayerSettings(), recovery = true)
-            assertEquals(old.settings, repo.pendingBackupSettings()); assertFalse(repo.hasPro())
+            assertEquals(old.settings, repo.pendingBackupSettings()); assertTrue(repo.hasPro())
             assertTrue(database.progress().photoIds().isEmpty())
             assertNull(repo.startOrResume(level).photoId)
         } finally { database.close(); instrumentation.targetContext.deleteDatabase(name) }

@@ -1,3 +1,5 @@
+> **Historical record:** this document predates the [fully free edition](FREE_EDITION.md). Pro, ads, billing and reward limits described below no longer apply.
+
 # Sliding Tiles personal photos
 
 Pro campaign boards offer **Choose photo** / **Change photo**. Android's
