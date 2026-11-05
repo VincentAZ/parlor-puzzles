@@ -49,21 +49,19 @@ fun main(args: Array<String>) {
     }
     val schedule = ParlorJson.decodeFromString<DailySchedule>(File(directory, "daily-schedule.json").readText())
     require(schedule.epochs.all { epoch -> epoch.pool.all { ref -> catalog.levels.any { it.id == ref.id && it.revision == ref.revision } } })
-    if (args[2] == "release") {
-        for (puzzle in Puzzle.entries) {
-            require(catalog.levels.count { it.puzzle == puzzle } == puzzle.campaignCount) { "Release requires ${puzzle.campaignCount} $puzzle levels" }
-            for (tier in Tier.entries) {
-                val sizes = when (puzzle.campaignCount) { 50 -> listOf(13,12,13,12); 30 -> listOf(8,7,8,7); else -> List(4) { puzzle.campaignCount / 4 } }
-                require(catalog.levels.filter { it.puzzle == puzzle && it.tier == tier }.map { it.order }.sorted() == (1..sizes[tier.ordinal]).toList())
-            }
-        }
-        require(catalog.levels.size == 556)
-    } else {
-        require(args[2] == "prototype")
-        val counts = Puzzle.entries.associateWith {if(it==Puzzle.TRAFFIC_JAM) 12 else 4}
-        require(catalog.levels.groupingBy { it.puzzle }.eachCount() == counts)
-        require(counts.keys.all { p -> Tier.entries.all { t -> catalog.levels.any { it.puzzle == p && it.tier == t } } })
+    require(args[2] in setOf("prototype", "release"))
+    // The owner approved the existing 56 puzzles for the first free release.
+    // Keep their IDs, revisions, tier/order slots and frozen Daily epochs intact.
+    val counts = Puzzle.entries.associateWith { it.campaignCount }
+    require(catalog.levels.groupingBy { it.puzzle }.eachCount() == counts) {
+        "The first release requires 12 Traffic Jam puzzles and 4 of every other family"
     }
+    for (puzzle in Puzzle.entries) for (tier in Tier.entries) {
+        require(catalog.levels.count { it.puzzle == puzzle && it.tier == tier } == puzzle.campaignCount / 4) {
+            "Incorrect first-release coverage for $puzzle / $tier"
+        }
+    }
+    require(catalog.levels.size == 56)
     println("Verified ${catalog.levels.size} levels for ${args[2]}")
 }
 

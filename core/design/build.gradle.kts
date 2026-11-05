@@ -12,6 +12,10 @@ android {
 }
 kotlin { jvmToolchain(17) }
 dependencies {
+    constraints {
+        // Match the app's verified annotation dependency in release lint classpaths.
+        implementation("com.google.errorprone:error_prone_annotations:2.26.1")
+    }
     implementation(project(":core:model"))
     // Match the application's pinned AndroidX graph, including local palette tests.
     implementation(libs.androidx.core)

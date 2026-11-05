@@ -14,7 +14,7 @@ Normal puzzle rules remain: hints affect scoring, photo storage is bounded, hist
 
 ## Release readiness
 
-The repository contains 56 verified prototype levels across twelve puzzle families. The earlier planned 556-level launch catalog is unfinished. Release still requires catalog completion, physical-device/accessibility qualification, signing, and the existing configured crash reporter. These are unrelated to payment; do not bypass safety or content checks to claim a production release.
+On November 5, 2026, the owner approved the existing 56 puzzles across twelve families for the first free Google Play release and deferred the earlier 556-level plan. Release verification requires 12 Traffic Jam puzzles and four puzzles in each other family, evenly covering all four difficulty tiers. Solution replay, canonical uniqueness, provenance, scoring and frozen Daily-reference checks remain required. Level IDs and revisions are unchanged. Physical-device/accessibility qualification, signing, and the configured crash reporter remain release requirements.
 
 Source changes do not change Google Play pricing or publish an update. Before a store launch, choose free distribution, no ads, and no in-app products; align the listing, privacy policy and Data safety answers with the final signed binary. Run upgrade tests without clearing app data.
 
@@ -36,7 +36,7 @@ a release; those steps still happen in Play Console.
 
 ## Verification
 
-Run JVM tests for model/game/progress, the prototype verifier, app unit tests and a debug build. On a device, run the retained instrumentation tests and verify all themes, photos, history, backup/restore, repeated hints and scored Daily retries. `FreeAccessTest` covers exhausted legacy allowances and formerly paid tiers; `FreeEditionTest` covers app navigation and absence of billing/advertising permissions.
+Run JVM tests for model/game/progress, both catalog verifiers, app unit tests and debug/release builds. On a device, run the retained instrumentation tests and verify all themes, photos, history, backup/restore, repeated hints and scored Daily retries. `FreeAccessTest` covers exhausted legacy allowances and formerly paid tiers; `FreeEditionTest` covers app navigation and absence of billing/advertising permissions.
 
 Earlier documents describing Pro purchases, ad consent or reward limits are historical design records. This file and the root README define the current product behavior.
 

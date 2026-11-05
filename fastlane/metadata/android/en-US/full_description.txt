@@ -1,0 +1,20 @@
+A little room to think. Every room is yours.
+
+Parlor Puzzles brings 56 puzzles across twelve classic logic collections into one calm place. Every puzzle, difficulty and feature is included for free. No ads, purchases, subscriptions or account required.
+
+TWELVE COLLECTIONS
+Explore Traffic Jam, Tower of Hanoi, Sliding Tiles, Block Escape, Box Pusher, Switch Grid, Peg Solitaire, Queens, Knight's Tour, Water Jugs, River Crossings and Pancake Flip. The first release includes 12 Traffic Jam puzzles and four puzzles in each other collection, spanning four difficulty tiers.
+
+HELP WHEN YOU WANT IT
+Learn with tutorials, undo your moves, ask for unlimited hints and watch solution demonstrations. Hints affect scoring, but never require a purchase or an ad.
+
+A DAILY REASON TO RETURN
+Play the Daily Challenge and retry for your best score as often as you like. Recent challenges remain available in your 30-day history.
+
+MAKE YOURSELF AT HOME
+Choose from six room palettes, use light or dark appearance, and turn your own photos into Sliding Tiles puzzles. Adjust sound, haptics, motion and the visible timer. Optional local reminders are yours to control.
+
+YOUR PROGRESS STAYS WITH YOU
+Boards save as you play. Review results and achievements, and export or restore a progress backup with your puzzle photos. Gameplay works offline. The release uses Firebase Crashlytics for crash diagnostics; see the privacy policy for details.
+
+Free to download. Free to play. Every feature included.

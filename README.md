@@ -25,7 +25,7 @@ A good puzzle needs space, a clear set of rules, and a satisfying moment when it
 
 **No ads. No purchases. No subscriptions. No account.** All puzzle difficulties and variants, all six room palettes, photo tiles, backups, demonstrations, detailed history, unlimited hints, and unlimited scored Daily retries are included. Nothing needs a store connection to unlock.
 
-> **Project status:** this is a development prototype with **56 verified sample levels across all twelve families**. The planned 556-level launch catalog and physical-device release qualification are unfinished. Making every existing feature free does not turn the prototype into a certified store release. See [release readiness](docs/FREE_EDITION.md#release-readiness).
+> **Release scope:** the first free release contains **56 verified puzzles across all twelve families**, as approved by the owner. The former 556-level plan is deferred. Store publication and physical-device release qualification are still pending. See [release readiness](docs/FREE_EDITION.md#release-readiness).
 
 ## The puzzles
 
@@ -83,7 +83,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 The debug package is `com.parlor.puzzles.debug`. It coexists with the production package and needs **no billing key, ad account, or purchase-verification service**. Debug and release use the same free feature policy.
 
-A release build still requires the complete launch catalog, signing, and the existing Firebase crash-reporting configuration. These are release-readiness requirements, never feature unlocks. There is no download charge in this source project; Google Play pricing and a published update must be managed separately in Play Console.
+A release build requires the approved 56-puzzle catalog, signing, and the existing Firebase crash-reporting configuration. These are release-readiness requirements, never feature unlocks. There is no download charge in this source project; Google Play pricing and a published update must be managed separately in Play Console.
 
 ## Built for moves that matter
 

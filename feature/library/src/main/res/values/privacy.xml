@@ -1,0 +1,13 @@
+<resources>
+    <string name="library_privacy_policy">Privacy policy</string>
+    <string name="privacy_heading_0">About Parlor Puzzles</string>
+    <string name="privacy_body_0">Parlor Puzzles is published by Plan 9 from Outer Space. Every puzzle and feature is free. There are no ads, purchases, subscriptions or user accounts.</string>
+    <string name="privacy_heading_1">On your device</string>
+    <string name="privacy_body_1">Puzzle progress, settings, history and optional reminders are stored locally. Photos you select are copied into private app storage for Sliding Tiles; Parlor does not upload your photos. Manual backups contain progress, settings and puzzle photos and are saved to the location you choose. Android may back up eligible app data according to your device settings.</string>
+    <string name="privacy_heading_2">Crash diagnostics</string>
+    <string name="privacy_body_2">The release uses Google Firebase Crashlytics to diagnose crashes and app stability. Crash reports may include stack traces, exception messages, app state, device and operating-system information, installation identifiers and session information. Reports are sent to Google over HTTPS. No Google Analytics or advertising SDK is included. Parlor adds no player identifiers, gameplay event logs, custom diagnostic keys or photo attachments.</string>
+    <string name="privacy_heading_3">Retention and deletion</string>
+    <string name="privacy_body_3">Local data remains until you reset it, clear app storage or uninstall the app. Delete saved photos in Settings; delete exported backups separately from their chosen storage location. Firebase retains crash traces and associated identifiers for 90 days before beginning removal from live and backup systems. Uninstalling does not erase reports already sent to Firebase.</string>
+    <string name="privacy_heading_4">Contact and changes</string>
+    <string name="privacy_body_4">For support, privacy questions or data-deletion requests, email vincent.serpico@serpico.ai. Please do not send puzzle photos or other sensitive information unless needed to resolve your request. This policy will be updated when app data practices change. Last updated November 5, 2026.</string>
+</resources>

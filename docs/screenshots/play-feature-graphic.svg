@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
+  <rect width="1024" height="500" fill="#F8F2E8"/>
+  <rect x="32" y="32" width="960" height="436" rx="24" fill="none" stroke="#D8CCBA" stroke-width="2"/>
+  <g transform="translate(56 92) scale(2.7)">
+    <path fill="#9E4934" d="M24,24h25v25h-25zM24,57h25v25h-25zM57,57h25v25h-25zM64,20h25v25h-25z"/>
+  </g>
+  <text x="390" y="222" font-family="DejaVu Sans,sans-serif" font-size="68" font-weight="bold" fill="#293C39">Parlor</text>
+  <text x="393" y="285" font-family="DejaVu Sans,sans-serif" font-size="48" fill="#293C39">Puzzles</text>
+  <text x="393" y="342" font-family="DejaVu Sans,sans-serif" font-size="23" fill="#5B665F">A little room to think.</text>
+</svg>

@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class Puzzle(val campaignCount: Int) {
-    TRAFFIC_JAM(80), HANOI(16), SLIDING_TILES(60), BLOCK_ESCAPE(50), BOX_PUSHER(60),
-    SWITCH_GRID(60), PEG_SOLITAIRE(40), QUEENS(30), KNIGHTS_TOUR(30), WATER_JUGS(50),
-    CROSSINGS(40), PANCAKE_FLIP(40),
+    TRAFFIC_JAM(12), HANOI(4), SLIDING_TILES(4), BLOCK_ESCAPE(4), BOX_PUSHER(4),
+    SWITCH_GRID(4), PEG_SOLITAIRE(4), QUEENS(4), KNIGHTS_TOUR(4), WATER_JUGS(4),
+    CROSSINGS(4), PANCAKE_FLIP(4),
 }
 
 @Serializable enum class Tier { EASY, MEDIUM, HARD, EXPERT }

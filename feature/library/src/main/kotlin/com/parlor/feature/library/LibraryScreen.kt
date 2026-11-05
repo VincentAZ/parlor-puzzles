@@ -65,6 +65,10 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
         Onboarding { updateSettings { it.copy(onboarded = true) } }
         return
     }
+    if (screen == "privacy") {
+        PrivacyScreen(onBack = ::back)
+        return
+    }
     if (screen == "stats") {
         ProgressScreen(catalog, bests, player, true, history, onPro = { notice = Access.PRO.name },
             onBack = ::back)
@@ -144,6 +148,9 @@ fun LibraryScreen(catalog: Catalog, bests: List<LevelBest>, resume: Attempt?, pl
                 onPhotos?.let { open -> OutlinedButton(onClick = open, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                     Text(stringResource(R.string.library_photos))
                 } }
+                OutlinedButton(onClick = { navigate("privacy") }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
+                    Text(stringResource(R.string.library_privacy_policy))
+                }
                 HorizontalDivider()
                 Text(stringResource(R.string.library_reset_heading), style = MaterialTheme.typography.titleLarge)
                 catalog.levels.map { it.puzzle }.distinct().forEach { puzzle ->

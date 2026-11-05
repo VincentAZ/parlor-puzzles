@@ -33,6 +33,10 @@ class FreeEditionTest {
                 scenario.recreate()
                 compose.waitUntil(15_000) { compose.onAllNodesWithTag("theme-linen").fetchSemanticsNodes().isNotEmpty() }
                 compose.onNodeWithTag("theme-linen").performScrollTo().assertIsSelected()
+                compose.onNodeWithText("Back").performScrollTo().performClick()
+                compose.onNodeWithText("Privacy policy").performScrollTo().performClick()
+                compose.onNodeWithText("About Parlor Puzzles").assertIsDisplayed()
+                compose.onNodeWithText("Crash diagnostics").performScrollTo().assertIsDisplayed()
             }
             @Suppress("DEPRECATION")
             val permissions = context.packageManager.getPackageInfo(context.packageName, PackageManager.GET_PERMISSIONS)

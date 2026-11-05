@@ -11,8 +11,8 @@ object Achievements {
         add(AchievementDefinition("box-no-undo", AchievementKind.BOX_NO_UNDO, Puzzle.BOX_PUSHER))
         add(AchievementDefinition("knight-closed-eight", AchievementKind.KNIGHT_CLOSED_EIGHT, Puzzle.KNIGHTS_TOUR))
         add(AchievementDefinition("first-solution", AchievementKind.FIRST_SOLUTION))
-        listOf(10, 50, 100, 556).forEach { add(AchievementDefinition("campaign-levels-$it", AchievementKind.CAMPAIGN_LEVELS, target = it)) }
-        listOf(100, 500).forEach { add(AchievementDefinition("campaign-stars-$it", AchievementKind.CAMPAIGN_STARS, target = it)) }
+        listOf(10, 25, 50, 56).forEach { add(AchievementDefinition("campaign-levels-$it", AchievementKind.CAMPAIGN_LEVELS, target = it)) }
+        listOf(100, 150).forEach { add(AchievementDefinition("campaign-stars-$it", AchievementKind.CAMPAIGN_STARS, target = it)) }
         add(AchievementDefinition("daily-days-7", AchievementKind.DAILY_DAYS, target = 7))
         add(AchievementDefinition("all-puzzles", AchievementKind.ALL_PUZZLES, target = 12))
     }.also { require(it.size == 40 && it.map { a -> a.id }.distinct().size == 40) }
@@ -28,7 +28,7 @@ object Achievements {
                 AchievementKind.FIRST_THREE_STARS -> level.puzzle == definition.puzzle && result?.stars == 3
                 AchievementKind.PERFECT_TIER -> Tier.entries.any { tier ->
                     val levels = catalog.filter { it.puzzle == definition.puzzle && it.tier == tier }
-                    // A partial development catalog cannot award a full-tier achievement.
+                    // A missing level must not award a full-tier achievement.
                     levels.size == tierSize(requireNotNull(definition.puzzle), tier) &&
                         levels.all { bestById[it.id]?.stars == 3 }
                 }
@@ -45,9 +45,5 @@ object Achievements {
         }.map { it.id }.toSet()
     }
 
-    fun tierSize(puzzle: Puzzle, tier: Tier): Int = when (puzzle.campaignCount) {
-        50 -> listOf(13, 12, 13, 12)[tier.ordinal]
-        30 -> listOf(8, 7, 8, 7)[tier.ordinal]
-        else -> puzzle.campaignCount / 4
-    }
+    fun tierSize(puzzle: Puzzle, tier: Tier): Int = puzzle.campaignCount / Tier.entries.size
 }

@@ -36,3 +36,33 @@ Instrumentation tests were compiled, not executed on an Android device or emulat
   Searching its app list found no Parlor listing. No listing, store pricing,
   Firebase project, or published release has been created or changed in this
   follow-up.
+
+## Approved 56-puzzle first release
+
+The owner subsequently approved shipping the existing 56 puzzles and deferring
+its former 556-puzzle launch plan. The release verifier now checks the approved
+per-family and per-tier counts while retaining solution replay, canonical
+uniqueness, provenance, scoring and frozen Daily-reference checks. Puzzle IDs,
+revisions and Daily epochs have not changed.
+
+- Model/game/progress: **68 JVM tests passed**, zero failures or errors, including
+  reachable achievement targets and complete-tier awards for this release.
+- `:tools:levels:verifyCatalog` and `:tools:levels:verifyPrototype`: **passed**.
+- Debug APK assembly and Android test compilation: **passed**. This is build
+  evidence, not yet a device-test result.
+- Production Firebase project `parlor-puzzles` and Android registration
+  `com.parlor.puzzles` were created on the Spark plan without Analytics or Gemini.
+  The owner downloaded the configuration, which is kept in the ignored
+  `app/src/release/google-services.json` path.
+- Signed release bundle assembly, release signing validation, release lint,
+  no-ad/no-billing dependency audit and Crashlytics mapping upload: **passed**.
+  This does not yet prove crash-report delivery from a device or Play publication.
+- Release lint resolved an older annotation dependency in two library modules;
+  those modules now use the same already-checksummed 2.26.1 annotation constraint
+  as the application. Checksum verification remains enabled.
+
+Store copy and vector-derived icon/feature graphic are in
+`fastlane/metadata/android/en-US`. An offline privacy screen and corresponding
+`docs/privacy.html` describe actual local storage and crash diagnostics, with the
+owner-provided public support address. Store publication, device qualification
+and Play review remain pending.

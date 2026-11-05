@@ -86,4 +86,22 @@ class DailyAndAchievementTest {
         assertFalse("box-no-undo" in earned(level.copy(puzzle = Puzzle.BOX_PUSHER), a.copy(undoCount = 1)))
         assertTrue("box-no-undo" in earned(level.copy(puzzle = Puzzle.BOX_PUSHER), a))
     }
+
+    @Test fun firstReleaseAchievementsFitTheApprovedCatalogAndRequireEveryTierLevel() {
+        val campaignSize = Puzzle.entries.sumOf { it.campaignCount }
+        assertEquals(56, campaignSize)
+        assertTrue(Achievements.definitions.filter { it.kind == AchievementKind.CAMPAIGN_LEVELS }
+            .all { it.target <= campaignSize })
+        assertTrue(Achievements.definitions.filter { it.kind == AchievementKind.CAMPAIGN_STARS }
+            .all { it.target <= campaignSize * 3 })
+        val tier = (1..3).map { level.copy(id = "traffic-test-$it", order = it) }
+        val completed = Attempt.start("completed", tier.last()).copy(completed = true)
+        val result = Scoring.result(tier.last(), completed)!!
+        val bests = tier.map { Scoring.improve(it.id, null, result, "2026-11-05") }
+        fun awards(catalog: List<LevelDefinition>, results: List<LevelBest>) =
+            Achievements.evaluate(tier.last(), completed, result, catalog, results, RewardLedger(), PlayerProfile())
+        assertTrue("perfect-tier-traffic_jam" in awards(tier, bests))
+        assertFalse("perfect-tier-traffic_jam" in awards(tier.dropLast(1), bests))
+        assertFalse("perfect-tier-traffic_jam" in awards(tier, bests.dropLast(1)))
+    }
 }

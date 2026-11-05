@@ -12,7 +12,7 @@ fun generateWaveC(directory:File) {
     val levels=mutableListOf<LevelDefinition>()
     fun add(puzzle:Puzzle,tier:Tier,board:BoardState,route:List<Move>,unit:ScoringUnit,optimal:Boolean,seconds:Int) {
         val prefix=when(puzzle) {Puzzle.PEG_SOLITAIRE->"pegs";Puzzle.QUEENS->"queens";Puzzle.KNIGHTS_TOUR->"knight";else->"crossings"}
-        val number=(if(puzzle.campaignCount==30) listOf(1,9,16,24) else listOf(1,11,21,31))[tier.ordinal]
+        val number=(if(puzzle in setOf(Puzzle.QUEENS, Puzzle.KNIGHTS_TOUR)) listOf(1,9,16,24) else listOf(1,11,21,31))[tier.ordinal]
         val variant=when(board) {is PegBoard->board.layout.name.lowercase();is KnightBoard->if(board.closed) "closed" else "open"
             is CrossingBoard->board.scenario.name.lowercase();else->"standard"}
         val level=LevelDefinition("$prefix-${number.toString().padStart(3,'0')}",puzzle=puzzle,tier=tier,order=1,

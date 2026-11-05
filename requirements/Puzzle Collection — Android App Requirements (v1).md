@@ -1,5 +1,7 @@
 # Parlor Puzzles — Android App Requirements (v1)
 
+> **Owner-approved release amendment — November 5, 2026:** The first Google Play release ships the existing 56 puzzles (12 Traffic Jam, four in each of the other eleven families), with all features free and no ads or payments. The former 556-level launch scope and all monetization requirements below are superseded. Preserve level identities, verified solutions and coverage checks. See [the current release requirements](../docs/FREE_EDITION.md#release-readiness).
+
 Sep 28, 2026 · @Vincent Serpico
 
 ## Overview

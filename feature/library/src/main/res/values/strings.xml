@@ -17,7 +17,7 @@
     <string name="library_play">Find your next puzzle</string>
     <string name="library_resume">Pick up where you left off</string>
     <string name="library_resume_detail">Traffic Jam · Moves: %1$d</string>
-    <string name="library_prototype_note">An early room, taking shape. This development build includes sample puzzles from all twelve collections.</string>
+    <string name="library_prototype_note">56 puzzles across twelve collections. Every puzzle and feature is free, with no ads or purchases.</string>
     <string name="library_level_title">A clear way through</string>
     <string name="library_level_subtitle">A few thoughtful moves can change everything.</string>
     <string name="library_difficulty">Difficulty</string>

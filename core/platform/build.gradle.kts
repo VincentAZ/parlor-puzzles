@@ -11,6 +11,10 @@ android {
 }
 kotlin { jvmToolchain(17) }
 dependencies {
+    constraints {
+        // Match the app's verified annotation dependency in release lint classpaths.
+        implementation("com.google.errorprone:error_prone_annotations:2.26.1")
+    }
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.serialization.json)
