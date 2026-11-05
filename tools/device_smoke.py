@@ -28,11 +28,26 @@ def tree():
 
 
 def tap(text=None, desc=None, prefix=None):
-    nodes = list(tree().iter('node'))
-    match = next((n for n in nodes if
-        (text is not None and n.get('text') == text) or
-        (desc is not None and n.get('content-desc') == desc) or
-        (prefix is not None and n.get('content-desc','').startswith(prefix))), None)
+    match = None
+    # Compact displays can place tutorial controls below the board. Scroll the
+    # outer margin so the gesture cannot drag a puzzle piece.
+    for direction in [None] + ['down'] * 4 + ['up'] * 8:
+        nodes = list(tree().iter('node'))
+        if direction:
+            container = next((n for n in nodes if n.get('scrollable') == 'true'), None)
+            if container is None:
+                break
+            left, top, right, bottom = map(int, re.findall(r'\d+', container.get('bounds')))
+            x = right - 8
+            start, end = (bottom - 80, top + 80) if direction == 'down' else (top + 80, bottom - 80)
+            adb('shell', 'input', 'swipe', str(x), str(start), str(x), str(end), '350')
+            nodes = list(tree().iter('node'))
+        match = next((n for n in nodes if
+            (text is not None and n.get('text') == text) or
+            (desc is not None and n.get('content-desc') == desc) or
+            (prefix is not None and n.get('content-desc','').startswith(prefix))), None)
+        if match is not None:
+            break
     if match is None:
         raise AssertionError(f'Control not visible: {text or desc or prefix}')
     x1, y1, x2, y2 = map(int, re.findall(r'\d+', match.get('bounds')))
