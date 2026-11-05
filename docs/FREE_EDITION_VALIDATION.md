@@ -76,3 +76,40 @@ script also passed onboarding, interactive tutorial steps, one committed move,
 and force-stop/resume persistence. These are emulator results, not physical-device
 or human accessibility qualification. The published privacy page was fetched and
 compared byte-for-byte with `docs/privacy.html`.
+
+### Google Play submission — November 5, 2026
+
+- Installed and exercised the signed release APK on the isolated API 36 emulator.
+  Onboarding, tutorial moves, force-stop/resume persistence, and the Tower of Hanoi,
+  Switch Grid, Water Jugs and Pancake Flip smoke flows passed.
+- Captured eight genuine 1080×1920 release screenshots, verified opaque pixels,
+  and stored RGB PNGs under `fastlane/metadata/android/en-US/images/phoneScreenshots`.
+- Created Parlor Puzzles (`com.parlor.puzzles`) as a free Puzzle game in the
+  owner-selected Plan 9 from Outer Space account. Saved listing text, icon,
+  feature graphic, screenshots, public support contact and published privacy URL.
+- Completed app access, no ads, no advertising ID, government, financial, health,
+  audience and data-safety declarations. Intended audience is 13 and older.
+  With explicit owner approval, accepted IARC terms; the questionnaire returned
+  ESRB Everyone and PEGI 3, among other regional ratings.
+- Data safety discloses required, non-ephemeral collection of crash logs,
+  diagnostics, session interactions and installation identifiers for app-quality
+  analytics. Firebase is a service provider; no advertising or marketing use is
+  declared. Transport is encrypted. The privacy page supplies deletion-request
+  contact instructions. No account creation or login is offered.
+- Uploaded version code 2 / version 0.2.0 signed AAB, with ReTrace mapping file.
+  SHA-256: `1190ad9954a3bc348c752ff474ef163868edefe704410acb22c538ac8eba24dd`.
+  Play processed the bundle successfully; estimated new-install size is 2.27 MB.
+  Play App Signing and automatic protection are enabled.
+- Chose United States only, following the owner's fallback preference to avoid
+  EU-specific distribution setup. Play includes its seven associated locations.
+- Saved production release `0.2.0 — Free launch` and sent all 11 changes for review.
+  The observed Publishing overview state is **Changes in review**, with automated
+  quick checks still running. Managed publishing is off. This is submission
+  evidence, **not proof that the app is live**. Google approval/public availability
+  remains pending; live Crashlytics delivery and physical-device qualification
+  have not been established by these checks.
+- Play reported one non-blocking recommendation: native debug symbols are absent.
+  No blocking bundle errors remained after country targeting was saved.
+
+Play app ID: `4973544480472398976`.
+[Publishing overview](https://play.google.com/console/u/0/developers/8105003511787020834/app/4973544480472398976/publishing).
