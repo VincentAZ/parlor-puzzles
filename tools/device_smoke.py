@@ -14,10 +14,12 @@ import xml.etree.ElementTree as ET
 PACKAGE = 'com.parlor.puzzles.debug'
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'docs/evidence/traffic-prototype'
+SERIAL = None
 
 
 def adb(*args, binary=False):
-    return subprocess.check_output(['adb', '-e', *args], text=not binary)
+    target = ['-s', SERIAL] if SERIAL else ['-e']
+    return subprocess.check_output(['adb', *target, *args], text=not binary)
 
 
 def tree():
@@ -43,9 +45,14 @@ def screenshot(name):
 
 
 def main():
+    global SERIAL
     parser = argparse.ArgumentParser()
+    parser.add_argument('--serial', help='Isolated emulator serial, for example emulator-5556')
     parser.add_argument('--reset', action='store_true')
     options = parser.parse_args()
+    if options.serial and not options.serial.startswith('emulator-'):
+        parser.error('--serial must identify an emulator, never a physical device')
+    SERIAL = options.serial
     if options.reset:
         adb('shell','pm','clear',PACKAGE)
     adb('shell','am','start','-n',f'{PACKAGE}/com.parlor.puzzles.MainActivity')

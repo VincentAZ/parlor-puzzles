@@ -66,3 +66,13 @@ Store copy and vector-derived icon/feature graphic are in
 `docs/privacy.html` describe actual local storage and crash diagnostics, with the
 owner-provided public support address. Store publication, device qualification
 and Play review remain pending.
+
+### API 36 emulator evidence
+
+On the isolated `emulator-5556` device, `FreeEditionTest` passed: all six themes
+were selected and persisted through recreation, the offline privacy screen opened,
+and Billing/advertising-ID/AdServices permissions were absent. The gameplay smoke
+script also passed onboarding, interactive tutorial steps, one committed move,
+and force-stop/resume persistence. These are emulator results, not physical-device
+or human accessibility qualification. The published privacy page was fetched and
+compared byte-for-byte with `docs/privacy.html`.
