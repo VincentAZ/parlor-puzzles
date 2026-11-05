@@ -1,6 +1,7 @@
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import com.google.gms.googleservices.GoogleServicesTask
 import groovy.json.JsonSlurper
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,9 +10,23 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
 }
+val releaseSigningFile = rootProject.file("signing.properties")
+val releaseSigning = Properties().apply {
+    if (releaseSigningFile.isFile) releaseSigningFile.inputStream().use { load(it) }
+}
 android {
     namespace = "com.parlor.puzzles"
     compileSdk = 36
+    signingConfigs {
+        if (releaseSigningFile.isFile) {
+            create("production") {
+                storeFile = rootProject.file(requireNotNull(releaseSigning.getProperty("storeFile")))
+                storePassword = requireNotNull(releaseSigning.getProperty("storePassword"))
+                keyAlias = requireNotNull(releaseSigning.getProperty("keyAlias"))
+                keyPassword = requireNotNull(releaseSigning.getProperty("keyPassword"))
+            }
+        }
+    }
     defaultConfig {
         applicationId = "com.parlor.puzzles"
         minSdk = 26
@@ -28,6 +43,7 @@ android {
             applicationIdSuffix = ".debug"; versionNameSuffix = "-dev"
         }
         release {
+            signingConfig = signingConfigs.findByName("production")
             buildConfigField("boolean", "CRASH_REPORTING_ENABLED", "true")
             manifestPlaceholders["crashReportingEnabled"] = "true"
             isMinifyEnabled = true
@@ -97,7 +113,16 @@ dependencies {
     androidTestImplementation(libs.androidx.window.testing)
     debugImplementation(libs.compose.test.manifest)
 }
-tasks.matching { it.name == "preReleaseBuild" }.configureEach { dependsOn(":tools:levels:verifyCatalog") }
+val verifyReleaseSigning by tasks.registering {
+    group = "verification"
+    doLast {
+        require(releaseSigningFile.isFile) { "Configure ignored signing.properties before building a release." }
+        require(rootProject.file(requireNotNull(releaseSigning.getProperty("storeFile"))).isFile) {
+            "The configured release keystore does not exist."
+        }
+    }
+}
+tasks.matching { it.name == "preReleaseBuild" }.configureEach { dependsOn(":tools:levels:verifyCatalog", verifyReleaseSigning) }
 tasks.matching { it.name in setOf("preDebugBuild", "preBenchmarkBuild", "preCrashTestBuild") }.configureEach {
     dependsOn(":tools:levels:verifyPrototype")
 }

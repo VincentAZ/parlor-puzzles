@@ -18,6 +18,22 @@ The repository contains 56 verified prototype levels across twelve puzzle famili
 
 Source changes do not change Google Play pricing or publish an update. Before a store launch, choose free distribution, no ads, and no in-app products; align the listing, privacy policy and Data safety answers with the final signed binary. Run upgrade tests without clearing app data.
 
+### Release signing
+
+The release build reads the Git-ignored root `signing.properties` file with
+`storeFile`, `storePassword`, `keyAlias`, and `keyPassword` properties. `storeFile`
+may be an absolute path to a privately stored upload keystore. Keep the keystore
+and passwords outside version control, restrict access to their files, and back
+them up securely. Debug and benchmark builds continue to use debug signing.
+Release builds fail when signing configuration is absent; the Android signing
+task validates the key and passwords when producing the bundle.
+
+After catalog and Firebase configuration checks pass, build with
+`./gradlew :app:bundleRelease`. Upload the signed bundle from
+`app/build/outputs/bundle/release/app-release.aab` to the Parlor app in Play Console.
+Creating a local upload key does not enroll the app in Play App Signing or publish
+a release; those steps still happen in Play Console.
+
 ## Verification
 
 Run JVM tests for model/game/progress, the prototype verifier, app unit tests and a debug build. On a device, run the retained instrumentation tests and verify all themes, photos, history, backup/restore, repeated hints and scored Daily retries. `FreeAccessTest` covers exhausted legacy allowances and formerly paid tiers; `FreeEditionTest` covers app navigation and absence of billing/advertising permissions.

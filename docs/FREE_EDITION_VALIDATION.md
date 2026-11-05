@@ -20,3 +20,19 @@ Removing monetization changes transitive annotation dependency selection. The ap
 ## Not performed
 
 Instrumentation tests were compiled, not executed on an Android device or emulator. Physical-device, accessibility and store release qualification are still required. No signing secrets, Play Console settings, Firebase project configuration or published store release were changed. The planned 556-level production catalog remains unfinished.
+
+## November 5, 2026 follow-up
+
+- Re-ran model, game, and progress JVM tests after removing remaining monetization
+  text: **67 tests passed**, zero failures or errors.
+- Re-ran `:tools:levels:verifyPrototype`: **56 levels passed**.
+- Installed local Java 17 and Android SDK tooling; no Android device was connected.
+- Created a new local upload key for the first release and configured release
+  signing through ignored `signing.properties`. No private signing material is
+  tracked. `:app:verifyReleaseSigning` passed.
+- The production catalog verifier still fails: `Release requires 80 TRAFFIC_JAM
+  levels`. The full 556-level catalog remains incomplete.
+- The owner selected the **Plan 9 from Outer Space** Play developer account.
+  Searching its app list found no Parlor listing. No listing, store pricing,
+  Firebase project, or published release has been created or changed in this
+  follow-up.
