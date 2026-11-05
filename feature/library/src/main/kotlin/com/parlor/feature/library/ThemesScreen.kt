@@ -74,10 +74,8 @@ fun ThemesScreen(settings: PlayerSettings, pro: Boolean, systemDark: Boolean,
         Column(Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             RoomTheme.entries.forEach { theme ->
                 val selected = displayed == theme
-                val available = true
                 val state = stringResource(when {
                     selected -> R.string.library_theme_selected
-                    !available -> R.string.library_theme_pro
                     else -> R.string.library_theme_available
                 })
                 OutlinedCard(Modifier.fillMaxWidth().clip(MaterialTheme.shapes.medium).testTag("theme-${theme.id}")

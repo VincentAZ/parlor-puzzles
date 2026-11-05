@@ -5,7 +5,6 @@
     <string name="play_photo_remove">Use default artwork</string>
     <string name="play_photo_pro">Use your own photos in Sliding Tiles for free.</string>
     <string name="play_photo_retained">Your saved photo is available.</string>
-    <string name="play_photo_open_pro">View Pro</string>
     <string name="play_photo_local">A private copy stays on this device and in your backups. Delete saved copies in Settings → Saved photos.</string>
     <string name="play_photo_preview">Use this square crop?</string>
     <string name="play_photo_description">Your selected puzzle photo</string>
@@ -14,8 +13,7 @@
     <string name="play_photo_cancel">Cancel</string>
     <string name="play_photo_working">Preparing your photo…</string>
     <string name="play_photo_missing">This saved photo could not be opened. Your puzzle is safe; choose another photo or use the default artwork.</string>
-    <string name="play_photo_error">The photo could not be saved. Try a smaller image, check that Pro is available, or delete saved photos in Settings if storage is full.</string>
-    <string name="play_earn_hints">Get 2 hints with an ad</string>
+    <string name="play_photo_error">The photo could not be saved. Try a smaller image, or delete saved photos in Settings if storage is full.</string>
     <string name="play_solve_for_me">Solve for me</string>
     <string name="play_demonstration">Demonstration</string>
     <string name="play_demonstration_body">Watch a verified solution from the starting board. Your own puzzle is saved. Demonstrations earn no stars, points, streaks or achievements.</string>

@@ -6,11 +6,8 @@
     <string name="library_appearance_dark">Dark</string>
     <string name="library_appearance_system">Use device setting</string>
     <string name="library_theme_save_error">This choice could not be saved. Please try again.</string>
-    <string name="library_theme_retained">Your Pro theme is saved. Linen is shown until Pro is restored.</string>
-    <string name="library_themes_pro">Explore all six themes with Pro</string>
     <string name="library_theme_selected">Selected</string>
     <string name="library_theme_available">Available</string>
-    <string name="library_theme_pro">Included with Pro</string>
     <string name="library_theme_linen">Linen room</string>
     <string name="library_theme_sage">Garden room</string>
     <string name="library_theme_rose">Rose nook</string>

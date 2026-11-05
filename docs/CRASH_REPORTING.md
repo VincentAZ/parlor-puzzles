@@ -9,15 +9,15 @@ requirement concerns sessions over the first 14 production days.
 
 ## Build isolation
 
-- `debug`, `benchmark` and `storeTest` do not initialize Firebase. Their manifest
+- `debug` and `benchmark` do not initialize Firebase. Their manifest
   collection flags are false, Google Services processing is disabled and mapping
-  upload is disabled. Ordinary development and purchase testing need no Firebase
+  upload is disabled. Ordinary development and gameplay testing need no Firebase
   account or configuration.
 - `crashTest` is a separate, debug-signed, minified application:
-  `com.parlor.puzzles.crashtest`. It uses the sample catalog and AdMob demo units.
+  `com.parlor.puzzles.crashtest`. It uses the sample catalog.
   Its manual test screen and deliberate crash are absent from other variants.
 - `release` uses `com.parlor.puzzles`, reporting enabled and mapping upload enabled.
-  Its existing full-catalog, production-ad and Billing configuration gates remain.
+  Its full-catalog and Firebase configuration gates remain; production signing must also be configured.
 
 Firebase's automatic initialization provider is removed. `ParlorApplication`
 starts it explicitly only in the two reporting variants. SDK initialization
@@ -87,6 +87,10 @@ instructions. The internal crash button requires a tap and is never invoked on
 ordinary launch or included in production.
 
 ## Qualification status
+
+The results below are historical, from before the free edition. Ad and consent
+qualification no longer applies: those SDKs and test variants have been removed.
+See [free edition validation](FREE_EDITION_VALIDATION.md) for the subsequent checks.
 
 The local evidence packet records 543 passing
 regression executions, eleven configuration checks, debug/minified installed
