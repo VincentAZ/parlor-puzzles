@@ -25,7 +25,7 @@ A good puzzle needs space, a clear set of rules, and a satisfying moment when it
 
 **No ads. No purchases. No subscriptions. No account.** All puzzle difficulties and variants, all six room palettes, photo tiles, backups, demonstrations, detailed history, unlimited hints, and unlimited scored Daily retries are included. Nothing needs a store connection to unlock.
 
-> **Release scope:** the first free release contains **56 verified puzzles across all twelve families**, as approved by the owner. The former 556-level plan is deferred. Store publication and physical-device release qualification are still pending. See [release readiness](docs/FREE_EDITION.md#release-readiness).
+> **Release scope:** the first free release contains **56 verified puzzles across all twelve families**, as approved by the owner, and is [available on Google Play](https://play.google.com/store/apps/details?id=com.parlor.puzzles). The former 556-level plan is deferred. Physical-device release qualification is still pending. See [release readiness](docs/FREE_EDITION.md#release-readiness).
 
 ## The puzzles
 
